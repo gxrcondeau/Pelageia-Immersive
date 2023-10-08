@@ -1,9 +1,12 @@
 #include "SDL.h"
 
+const int SCREEN_WIDTH= 640;
+const int SCREEN_HEIGHT = 480;
+
 int main(int argc, char* args []) {
     SDL_Init(SDL_INIT_VIDEO);
 
-    SDL_Window* window = SDL_CreateWindow("Blank Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("Pelageia Immersive Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     if (window == nullptr) {
         SDL_Log("Failed to create window: %s", SDL_GetError());
         return 1;
@@ -15,23 +18,6 @@ int main(int argc, char* args []) {
         SDL_DestroyWindow(window);
         SDL_Quit();
         return 1;
-    }
-
-    bool running = true;
-    SDL_Event event;
-
-    while (running) {
-        // Close window with any input
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT || event.type == SDL_KEYDOWN || event.type == SDL_MOUSEBUTTONDOWN) {
-                running = false;
-                break;
-            }
-        }
-
-        SDL_SetRenderDrawColor(renderer, 100, 100, 180, 255); // Set the background color to purple
-        SDL_RenderClear(renderer);
-        SDL_RenderPresent(renderer);
     }
 
     SDL_DestroyRenderer(renderer);
