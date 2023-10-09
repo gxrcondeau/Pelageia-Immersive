@@ -1,27 +1,48 @@
 #include "SDL.h"
+#include <iostream>
 
 const int SCREEN_WIDTH= 640;
 const int SCREEN_HEIGHT = 480;
 
 int main(int argc, char* args []) {
-    SDL_Init(SDL_INIT_VIDEO);
+    // Window that is rendering to
+    SDL_Window* window = NULL;
 
-    SDL_Window* window = SDL_CreateWindow("Pelageia Immersive Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-    if (window == nullptr) {
-        SDL_Log("Failed to create window: %s", SDL_GetError());
-        return 1;
+    // Surface contained by the window
+    SDL_Surface* screenSurface = NULL;
+
+    // Initializing SDL
+    if(SDL_Init(SDL_INIT_VIDEO) < 0) {
+        printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
     }
+    else
+    {
+        //Create window
+        window = SDL_CreateWindow( "Pelageia Immersive Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+        if( window == NULL )
+        {
+            printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
+        }
+        else
+        {
+            //Get window surface
+            screenSurface = SDL_GetWindowSurface( window );
 
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    if (renderer == nullptr) {
-        SDL_Log("Failed to create renderer: %s", SDL_GetError());
-        SDL_DestroyWindow(window);
-        SDL_Quit();
-        return 1;
+            //Fill the surface white
+            SDL_FillRect( screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ) );
+
+            //Update the surface
+            SDL_UpdateWindowSurface( window );
+
+            //Hack to get window to stay up
+            SDL_Event e; bool quit = false; while( quit == false ){ while( SDL_PollEvent( &e ) ){ if( e.type == SDL_QUIT ) quit = true; } }
+        }
     }
+    //Destroy window
+    SDL_DestroyWindow( window );
 
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    //Quit SDL subsystems
     SDL_Quit();
+
     return 0;
 }
