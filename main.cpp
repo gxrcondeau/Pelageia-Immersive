@@ -5,7 +5,7 @@ Engine *engine = nullptr;
 
 int main(int argc, char *args[]) {
     engine = new Engine();
-    engine->init("Pelageia Immersive", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, false);
+    engine->init("PEIM Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, false);
 
     while(engine->running()) {
         engine->handleEvents();
