@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<PEIMEngine>
+    <version>0.1</version>
+    <channel>dev</channel>
+    <window>
+        <w_width>1280</w_width>
+        <w_height>720</w_height>
+        <fullscreen>false</fullscreen>
+    </window>
+</PEIMEngine>
