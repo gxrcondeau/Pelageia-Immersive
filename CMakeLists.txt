@@ -6,22 +6,17 @@ set(CMAKE_CXX_STANDARD 23)
 add_executable(${PROJECT_NAME} main.cpp
         Core/Engine.cpp
         Core/Engine.h
-        Core/Utils/ConfigLoader.cpp
-        Core/Utils/ConfigLoader.h
+        Core/Config/ConfigLoader.cpp
+        Core/Config/ConfigLoader.h
+        Core/Logger/PeImLogger.cpp
+        Core/Logger/PeImLogger.h
+        Core/Utils/Parser.cpp
+        Core/Utils/Parser.h
 )
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/SDL2IMAGE/cmake)
 set(SDL2_PATH "SDL2/x86_64-w64-mingw32")
-set(SDL2IMAGE_PATH "SDL2IMAGE/x86_64-w64-mingw32")
 
-# Find SDL2
 find_package(SDL2 REQUIRED)
-include_directories(${PROJECT_NAME} ${SDL2_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2_LIBRARIES})
-
-
-# Find SDL_image
-# find_package(SDL2IMAGE REQUIRED)
-# include_directories(${PROJECT_NAME} ${SDL2IMAGE_INCLUDE_DIRS})
-# target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2IMAGE_LIBRARIES})
+include_directories(${SDL2_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY})

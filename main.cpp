@@ -1,6 +1,6 @@
 #include "SDL.h"
 #include "Core/Engine.h"
-#include "Core/Utils/ConfigLoader.h"
+#include "Core/Config/ConfigLoader.h"
 
 Engine *engine = nullptr;
 ConfigLoader *config = nullptr;
@@ -11,7 +11,7 @@ int main(int argc, char *args[]) {
     std::cout << "Loading config" << std::endl;
     config->getXml();
     std::cout << "Config loaded" << std::endl;
-     engine->init("PEIM Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, false);
+     engine->init("PEIM Engine");
 
     while(engine->running()) {
         engine->handleEvents();
