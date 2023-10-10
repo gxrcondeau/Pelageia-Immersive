@@ -2,48 +2,74 @@
 // Created by gxrcondeau on 2023-10-08.
 //
 
+
+#include <sys/stat.h>
+#include <unistd.h>
+#include <iostream>
+#include <fstream>
+#include <vector>
 #include "ConfigLoader.h"
 
-using namespace pugi;
-namespace fs = std::filesystem;
 
-const char *const configLocation = "./Config/Engine.xml";
-
-ConfigLoader::ConfigLoader() {
-}
-
-ConfigLoader::~ConfigLoader() {
-}
-
-void ConfigLoader::load() {
-    configCheck();
-    if(configExist) {
-        xml_document doc;
-
-        xml_parse_result result = doc.load_file(configLocation);
-
-        std::cout << "Load result: " << result.description() << ", engine version: " << doc.child("PEIM").child("build").attribute("version").value() << ":" << doc.child("PEIM").child("build").attribute("channel").value() << std::endl;
+pugi::xml_parse_result ConfigLoader::getXml() const{
+    if(!isConfigExist()) {
+        createDefault();
     }
-    else {
-        reset();
-    }
+    pugi::xml_document doc;
+
+    const char* const configPath = getConfigFullPath();
+    pugi::xml_parse_result result = doc.load_file(configPath);
+
+    delete[] configPath;
+    std::cout << "Load result: " << result.description() << ", engine version: " << doc.child("PEIM").child("build").attribute("version").value() << ":" << doc.child("PEIM").child("build").attribute("channel").value() << std::endl;
+
+    return result;
 }
 
-void ConfigLoader::reset() {
-    std::ofstream outfile (configLocation);
-    outfile << "<?xml version=\"1.0\"?>\n"
-               "<PEIM>\n"
-               "    <build version=\"0.1\" channel=\"dev\"/>\n"
-               "    <window width=\"1280\" height=\"720\" fullscreen=\"0\"/>\n"
-               "</PEIM>";
+void ConfigLoader::createDefault() const{
+    if(isConfigExist()) return;
+
+    if(!isDirectoryExist()){
+        mkdir(configDirectory);
+    }
+
+    createFile();
+}
+
+void ConfigLoader::createFile() const{
+
+    const char* const outFilePath = getConfigFullPath();
+
+    std::ofstream outfile (outFilePath);
+    outfile << configDefaultString;
+
+    delete[] outFilePath;
     outfile.close();
 }
 
-void ConfigLoader::configCheck() {
-    if(fs::exists(configLocation)) {
-        configExist = true;
-    } else {
-        configExist = false;
-        fs::create_directory("./Config");
-    }
+char* ConfigLoader::getConfigFullPath() const {
+    size_t fullPathLength = strlen(configDirectory) + strlen("/") + strlen(configFileName) + 1;
+
+    char* fullPath = new char[fullPathLength];
+
+    strcpy(fullPath, configDirectory);
+
+    strcat(fullPath, "/");
+    strcat(fullPath, configFileName);
+
+    return fullPath;
+}
+
+bool ConfigLoader::isConfigExist() const {
+    struct stat buffer{};
+    return stat(getConfigFullPath(), &buffer) == 1;
+}
+
+bool ConfigLoader::isDirectoryExist() const {
+    struct stat buffer{};
+    return stat(configDirectory, &buffer) == 1;
+}
+
+void ConfigLoader::update() {
+
 }

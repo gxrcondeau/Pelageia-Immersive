@@ -9,7 +9,7 @@ int main(int argc, char *args[]) {
     engine = new Engine();
     config = new ConfigLoader();
     std::cout << "Loading config" << std::endl;
-    config->load();
+    config->getXml();
     std::cout << "Config loaded" << std::endl;
      engine->init("PEIM Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, false);
 
