@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <SDL_image.h>
 #include "Graphics.h"
 
 Graphics::Graphics(const char* windowName, int width, int height) {
@@ -25,15 +26,13 @@ Graphics::Graphics(const char* windowName, int width, int height) {
 Image* Graphics::NewImage(const char* file) {
     Image* image = new Image();
 
-    // TODO SDL_Image need to be installed
+    image->texture = IMG_LoadTexture(Renderer, file);
 
-    //image->texture = IMG_LoadTexture(Renderer, file);
-
-//    if (!image->texture) {
-//        fprintf(stderr, "Failed to load image: %s\n", IMG_GetError());
-//        delete image; // Clean up the image if loading failed
-//        return nullptr;
-//    }
+    if (!image->texture) {
+        fprintf(stderr, "Failed to load image: %s\n", IMG_GetError());
+        delete image; // Clean up the image if loading failed
+        return nullptr;
+    }
 
     // Get the width and height from the source image
     SDL_QueryTexture(image->texture, NULL, NULL, &image->width, &image->height);

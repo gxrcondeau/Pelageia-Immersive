@@ -17,17 +17,17 @@ add_executable(${PROJECT_NAME} main.cpp
 )
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/SDL2IMAGE/cmake)
 set(SDL2_PATH "SDL2/x86_64-w64-mingw32")
-set(SDL2IMAGE_PATH "SDL2IMAGE/x86_64-w64-mingw32")
+set(SDL2_IMAGE_PATH "SDL2/x86_64-w64-mingw32")
 
-# Find SDL2
 find_package(SDL2 REQUIRED)
-include_directories(${PROJECT_NAME} ${SDL2_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2_LIBRARIES})
+find_package(SDL2_IMAGE REQUIRED)
+
+include_directories(${SDL2_INCLUDE_DIR}
+        ${SDL2_IMAGE_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY}
+        ${SDL2_IMAGE_LIBRARIES})
 
 
-# Find SDL_image
-# find_package(SDL2IMAGE REQUIRED)
-# include_directories(${PROJECT_NAME} ${SDL2IMAGE_INCLUDE_DIRS})
-# target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2IMAGE_LIBRARIES})
+
+

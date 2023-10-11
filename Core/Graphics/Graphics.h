@@ -6,7 +6,7 @@
 #define PELAGEIA_IMMERSIVE_GRAPHICS_H
 
 
-#include <SDL_surface.h>
+#include <SDL.h>
 #include "Image.h"
 
 class Graphics {

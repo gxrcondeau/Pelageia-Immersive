@@ -7,7 +7,6 @@ Engine *engine = nullptr;
 ConfigLoader *config = nullptr;
 
 int main(int argc, char *args[]) {
-
     Game game;
     game.Execute();
 //    engine = new Engine();
