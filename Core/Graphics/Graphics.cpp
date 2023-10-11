@@ -1,8 +1,8 @@
 #include <cstdio>
-#include <SDL_image.h>
+#include "SDL_image.h"
 #include "Graphics.h"
 
-Graphics::Graphics(const char* windowName, int width, int height) {
+Graphics::Graphics(const char* const windowName, int width, int height) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "SDL Init failed: %s\n", SDL_GetError());
     }

@@ -15,7 +15,7 @@ ConfigLoader::ConfigLoader() {
     createDefault();
 
     WindowParams params = getWindowParams();
-    printf("xPos: %i, yPos: %i, height: %i, width: %i, fullScreen: %i\n", params.xPos, params.yPos, params.height, params.width, params.fullScreen);
+    printf("Config: window name: %s, height: %i, width: %i, fullScreen: %i\n", params.name, params.height, params.width, params.fullScreen);
 }
 
 ConfigLoader::~ConfigLoader() {
@@ -41,7 +41,7 @@ void ConfigLoader::createDefault() const{
         mkdir(configDirectory);
     }
 
-    if(isConfigExist()) {
+    if(!isConfigExist()) {
         createFile();
     }
 }
@@ -83,18 +83,16 @@ bool ConfigLoader::isDirectoryExist() const {
 void ConfigLoader::update() {
 }
 
-WindowParams ConfigLoader::getWindowParams() {
+WindowParams ConfigLoader::getWindowParams() const{
     const auto config = getXml();
 
-    const auto xPos = config.child("PeImConfig").child("window").attribute("xpos").value();
-    const auto yPos = config.child("PeImConfig").child("window").attribute("ypos").value();
+    const auto name = config.child("PeImConfig").child("meta").attribute("name").value();
     const auto width = config.child("PeImConfig").child("window").attribute("width").value();
     const auto height = config.child("PeImConfig").child("window").attribute("height").value();
     const auto fullscreen = config.child("PeImConfig").child("window").attribute("fullscreen").value();
 
     return WindowParams{
-            Parser::TryParseInt(xPos).first,
-            Parser::TryParseInt(yPos).first,
+            name,
             Parser::TryParseInt(width).first,
             Parser::TryParseInt(height).first,
             Parser::TryParseBool(fullscreen)

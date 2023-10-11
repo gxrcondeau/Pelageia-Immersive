@@ -15,7 +15,7 @@ private:
     SDL_Renderer* Renderer;
 
 public:
-    Graphics(const char* windowName,int width, int height);
+    Graphics(const char* const windowName,int width, int height);
 
     Image* NewImage(const char* file);
     Image* NewImage(const char* file, int r, int g, int b);

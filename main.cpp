@@ -1,14 +1,10 @@
-#include "SDL.h"
-#include "Core/Engine.h"
-#include "Core/Utils/ConfigLoader.h"
 #include "Core/Game.h"
 
-Engine *engine = nullptr;
-ConfigLoader *config = nullptr;
-
 int main(int argc, char *args[]) {
-    Game game;
-    game.Execute();
+    Game* game = new Game();
+    game->Execute();
+
+    return 0;
 //    engine = new Engine();
 //    config = new ConfigLoader();
 //    std::cout << "Loading config" << std::endl;

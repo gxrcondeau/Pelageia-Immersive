@@ -8,8 +8,7 @@
 #include "../Include/Pugi/pugixml.hpp"
 
 struct WindowParams{
-    int xPos;
-    int yPos;
+    const char* const name;
     int width;
     int height;
     bool fullScreen;
@@ -22,7 +21,7 @@ public:
 
     pugi::xml_document getXml() const;
 
-    WindowParams getWindowParams();
+    WindowParams getWindowParams() const;
 
     // TODO: add config update method
     void update();
@@ -45,7 +44,8 @@ private:
     const char* const configDefaultString = "<?xml version=\"1.0\"?>\n"
                                             "<PeImConfig>\n"
                                             "    <build version=\"0.1\" channel=\"dev\"/>\n"
-                                            "    <window xpos=\"0\" ypos=\"0\" width=\"1280\" height=\"720\" fullscreen=\"0\"/>\n"
+                                            "    <meta name=\"Pelageia Immersive\"/>\n"
+                                            "    <window width=\"720\" height=\"420\" fullscreen=\"0\"/>\n"
                                             "</PeImConfig>";
 };
 

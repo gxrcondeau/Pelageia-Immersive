@@ -4,16 +4,16 @@ project(pelageia-immersive)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(${PROJECT_NAME} main.cpp
-        Core/Engine.cpp
-        Core/Engine.h
-        Core/Utils/ConfigLoader.cpp
-        Core/Utils/ConfigLoader.h
         Core/Game.cpp
         Core/Game.h
         Core/Graphics/Graphics.cpp
         Core/Graphics/Graphics.h
         Core/Graphics/Image.cpp
         Core/Graphics/Image.h
+        Core/Config/ConfigLoader.cpp
+        Core/Config/ConfigLoader.h
+        Core/Utils/Parser.cpp
+        Core/Utils/Parser.h
 )
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
