@@ -4,36 +4,46 @@
 
 
 #include <sys/stat.h>
-#include <unistd.h>
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include "../Utils/Parser.h"
 #include "ConfigLoader.h"
 
 
-pugi::xml_parse_result ConfigLoader::getXml() const{
+ConfigLoader::ConfigLoader() {
+    createDefault();
+
+    WindowParams params = getWindowParams();
+    printf("xPos: %i, yPos: %i, height: %i, width: %i, fullScreen: %i\n", params.xPos, params.yPos, params.height, params.width, params.fullScreen);
+}
+
+ConfigLoader::~ConfigLoader() {
+}
+
+pugi::xml_document ConfigLoader::getXml() const{
     if(!isConfigExist()) {
         createDefault();
     }
+
     pugi::xml_document doc;
 
     const char* const configPath = getConfigFullPath();
     pugi::xml_parse_result result = doc.load_file(configPath);
 
     delete[] configPath;
-    std::cout << "Load result: " << result.description() << ", engine version: " << doc.child("PEIM").child("build").attribute("version").value() << ":" << doc.child("PEIM").child("build").attribute("channel").value() << std::endl;
-
-    return result;
+    std::cout << "Load result: " << result.description() << std::endl;
+    return doc;
 }
 
 void ConfigLoader::createDefault() const{
-    if(isConfigExist()) return;
-
     if(!isDirectoryExist()){
         mkdir(configDirectory);
     }
 
-    createFile();
+    if(isConfigExist()) {
+        createFile();
+    }
 }
 
 void ConfigLoader::createFile() const{
@@ -71,5 +81,22 @@ bool ConfigLoader::isDirectoryExist() const {
 }
 
 void ConfigLoader::update() {
+}
 
+WindowParams ConfigLoader::getWindowParams() {
+    const auto config = getXml();
+
+    const auto xPos = config.child("PeImConfig").child("window").attribute("xpos").value();
+    const auto yPos = config.child("PeImConfig").child("window").attribute("ypos").value();
+    const auto width = config.child("PeImConfig").child("window").attribute("width").value();
+    const auto height = config.child("PeImConfig").child("window").attribute("height").value();
+    const auto fullscreen = config.child("PeImConfig").child("window").attribute("fullscreen").value();
+
+    return WindowParams{
+            Parser::TryParseInt(xPos).first,
+            Parser::TryParseInt(yPos).first,
+            Parser::TryParseInt(width).first,
+            Parser::TryParseInt(height).first,
+            Parser::TryParseBool(fullscreen)
+    };
 }

@@ -5,11 +5,24 @@
 #ifndef PELAGEIA_IMMERSIVE_CONFIGLOADER_H
 #define PELAGEIA_IMMERSIVE_CONFIGLOADER_H
 
-#include "../Include/pugixml.hpp"
+#include "../Include/Pugi/pugixml.hpp"
+
+struct WindowParams{
+    int xPos;
+    int yPos;
+    int width;
+    int height;
+    bool fullScreen;
+};
 
 class ConfigLoader {
 public:
-    pugi::xml_parse_result getXml() const;
+    ConfigLoader();
+    ~ConfigLoader();
+
+    pugi::xml_document getXml() const;
+
+    WindowParams getWindowParams();
 
     // TODO: add config update method
     void update();
@@ -30,10 +43,10 @@ protected:
 
 private:
     const char* const configDefaultString = "<?xml version=\"1.0\"?>\n"
-                                            "<PEIM>\n"
+                                            "<PeImConfig>\n"
                                             "    <build version=\"0.1\" channel=\"dev\"/>\n"
-                                            "    <window width=\"1280\" height=\"720\" fullscreen=\"0\"/>\n"
-                                            "</PEIM>";
+                                            "    <window xpos=\"0\" ypos=\"0\" width=\"1280\" height=\"720\" fullscreen=\"0\"/>\n"
+                                            "</PeImConfig>";
 };
 
 

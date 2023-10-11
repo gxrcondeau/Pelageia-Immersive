@@ -2,6 +2,8 @@
 #define PELAGEIA_IMMERSIVE_ENGINE_H
 
 #include "SDL.h"
+#include "Config/ConfigLoader.h"
+#include "Logger/PeImLogger.h"
 #include <iostream>
 
 
@@ -11,7 +13,7 @@ public:
 
     ~Engine();
 
-    void init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen);
+    void init(const char *title);
 
     void handleEvents();
 
