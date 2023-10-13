@@ -16,7 +16,7 @@ int Game::Execute() {
     graphics = new Rendering(windowParams.name, windowParams.width, windowParams.height);
     input = new Input();
 
-    Image* img = graphics->NewImage("Resources/character.png");
+    Image* img = graphics->NewImage("Resources/dolphins.jpg");
 
     int x = 0;
     int y = 0;
@@ -30,6 +30,8 @@ int Game::Execute() {
         graphics->RenderFrame();
 
         input->Update();
+
+        SDL_Delay(1000);
     }
 
     SDL_Quit();

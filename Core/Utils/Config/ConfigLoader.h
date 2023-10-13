@@ -34,7 +34,7 @@ protected:
 
     char* getConfigFullPath() const;
 
-    bool createFile() const;
+    void createFile() const;
 
     bool isConfigExist() const;
     bool isDirectoryExist() const;

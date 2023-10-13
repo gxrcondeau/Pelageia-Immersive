@@ -2,9 +2,8 @@
 // Created by gxrcondeau on 2023-10-08.
 //
 
-
 #include <sys/stat.h>
-#include <direct.h>
+#include <io.h> // Use io.h for directory existence on Windows
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -12,7 +11,6 @@
 #include "../Parser/TryParse.h"
 #include "ConfigLoader.h"
 #include "../Logger/PeImLogger.h"
-
 
 ConfigLoader::ConfigLoader() {
     createDefault();
@@ -41,7 +39,7 @@ pugi::xml_document ConfigLoader::getXml() const{
 
 void ConfigLoader::createDefault() const{
     if(!isDirectoryExist()){
-        int stat = _mkdir(configDirectory);
+        int stat = mkdir(configDirectory);
         if(!stat){
             PeImLogger::Info("Folder Created: %s", configDirectory);
         }
@@ -51,25 +49,8 @@ void ConfigLoader::createDefault() const{
     }
 
     if(!isConfigExist()) {
-        if(createFile()){
-            PeImLogger::Info("File created: %s", configDirectory);
-        }
-        else{
-            PeImLogger::Info("Impossible create file");
-        }
+        createFile();
     }
-}
-
-bool ConfigLoader::createFile() const{
-
-    const char* const outFilePath = getConfigFullPath();
-
-    std::ofstream outfile (outFilePath);
-    outfile << configDefaultString;
-
-    delete[] outFilePath;
-    outfile.close();
-    return true;
 }
 
 char* ConfigLoader::getConfigFullPath() const {
@@ -95,6 +76,17 @@ bool ConfigLoader::isDirectoryExist() const {
     return stat(configDirectory, &buffer) == 1;
 }
 
+void ConfigLoader::createFile() const {
+    const char* const outFilePath = getConfigFullPath();
+
+    std::ofstream outfile(outFilePath);
+    outfile << configDefaultString;
+
+    outfile.close();
+
+    PeImLogger::Info("File created: %s", outFilePath);
+}
+
 void ConfigLoader::update() {
 }
 
@@ -107,7 +99,7 @@ WindowParams ConfigLoader::getWindowParams() const{
     const auto fullscreen = config.child("PeImConfig").child("window").attribute("fullscreen").value();
 
     return WindowParams{
-            name,
+            "Name",
             TryParse::Int(width).first,
             TryParse::Int(height).first,
             TryParse::Bool(fullscreen)
