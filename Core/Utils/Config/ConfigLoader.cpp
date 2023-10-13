@@ -4,11 +4,14 @@
 
 
 #include <sys/stat.h>
+#include <direct.h>
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "../Utils/Parser.h"
+#include <cwchar>
+#include "../Parser/TryParse.h"
 #include "ConfigLoader.h"
+#include "../Logger/PeImLogger.h"
 
 
 ConfigLoader::ConfigLoader() {
@@ -38,15 +41,26 @@ pugi::xml_document ConfigLoader::getXml() const{
 
 void ConfigLoader::createDefault() const{
     if(!isDirectoryExist()){
-        mkdir(configDirectory);
+        int stat = _mkdir(configDirectory);
+        if(!stat){
+            PeImLogger::Info("Folder Created: %s", configDirectory);
+        }
+        else{
+            PeImLogger::Info("Impossible create folder");
+        }
     }
 
     if(!isConfigExist()) {
-        createFile();
+        if(createFile()){
+            PeImLogger::Info("File created: %s", configDirectory);
+        }
+        else{
+            PeImLogger::Info("Impossible create file");
+        }
     }
 }
 
-void ConfigLoader::createFile() const{
+bool ConfigLoader::createFile() const{
 
     const char* const outFilePath = getConfigFullPath();
 
@@ -55,6 +69,7 @@ void ConfigLoader::createFile() const{
 
     delete[] outFilePath;
     outfile.close();
+    return true;
 }
 
 char* ConfigLoader::getConfigFullPath() const {
@@ -93,8 +108,8 @@ WindowParams ConfigLoader::getWindowParams() const{
 
     return WindowParams{
             name,
-            Parser::TryParseInt(width).first,
-            Parser::TryParseInt(height).first,
-            Parser::TryParseBool(fullscreen)
+            TryParse::Int(width).first,
+            TryParse::Int(height).first,
+            TryParse::Bool(fullscreen)
     };
 }

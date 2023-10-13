@@ -6,15 +6,17 @@
 #define PELAGEIA_IMMERSIVE_GAME_H
 
 
+#include "Utils/Config/ConfigLoader.h"
 #include "Graphics/Graphics.h"
-#include "Config/ConfigLoader.h"
+#include "Input/Input.h"
 
 class Game {
 private:
     bool isRunning;
 
     ConfigLoader* config;
-    Graphics* graphics;
+    Rendering* graphics;\
+    Input* input;
 
 public:
     Game();

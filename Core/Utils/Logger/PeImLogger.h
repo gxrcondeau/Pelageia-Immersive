@@ -10,9 +10,17 @@
 #include <map>
 #include "SDL_log.h"
 
+
+enum PeImLogCategory{
+    SYSTEM,
+    CONFIG,
+    GRAPHICS,
+    INPUT
+};
+
 class PeImLogger {
 public:
-    void static LogToFile(void* userdata, int category, SDL_LogPriority priority, const char* message);
+    void static Info(const char* message, ...);
 };
 
 

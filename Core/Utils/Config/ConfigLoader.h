@@ -5,7 +5,7 @@
 #ifndef PELAGEIA_IMMERSIVE_CONFIGLOADER_H
 #define PELAGEIA_IMMERSIVE_CONFIGLOADER_H
 
-#include "../Include/Pugi/pugixml.hpp"
+#include "../../Include/Pugi/pugixml.hpp"
 
 struct WindowParams{
     const char* const name;
@@ -34,7 +34,7 @@ protected:
 
     char* getConfigFullPath() const;
 
-    void createFile() const;
+    bool createFile() const;
 
     bool isConfigExist() const;
     bool isDirectoryExist() const;

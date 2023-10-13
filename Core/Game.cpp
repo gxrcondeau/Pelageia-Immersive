@@ -13,9 +13,10 @@ int Game::Execute() {
 
     config = new ConfigLoader();
     WindowParams windowParams = config->getWindowParams();
-    graphics = new Graphics(windowParams.name, windowParams.width, windowParams.height);
+    graphics = new Rendering(windowParams.name, windowParams.width, windowParams.height);
+    input = new Input();
 
-    Image* img = graphics->NewImage("Resources/dolphins.jpg");
+    Image* img = graphics->NewImage("Resources/character.png");
 
     int x = 0;
     int y = 0;
@@ -28,10 +29,7 @@ int Game::Execute() {
         graphics->DrawImage(img, x, y);
         graphics->RenderFrame();
 
-        x += directionX;
-        y += directionY;
-
-        SDL_Delay(30);
+        input->Update();
     }
 
     SDL_Quit();

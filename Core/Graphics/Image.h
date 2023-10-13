@@ -14,7 +14,7 @@ private:
     int width;
     int height;
 public:
-    friend class Graphics;
+    friend class Rendering;
 
     int GetWidth();
     int GetHeight();

@@ -2,9 +2,9 @@
 // Created by admin on 10/10/2023.
 //
 
-#include "Parser.h"
+#include "TryParse.h"
 
-std::pair<int, bool> Parser::TryParseInt(const std::string &str) {
+std::pair<int, bool> TryParse::Int(const std::string &str) {
     int result;
     std::istringstream iss(str);
     if(iss >> result){
@@ -14,7 +14,7 @@ std::pair<int, bool> Parser::TryParseInt(const std::string &str) {
     }
 }
 
-bool Parser::TryParseBool(const std::string &str) {
+bool TryParse::Bool(const std::string &str) {
     bool result;
     std::istringstream iss(str);
     if(iss >> std::boolalpha >> result){
