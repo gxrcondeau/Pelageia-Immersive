@@ -1,6 +1,6 @@
 #include "SDL.h"
 #include "Core/Engine.h"
-#include "Core/Utils/ConfigLoader.h"
+#include "Core/Utils/ConfigLoader/ConfigLoader.h"
 
 Engine *engine = nullptr;
 ConfigLoader *config = nullptr;
