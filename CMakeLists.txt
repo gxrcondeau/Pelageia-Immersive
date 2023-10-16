@@ -14,9 +14,13 @@ add_executable(${PROJECT_NAME} main.cpp
         Core/Utils/Config/ConfigLoader.h
         Core/Utils/Parser/TryParse.cpp
         Core/Utils/Parser/TryParse.h
-        Core/Input/Input.cpp
-        Core/Input/Input.h
+        Core/Input/InputHandler.cpp
+        Core/Input/InputHandler.h
         Core/Utils/Logger/PeImLogger.cpp
+        Core/Entities/Actor.cpp
+        Core/Entities/Actor.h
+        Core/Entities/Pawn.cpp
+        Core/Entities/Pawn.h
 )
 
 include_directories(Core/Utils/ConfigLoader)

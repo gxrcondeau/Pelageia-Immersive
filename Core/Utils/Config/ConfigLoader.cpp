@@ -48,7 +48,7 @@ void ConfigLoader::createDefault() const{
         }
     }
 
-    if(!isConfigExist()) {
+    if(isConfigExist()) {
         createFile();
     }
 }

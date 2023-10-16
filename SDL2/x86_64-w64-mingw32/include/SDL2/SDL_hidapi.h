@@ -269,9 +269,9 @@ extern DECLSPEC SDL_hid_device * SDLCALL SDL_hid_open_path(const char *path, int
 extern DECLSPEC int SDLCALL SDL_hid_write(SDL_hid_device *dev, const unsigned char *data, size_t length);
 
 /**
- * Read an Input report from a HID device with timeout.
+ * Read an InputHandler report from a HID device with timeout.
  *
- * Input reports are returned to the host through the INTERRUPT IN endpoint.
+ * InputHandler reports are returned to the host through the INTERRUPT IN endpoint.
  * The first byte will contain the Report number if the device uses numbered
  * reports.
  *
@@ -290,9 +290,9 @@ extern DECLSPEC int SDLCALL SDL_hid_write(SDL_hid_device *dev, const unsigned ch
 extern DECLSPEC int SDLCALL SDL_hid_read_timeout(SDL_hid_device *dev, unsigned char *data, size_t length, int milliseconds);
 
 /**
- * Read an Input report from a HID device.
+ * Read an InputHandler report from a HID device.
  *
- * Input reports are returned to the host through the INTERRUPT IN endpoint.
+ * InputHandler reports are returned to the host through the INTERRUPT IN endpoint.
  * The first byte will contain the Report number if the device uses numbered
  * reports.
  *

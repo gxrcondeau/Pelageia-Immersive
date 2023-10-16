@@ -4,6 +4,8 @@
 
 #include <cstdio>
 #include "Game.h"
+#include "Utils/Logger/PeImLogger.h"
+#include "Entities/Pawn.h"
 
 Game::Game() {
     isRunning = true;
@@ -14,24 +16,20 @@ int Game::Execute() {
     config = new ConfigLoader();
     WindowParams windowParams = config->getWindowParams();
     graphics = new Rendering(windowParams.name, windowParams.width, windowParams.height);
-    input = new Input();
+    Image* img = graphics->NewImage("Resources/chelik.png");
 
-    Image* img = graphics->NewImage("Resources/dolphins.jpg");
+    Pawn* player = new Pawn(img, 0, 0);
 
-    int x = 0;
-    int y = 0;
-
-    int directionX = 1;
-    int directionY = 1;
+    inputHandler = new InputHandler(player);
 
     while(isRunning){
+        inputHandler->ReadInputs();
 
-        graphics->DrawImage(img, x, y);
+        graphics->DrawImage(player->Sprite, player->PosX, player->PosY);
+
         graphics->RenderFrame();
 
-        input->Update();
-
-        SDL_Delay(1000);
+        SDL_Delay(16);
     }
 
     SDL_Quit();

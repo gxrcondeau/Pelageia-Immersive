@@ -8,15 +8,15 @@
 
 #include "Utils/Config/ConfigLoader.h"
 #include "Graphics/Graphics.h"
-#include "Input/Input.h"
+#include "Input/InputHandler.h"
 
 class Game {
 private:
     bool isRunning;
 
     ConfigLoader* config;
-    Rendering* graphics;\
-    Input* input;
+    Rendering* graphics;
+    InputHandler* inputHandler;
 
 public:
     Game();
