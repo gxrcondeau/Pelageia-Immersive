@@ -4,8 +4,10 @@
 
 #include <cstdio>
 #include "Engine.h"
+#include "Graphics/TextureManager.h"
 
 Engine* Engine::s_Instance = nullptr;
+TextureManager* TextureManager::s_Instance = nullptr;
 
 bool Engine::Init() {
     if(SDL_Init(SDL_INIT_VIDEO) != 0 && IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) != 0){
@@ -25,10 +27,17 @@ bool Engine::Init() {
         return false;
     }
 
+    TextureManager::GetInstance()->Load("character", "Resources/character.png");
+
     return m_IsRunning = true;
 }
 
 bool Engine::Clean() {
+    TextureManager::GetInstance()->Clean();
+    SDL_DestroyRenderer(m_Renderer);
+    SDL_DestroyWindow(m_Window);
+    IMG_Quit();
+    SDL_Quit();
     return false;
 }
 
@@ -41,7 +50,9 @@ void Engine::Update() {
 }
 
 void Engine::Render() {
-    SDL_SetRenderDrawColor(m_Renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(m_Renderer, 124, 128, 255, 255);
+    SDL_RenderClear(m_Renderer);
+    TextureManager::GetInstance()->Draw("character", 100, 100, 60, 60);
     SDL_RenderPresent(m_Renderer);
 }
 

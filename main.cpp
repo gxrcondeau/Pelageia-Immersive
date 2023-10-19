@@ -1,4 +1,3 @@
-#include "Core/Game.h"
 #include "Core/Engine.h"
 
 int main(int argc, char *args[]) {

@@ -14,6 +14,8 @@ public:
         return s_Instance = (s_Instance != nullptr) ? s_Instance : new Engine();
     }
 
+    inline SDL_Renderer* GetRenderer(){ return m_Renderer; }
+
     bool Init();
     bool Clean();
     bool Quit();

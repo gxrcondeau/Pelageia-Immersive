@@ -4,25 +4,16 @@ project(pelageia-immersive)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(${PROJECT_NAME} main.cpp
-        Core/Game.cpp
-        Core/Game.h
-        Core/Graphics/Graphics.cpp
-        Core/Graphics/Graphics.h
-        Core/Graphics/Image.cpp
-        Core/Graphics/Image.h
         Core/Utils/Config/ConfigLoader.cpp
         Core/Utils/Config/ConfigLoader.h
         Core/Utils/Parser/TryParse.cpp
         Core/Utils/Parser/TryParse.h
-        Core/Input/InputHandler.cpp
-        Core/Input/InputHandler.h
         Core/Utils/Logger/PeImLogger.cpp
-        Core/Entities/Actor.cpp
-        Core/Entities/Actor.h
-        Core/Entities/Pawn.cpp
-        Core/Entities/Pawn.h
         Core/Engine.cpp
         Core/Engine.h
+        Core/Graphics/TextureManager.cpp
+        Core/Graphics/TextureManager.h
+        Core/Graphics/TextureManager.h
 )
 
 include_directories(Core/Utils/ConfigLoader)
