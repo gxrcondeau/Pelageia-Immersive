@@ -418,16 +418,16 @@ When you're done instrumenting with valgrind, you can disable the wrapper:
     adb shell setprop wrap.org.libsdl.app ""
 
 
-Rendering debugging
+Graphics debugging
 ================================================================================
 
 If you are developing on a compatible Tegra-based tablet, NVidia provides
-Tegra Rendering Debugger at their website. Because SDL2 dynamically loads EGL
+Tegra Graphics Debugger at their website. Because SDL2 dynamically loads EGL
 and GLES libraries, you must follow their instructions for installing the
 interposer library on a rooted device. The non-rooted instructions are not
 compatible with applications that use SDL2 for video.
 
-The Tegra Rendering Debugger is available from NVidia here:
+The Tegra Graphics Debugger is available from NVidia here:
 https://developer.nvidia.com/tegra-graphics-debugger
 
 

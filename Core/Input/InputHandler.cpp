@@ -23,7 +23,7 @@ bool InputHandler::IsKeyPressed(SDL_Event event, const SDL_Keycode key){
 }
 
 SDL_Keycode InputHandler::GetPressedKey(SDL_Event event){
-    return event.key.keysym.scancode;
+    return event.key.keysym.sym;
 }
 
 void InputHandler::HandleMouseButtonDown(SDL_Event event) {
@@ -41,27 +41,32 @@ void InputHandler::HandleKeyDown(SDL_Event event) {
     PeImLogger::Info("Key pressed: [%d]", key);
 
     switch(key){
-        case SDL_SCANCODE_W:
-            Player->MoveForward();
+        case SDLK_SPACE:
+            Player->Jump();
             break;
-        case SDL_SCANCODE_S:
-            Player->MoveBackward();
-            break;
-        case SDL_SCANCODE_D:
-            Player->MoveRight();
-            break;
-        case SDL_SCANCODE_A:
+        case SDLK_LEFT:
             Player->MoveLeft();
             break;
-        case SDL_SCANCODE_ESCAPE:
+        case SDLK_RIGHT:
+            Player->MoveRight();
+            break;
+        case SDLK_ESCAPE:
             HandleQuit(event);
     }
-
 }
 
 void InputHandler::HandleKeyUp(SDL_Event event) {
     const auto key = GetPressedKey(event);
     PeImLogger::Info("Key released: [%d]", key);
+
+    switch(key){
+        case SDLK_LEFT:
+            Player->StopMoving();
+            break;
+        case SDLK_RIGHT:
+            Player->StopMoving();
+            break;
+    }
 }
 
 void InputHandler::HandleQuit(SDL_Event event) {

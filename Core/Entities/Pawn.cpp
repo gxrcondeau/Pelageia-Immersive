@@ -4,18 +4,43 @@
 
 #include "Pawn.h"
 
+
+void Pawn::Tick() {
+    X += VelocityX;
+
+    if(!Jumping){
+        VelocityY += Gravity;
+    }
+
+    Y += VelocityY;
+
+    if(Y + Sprite->GetHeight() >= Ground){
+        Y = Ground - Sprite->GetHeight();
+
+        VelocityY = 0;
+        Jumping = false;
+    }
+}
+
 void Pawn::MoveRight() {
-    PosX += MovementAmount;
+    VelocityX += MoveSpeed;
 }
 
 void Pawn::MoveLeft() {
-    PosX -= MovementAmount;
+    VelocityX -= MoveSpeed;
 }
 
-void Pawn::MoveForward() {
-    PosY -= MovementAmount;
+void Pawn::Jump() {
+    if(!Jumping){
+        VelocityY = -JumpHeight;
+        Jumping = true;
+    }
 }
 
-void Pawn::MoveBackward() {
-    PosY += MovementAmount;
+void Pawn::StopMoving() {
+    VelocityX = 0;
+}
+
+void Pawn::Render() {
+    Renderer->DrawImage(Sprite, X, Y);
 }

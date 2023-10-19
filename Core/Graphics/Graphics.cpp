@@ -2,7 +2,7 @@
 #include "SDL_image.h"
 #include "Graphics.h"
 
-Rendering::Rendering(const char* const windowName, int width, int height) {
+Graphics::Graphics(const char* const windowName, int width, int height) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "SDL Init failed: %s\n", SDL_GetError());
     }
@@ -23,7 +23,7 @@ Rendering::Rendering(const char* const windowName, int width, int height) {
     }
 }
 
-Image* Rendering::NewImage(const char* file) {
+Image* Graphics::NewImage(const char* file) {
     Image* image = new Image();
 
     image->texture = IMG_LoadTexture(Renderer, file);
@@ -40,7 +40,7 @@ Image* Rendering::NewImage(const char* file) {
     return image;
 }
 
-Image* Rendering::NewImage(const char* file, int r, int g, int b) {
+Image* Graphics::NewImage(const char* file, int r, int g, int b) {
     Image* image = NewImage(file);
 
     // Set color key for transparency
@@ -49,7 +49,7 @@ Image* Rendering::NewImage(const char* file, int r, int g, int b) {
     return image;
 }
 
-bool Rendering::DrawImage(Image* img, int x, int y) {
+bool Graphics::DrawImage(Image* img, int x, int y) {
     if (!Renderer || !img->texture)
         return false;
 
@@ -64,7 +64,7 @@ bool Rendering::DrawImage(Image* img, int x, int y) {
     return true;
 }
 
-bool Rendering::DrawImage(Image* img, int x, int y, int startX, int startY, int endX, int endY) {
+bool Graphics::DrawImage(Image* img, int x, int y, int startX, int startY, int endX, int endY) {
     if (!Renderer || !img->texture)
         return false;
 
@@ -85,7 +85,7 @@ bool Rendering::DrawImage(Image* img, int x, int y, int startX, int startY, int 
     return true;
 }
 
-void Rendering::RenderFrame() {
+void Graphics::RenderFrame() {
     SDL_RenderPresent(Renderer);
     SDL_SetRenderDrawColor(Renderer, 0, 0, 0, 255);
     SDL_RenderClear(Renderer);

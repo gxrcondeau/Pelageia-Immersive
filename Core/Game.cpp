@@ -15,17 +15,18 @@ int Game::Execute() {
 
     config = new ConfigLoader();
     WindowParams windowParams = config->getWindowParams();
-    graphics = new Rendering(windowParams.name, windowParams.width, windowParams.height);
-    Image* img = graphics->NewImage("Resources/chelik.png");
+    graphics = new Graphics(windowParams.name, windowParams.width, windowParams.height);
+    Image* img = graphics->NewImage("Resources/character.png");
 
-    Pawn* player = new Pawn(img, 0, 0);
+    Pawn* player = new Pawn(graphics, img, 0, 0);
 
     inputHandler = new InputHandler(player);
 
     while(isRunning){
         inputHandler->ReadInputs();
 
-        graphics->DrawImage(player->Sprite, player->PosX, player->PosY);
+        player->Tick();
+        player->Render();
 
         graphics->RenderFrame();
 

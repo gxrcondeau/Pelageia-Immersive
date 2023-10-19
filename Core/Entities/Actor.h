@@ -5,16 +5,18 @@
 #ifndef PELAGEIA_IMMERSIVE_ACTOR_H
 #define PELAGEIA_IMMERSIVE_ACTOR_H
 
-
+#include "../Graphics/Graphics.h"
 #include "../Graphics/Image.h"
 
 class Actor {
 public:
-    Actor(Image* image, int posX, int posY);
+    Actor(Graphics* renderer, Image* image, int x, int y);
 
+protected:
+    Graphics* Renderer;
     Image* Sprite;
-    int PosX = 0;
-    int PosY = 0;
+    int X, Y = 0;
+    float Gravity = 5.0f;
 };
 
 

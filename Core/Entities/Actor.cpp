@@ -4,8 +4,10 @@
 
 #include "Actor.h"
 
-Actor::Actor(Image *image, int posX, int posY) {
+
+Actor::Actor(Graphics *renderer, Image *image, int x, int y) {
+    Renderer = renderer;
     Sprite = image;
-    PosX = posX;
-    PosY = posY;
+    X = x;
+    Y = y;
 }

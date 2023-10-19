@@ -15,7 +15,7 @@ private:
     bool isRunning;
 
     ConfigLoader* config;
-    Rendering* graphics;
+    Graphics* graphics;
     InputHandler* inputHandler;
 
 public:

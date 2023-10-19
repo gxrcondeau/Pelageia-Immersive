@@ -21,6 +21,8 @@ add_executable(${PROJECT_NAME} main.cpp
         Core/Entities/Actor.h
         Core/Entities/Pawn.cpp
         Core/Entities/Pawn.h
+        Core/Engine.cpp
+        Core/Engine.h
 )
 
 include_directories(Core/Utils/ConfigLoader)

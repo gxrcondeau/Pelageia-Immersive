@@ -9,13 +9,13 @@
 #include <SDL.h>
 #include "Image.h"
 
-class Rendering {
+class Graphics {
 private:
     SDL_Window* Window;
     SDL_Renderer* Renderer;
 
 public:
-    Rendering(const char* const windowName, int width, int height);
+    Graphics(const char* const windowName, int width, int height);
 
     Image* NewImage(const char* file);
     Image* NewImage(const char* file, int r, int g, int b);
