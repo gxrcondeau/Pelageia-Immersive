@@ -5,6 +5,7 @@
 #ifndef PELAGEIA_IMMERSIVE_TEXTUREMANAGER_H
 #define PELAGEIA_IMMERSIVE_TEXTUREMANAGER_H
 
+#include "SDL.h"
 #include <string>
 #include <map>
 
@@ -20,6 +21,7 @@ public:
     void Clean();
 
     void Draw(std::string id, int x, int y, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void DrawFrame(std::string id, int x, int y, int width, int height, int row, int frame, SDL_RendererFlip flip = SDL_FLIP_NONE);
 private:
     TextureManager() {};
     std::map<std::string, SDL_Texture*> m_TextureMap;

@@ -14,6 +14,18 @@ add_executable(${PROJECT_NAME} main.cpp
         Core/Graphics/TextureManager.cpp
         Core/Graphics/TextureManager.h
         Core/Graphics/TextureManager.h
+        Core/Physics/Vector2D.h
+        Core/Physics/Vector2D.h
+        Core/Physics/Transform.h
+        Core/Objects/IObject.h
+        Core/Objects/GameObject.h
+        Core/Characters/Character.h
+        Core/Characters/Player.cpp
+        Core/Characters/Player.h
+        Core/Objects/Utils.h
+        Core/Physics/RigidBody.h
+        Core/Animation/Animation.cpp
+        Core/Animation/Animation.h
 )
 
 include_directories(Core/Utils/ConfigLoader)

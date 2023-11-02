@@ -5,9 +5,12 @@
 #include <cstdio>
 #include "Engine.h"
 #include "Graphics/TextureManager.h"
+#include "Objects/Utils.h"
+#include "Characters/Player.h"
 
 Engine* Engine::s_Instance = nullptr;
 TextureManager* TextureManager::s_Instance = nullptr;
+Player* player = nullptr;
 
 bool Engine::Init() {
     if(SDL_Init(SDL_INIT_VIDEO) != 0 && IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) != 0){
@@ -27,7 +30,8 @@ bool Engine::Init() {
         return false;
     }
 
-    TextureManager::GetInstance()->Load("character", "Resources/character.png");
+    TextureManager::GetInstance()->Load("character", "Resources/Player/character_idle.png");
+    player = new Player(new Properties("character", 20, 30, 48, 48, SDL_RendererFlip::SDL_FLIP_NONE));
 
     return m_IsRunning = true;
 }
@@ -46,13 +50,14 @@ bool Engine::Quit() {
 }
 
 void Engine::Update() {
+    player->Update(0);
     SDL_Log("Updating...");
 }
 
 void Engine::Render() {
     SDL_SetRenderDrawColor(m_Renderer, 124, 128, 255, 255);
     SDL_RenderClear(m_Renderer);
-    TextureManager::GetInstance()->Draw("character", 100, 100, 60, 60);
+    player->Draw();
     SDL_RenderPresent(m_Renderer);
 }
 
