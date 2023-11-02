@@ -10,6 +10,11 @@
 #include "../Physics/RigidBody.h"
 #include "../Animation/Animation.h"
 
+#define FORWARD 1
+#define BACKWARD -1
+#define UPWARD 1
+#define DOWNWARD -1
+
 class Player : public Character{
 public:
     Player(Properties* props);

@@ -26,6 +26,8 @@ add_executable(${PROJECT_NAME} main.cpp
         Core/Physics/RigidBody.h
         Core/Animation/Animation.cpp
         Core/Animation/Animation.h
+        Core/Inputs/Input.cpp
+        Core/Inputs/Input.h
 )
 
 include_directories(Core/Utils/ConfigLoader)

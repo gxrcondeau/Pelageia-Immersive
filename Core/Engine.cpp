@@ -7,6 +7,7 @@
 #include "Graphics/TextureManager.h"
 #include "Objects/Utils.h"
 #include "Characters/Player.h"
+#include "Inputs/Input.h"
 
 Engine* Engine::s_Instance = nullptr;
 TextureManager* TextureManager::s_Instance = nullptr;
@@ -30,8 +31,9 @@ bool Engine::Init() {
         return false;
     }
 
-    TextureManager::GetInstance()->Load("character", "Resources/Player/character_idle.png");
-    player = new Player(new Properties("character", 20, 30, 48, 48, SDL_RendererFlip::SDL_FLIP_NONE));
+    TextureManager::GetInstance()->Load("player_idle", "Resources/Player/character_idle.png");
+    TextureManager::GetInstance()->Load("player_run", "Resources/Player/run_cycle.png");
+    player = new Player(new Properties("player_idle", 20, 30, 48, 48, SDL_RendererFlip::SDL_FLIP_NONE));
 
     return m_IsRunning = true;
 }
@@ -62,11 +64,5 @@ void Engine::Render() {
 }
 
 void Engine::Events() {
-    SDL_Event event;
-    SDL_PollEvent(&event);
-    switch(event.type){
-        case SDL_QUIT:
-            Quit();
-            break;
-    }
+    Input::GetInstance()->Listen();
 }
