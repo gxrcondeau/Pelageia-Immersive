@@ -28,6 +28,12 @@ add_executable(${PROJECT_NAME} main.cpp
         Core/Animation/Animation.h
         Core/Inputs/Input.cpp
         Core/Inputs/Input.h
+        Core/Timer/Timer.cpp
+        Core/Timer/Timer.h
+        Core/Map/Layer.h
+        Core/Map/GameMap.h
+        Core/Map/TileLayer.cpp
+        Core/Map/TileLayer.h
 )
 
 include_directories(Core/Utils/ConfigLoader)

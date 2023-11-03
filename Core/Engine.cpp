@@ -4,13 +4,17 @@
 
 #include <cstdio>
 #include "Engine.h"
+#include "Timer/Timer.h"
 #include "Graphics/TextureManager.h"
 #include "Objects/Utils.h"
 #include "Characters/Player.h"
 #include "Inputs/Input.h"
 
+
 Engine* Engine::s_Instance = nullptr;
 TextureManager* TextureManager::s_Instance = nullptr;
+Timer* Timer::s_Instance = nullptr;
+
 Player* player = nullptr;
 
 bool Engine::Init() {
@@ -52,8 +56,8 @@ bool Engine::Quit() {
 }
 
 void Engine::Update() {
-    player->Update(0);
-    SDL_Log("Updating...");
+    float dt = Timer::GetInstance()->GetDeltaTime();
+    player->Update(dt);
 }
 
 void Engine::Render() {
