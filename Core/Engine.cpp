@@ -31,8 +31,8 @@ bool Engine::Init() {
         return false;
     }
 
-    TextureManager::GetInstance()->Load("player_idle", "Resources/Player/character_idle.png");
-    TextureManager::GetInstance()->Load("player_run", "Resources/Player/run_cycle.png");
+    TextureManager::GetInstance()->Load("player_idle", "Resources/Animations/Player/player_idle.png");
+    TextureManager::GetInstance()->Load("player_run", "Resources/Animations/Player/player_run.png");
     player = new Player(new Properties("player_idle", 20, 30, 48, 48, SDL_RendererFlip::SDL_FLIP_NONE));
 
     return m_IsRunning = true;
