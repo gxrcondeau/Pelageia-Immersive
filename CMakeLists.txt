@@ -34,10 +34,13 @@ add_executable(${PROJECT_NAME} main.cpp
         Core/Map/GameMap.h
         Core/Map/TileLayer.cpp
         Core/Map/TileLayer.h
+        Core/Map/MapParser.cpp
+        Core/Map/MapParser.h
 )
 
 include_directories(Core/Utils/ConfigLoader)
 include_directories(Core/Include/Pugixml)
+include_directories(Core/Vendor/TinyXml)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 set(SDL2_PATH "SDL2/x86_64-w64-mingw32")
