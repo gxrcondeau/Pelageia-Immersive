@@ -11,8 +11,8 @@
 
 
 struct Tileset{
-    int First, LastID;
-    int NumRows, NumCols;
+    int FirstID, LastID;
+    int RowCount, ColCount;
     int TileCount, TileSize;
     std::string Name, Source;
 };
