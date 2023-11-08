@@ -7,25 +7,27 @@
 
 
 #include <string>
+#include <map>
 #include "TileLayer.h"
-#include "tinyxml.h"
 #include "GameMap.h"
+#include "../Include/Pugi/pugixml.hpp"
 
 class MapParser {
 public:
     bool Load();
     bool Clean();
 
-    inline GameMap* GameMaps();
+    inline GameMap* GameMaps(std::string id) { return m_MapDict[id]; };
     inline static MapParser* GetInstance() { return s_Instance = ( s_Instance != nullptr ? s_Instance : new MapParser()); }
 
 private:
     MapParser() {};
     static MapParser* s_Instance;
+    std::map<std::string, GameMap*> m_MapDict;
 
     bool Parse(std::string id, std::string source);
-    Tileset ParseTileset(TiXmlElement* xmlTileset);
-    TileLayer* ParseTileLayer(TiXmlElement* xmlTileLayer);
+    Tileset ParseTileset(pugi::xml_node* xmlTileset);
+    TileLayer* ParseTileLayer(pugi::xml_node* xmlTileLayer, TilesetList tilesets, int tilesize, int rowcount, int colcount);
 };
 
 

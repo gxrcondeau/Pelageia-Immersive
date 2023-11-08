@@ -15,6 +15,7 @@ public:
 
     std::vector<Layer*> GetMapLayers() { return m_MapLayer; }
 private:
+    friend class MapParser;
     std::vector<Layer*> m_MapLayer;
 };
 
