@@ -3,3 +3,4 @@ cmake-build-debug/*
 !cmake-build-debug/SDL2.dll
 !cmake-build-debug/SDL2_image.dll
 !cmake-build-debug/Resources
+!cmake-build-debug/Assets
