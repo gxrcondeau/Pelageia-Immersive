@@ -4,15 +4,23 @@
 
 #include <sstream>
 #include <iostream>
+#include <SDL_log.h>
 #include "MapParser.h"
 
-bool MapParser::Load() {
-    return Parse("level", "Assets/Maps/map.tmx");
+MapParser* MapParser::s_Instance = nullptr;
 
+bool MapParser::Load() {
+    return Parse("map", "Assets/Maps/map.tmx");
 }
 
 bool MapParser::Clean() {
-    return false;
+    std::map<std::string, GameMap*>::iterator iterator;
+    for (iterator = m_MapDict.begin(); iterator != m_MapDict.end(); iterator++)
+        iterator->second = nullptr;
+
+    m_MapDict.clear();
+
+    return true;
 }
 
 bool MapParser::Parse(std::string id, std::string source) {
@@ -23,29 +31,48 @@ bool MapParser::Parse(std::string id, std::string source) {
         return false;
     }
 
-    pugi::xml_node root = xml.root();
-    int colcount, rowcount, tilesize = 0;
+    pugi::xml_node root = xml.child("map");
 
-    tilesize = root.attribute("tileWidth").as_int();
-    colcount = root.attribute("width").as_int();
-    rowcount = root.attribute("height").as_int();
-
-    TilesetList tilesets;
-    for(pugi::xml_node e = root.first_child(); e != nullptr; e = e.next_sibling()){
-        if(e.value() == std::string("tileset")){
-            tilesets.push_back(ParseTileset(&e));
-        }
+    if(!root){
+        SDL_Log("map element not found in Tile Map XML.");
+        return false;
     }
 
+    TilesetList tilesets;
+    pugi::xml_node tilesetNode = root.child("tileset");
+    if(!tilesetNode){
+        SDL_Log("tile set element not found in Tile Map XML.");
+        return false;
+    }
+
+    while(tilesetNode){
+        tilesets.push_back(ParseTileset(&tilesetNode));
+        tilesetNode = tilesetNode.next_sibling("tileset");
+    }
+
+    int colcount, rowcount, tilesize = 0;
+
+    tilesize = 16; //tilesets[0].TileSize;
+    colcount = 30; //tilesets[0].ColCount;
+    rowcount = 20; //tilesets[0].RowCount;
+
+
     GameMap* gamemap = new GameMap();
-    for(pugi::xml_node e = root.first_child(); e != nullptr; e = e.next_sibling()){
-        if(e.value() == std::string("layer")){
-            TileLayer* tileLayer = ParseTileLayer(&e, tilesets, tilesize, colcount, rowcount);
-            gamemap->m_MapLayer.push_back(tileLayer);
-        }
+    pugi::xml_node layerNode = root.child("layer");
+    if(!layerNode){
+        SDL_Log("layer element not found in Tile Map XML.");
+        return false;
+    }
+
+    while(layerNode){
+        TileLayer* tileLayer = ParseTileLayer(&layerNode, tilesets, tilesize, colcount, rowcount);
+        gamemap->m_MapLayer.push_back(tileLayer);
+        layerNode = layerNode.next_sibling("layer");
     }
 
     m_MapDict[id] = gamemap;
+
+    return true;
 }
 
 Tileset MapParser::ParseTileset(pugi::xml_node* xmlTileset) {
@@ -68,31 +95,27 @@ Tileset MapParser::ParseTileset(pugi::xml_node* xmlTileset) {
 }
 
 TileLayer *MapParser::ParseTileLayer(pugi::xml_node *xmlTileLayer, TilesetList tilesets, int tilesize, int rowcount, int colcount) {
-    pugi::xml_node data;
-
-    for(pugi::xml_node e = xmlTileLayer->first_child(); e != nullptr; e = e.next_sibling()){
-        if(e.value() == std::string("data")){
-            data = e;
-            break;
-        }
-    }
-
-    std::string matrix(data.value());
-    std::istringstream iss(matrix);
-    std::string id;
-
     TileMap tilemap(rowcount, std::vector<int>(colcount, 0));
+    pugi::xml_node dataNode = xmlTileLayer->child("data");
+    if (dataNode) {
+        std::string encoding = dataNode.attribute("encoding").value();
 
-    for(int row = 0; row = rowcount; row++){
-        for(int col = 0; col = colcount; col++){
-            std::getline(iss, id, ',');
-            std::stringstream convertor(id);
-            convertor >> tilemap[row][col];
+        std::string csvData = dataNode.text().get();
+        std::istringstream stream(csvData);
+        std::string cell;
 
-            if(!iss.good()) break;
+        for (int row = 0; row < rowcount; row++) {
+            for (int col = 0; col < colcount; col++) {
+                std::getline(stream, cell, ',');
+                std::stringstream convertor(cell);
+                convertor >> tilemap[row][col];
+
+                if (!stream.good()) break;
+            }
         }
     }
 
     return new TileLayer(tilesize, rowcount, colcount, tilemap, tilesets);
 }
+
 

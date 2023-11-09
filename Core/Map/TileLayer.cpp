@@ -5,12 +5,8 @@
 #include "TileLayer.h"
 #include "../Graphics/TextureManager.h"
 
-TileLayer::TileLayer(int tilesize, int rowcount, int colcount,
-                     TileMap tilemap, TilesetList tilesetList) : m_TilesetList(tilesize) {
-    m_RowCount = rowcount;
-    m_ColCount = colcount;
-    m_TileMap = tilemap;
-
+TileLayer::TileLayer(int tilesize, int rowcount, int colcount, TileMap tilemap, TilesetList tilesetList) :
+        m_TileSize(tilesize), m_RowCount(rowcount), m_ColCount(colcount), m_TileMap(tilemap), m_TilesetList(tilesetList) {
     for(unsigned i = 0; i < m_TilesetList.size(); i++){
         TextureManager::GetInstance()->Load(m_TilesetList[i].Name, "Assets/Maps/" + m_TilesetList[i].Source);
     }
@@ -41,6 +37,12 @@ void TileLayer::Render() {
                 tileRow--;
                 tileCol = tileset.ColCount - 1;
             }
+
+            TextureManager::GetInstance()->DrawTile(tileset.Name, tileset.TileSize, j * tileset.TileSize, i * tileset.TileSize, tileRow, tileCol);
         }
     }
+}
+
+void TileLayer::Update() {
+    SDL_Log("Updating layer");
 }

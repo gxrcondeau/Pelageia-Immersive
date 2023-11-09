@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "Layer.h"
+#include "TileLayer.h"
 
 class GameMap{
 public:

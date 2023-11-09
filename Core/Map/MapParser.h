@@ -17,7 +17,7 @@ public:
     bool Load();
     bool Clean();
 
-    inline GameMap* GameMaps(std::string id) { return m_MapDict[id]; };
+    inline GameMap* GetMap(std::string id) { return m_MapDict[id]; };
     inline static MapParser* GetInstance() { return s_Instance = ( s_Instance != nullptr ? s_Instance : new MapParser()); }
 
 private:

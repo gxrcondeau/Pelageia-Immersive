@@ -24,8 +24,8 @@ class TileLayer : public Layer{
 public:
     TileLayer(int tilesize, int rowcount, int colcount, TileMap tilemap, TilesetList tilesetList);
 
-    virtual void Render() override;
-    virtual void Update() { };
+    void Render() override;
+    void Update() override;
 
     inline TileMap GetTilemap() { return m_TileMap; }
 private:

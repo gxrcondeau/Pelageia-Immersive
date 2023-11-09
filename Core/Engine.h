@@ -7,6 +7,7 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+#include "Map/GameMap.h"
 
 class Engine {
 public:
@@ -32,6 +33,8 @@ private:
 
     bool m_IsRunning;
     static Engine* s_Instance;
+
+    GameMap* m_LevelMap;
 };
 
 

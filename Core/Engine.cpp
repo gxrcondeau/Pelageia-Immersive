@@ -9,6 +9,7 @@
 #include "Objects/Utils.h"
 #include "Characters/Player.h"
 #include "Inputs/Input.h"
+#include "Map/MapParser.h"
 
 
 Engine* Engine::s_Instance = nullptr;
@@ -35,6 +36,12 @@ bool Engine::Init() {
         return false;
     }
 
+    if(!MapParser::GetInstance()->Load()){
+        SDL_Log("Failed to load map");
+    }
+
+    m_LevelMap = MapParser::GetInstance()->GetMap("map");
+
     TextureManager::GetInstance()->Load("player_idle", "Resources/Animations/Player/player_idle.png");
     TextureManager::GetInstance()->Load("player_run", "Resources/Animations/Player/player_run.png");
     player = new Player(new Properties("player_idle", 20, 30, 48, 48, SDL_RendererFlip::SDL_FLIP_NONE));
@@ -43,6 +50,7 @@ bool Engine::Init() {
 }
 
 bool Engine::Clean() {
+    MapParser::GetInstance()->Clean();
     TextureManager::GetInstance()->Clean();
     SDL_DestroyRenderer(m_Renderer);
     SDL_DestroyWindow(m_Window);
@@ -57,12 +65,14 @@ bool Engine::Quit() {
 
 void Engine::Update() {
     float dt = Timer::GetInstance()->GetDeltaTime();
+    m_LevelMap->Update();
     player->Update(dt);
 }
 
 void Engine::Render() {
     SDL_SetRenderDrawColor(m_Renderer, 124, 128, 255, 255);
     SDL_RenderClear(m_Renderer);
+    m_LevelMap->Render();
     player->Draw();
     SDL_RenderPresent(m_Renderer);
 }
