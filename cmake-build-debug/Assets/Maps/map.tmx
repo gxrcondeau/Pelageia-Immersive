@@ -6,6 +6,18 @@
  <tileset firstgid="85" name="Assets" tilewidth="16" tileheight="16" tilecount="625" columns="25">
   <image source="Assets.png" width="400" height="400"/>
  </tileset>
+ <tileset firstgid="710" name="BlueSlimeSpritesheet" tilewidth="16" tileheight="16" tilecount="184" columns="23">
+  <image source="Blue Slime Spritesheet.png" width="368" height="128"/>
+  <tile id="3">
+   <animation>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
  <layer id="1" name="Tile Layer 1" width="30" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -24,7 +36,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,1,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,13,14,15,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,13,14,15,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,713,0,0,0,0,0,0,0,0,
 2,2,19,14,18,2,2,2,2,2,2,19,18,2,2,2,2,2,2,2,2,2,3,0,0,0,0,0,0,0,
 14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,15,55,55,55,55,55,1,2,
 14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,15,79,79,79,79,79,13,14

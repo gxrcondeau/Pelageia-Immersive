@@ -91,6 +91,17 @@ Tileset MapParser::ParseTileset(pugi::xml_node* xmlTileset) {
     pugi::xml_node image = xmlTileset->child("image");
     tileset.Source = image.attribute("source").as_string();
 
+    pugi::xml_node tile = xmlTileset->child("tile");
+    auto anim = tile.child("animation");
+    auto frame = anim.child("frame");
+
+    while(frame){
+        int tilegid = tileset.FirstID + frame.attribute("tileid").as_int();
+        int duration = frame.attribute("duration").as_int();
+        tileset.Animation.push_back(TileAnimation(tilegid, duration));
+        frame = frame.next_sibling("frame");
+    }
+
     return tileset;
 }
 

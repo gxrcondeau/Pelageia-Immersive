@@ -19,18 +19,16 @@ void TileLayer::Render() {
             int tileID = m_TileMap[row][col];
 
             if (tileID > 0){
-                for(unsigned tilesetID = 0; tilesetID < m_TilesetList.size(); tilesetID++){
-                    Tileset tileset = m_TilesetList[tilesetID];
+                for(auto tileset: m_TilesetList){
 
                     if (tileID >= tileset.FirstID && tileID <= tileset.LastID){
                         std::string tilesetName = tileset.Name;
                         int tileSize = tileset.TileSize;
                         int x = col * tileset.TileSize;
                         int y = row * tileset.TileSize;
+
                         int tileRow = (tileID - tileset.FirstID + 1)/tileset.ColCount;
                         int tileCol = (tileID - tileset.FirstID + 1) - tileRow * tileset.ColCount - 1;
-
-                        std::cout << "tileset: " << tilesetID << "\ttileID: " << tileID << "\ttexture(" << tileRow << ", " << tileCol << ")\tpos(" << col << ", " << row << ")" << std::endl;
 
                         TextureManager::GetInstance()->DrawTile(tilesetName, tileSize, x, y,tileRow, tileCol);
                         break;
