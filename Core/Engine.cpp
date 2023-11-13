@@ -24,7 +24,7 @@ bool Engine::Init() {
         return false;
     }
 
-    m_Window = SDL_CreateWindow("Pelageia Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 420, 0);
+    m_Window = SDL_CreateWindow("Pelageia Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 480, 320, 0);
     if(!m_Window){
         SDL_Log("Failed initialize Window: %s", SDL_GetError());
         return false;
@@ -39,8 +39,6 @@ bool Engine::Init() {
     if(!MapParser::GetInstance()->Load()){
         SDL_Log("Failed to load map");
     }
-
-    m_LevelMap = MapParser::GetInstance()->GetMap("map");
 
     TextureManager::GetInstance()->Load("player_idle", "Resources/Animations/Player/player_idle.png");
     TextureManager::GetInstance()->Load("player_run", "Resources/Animations/Player/player_run.png");
@@ -65,14 +63,22 @@ bool Engine::Quit() {
 
 void Engine::Update() {
     float dt = Timer::GetInstance()->GetDeltaTime();
-    m_LevelMap->Update();
+    //MapParser::GetInstance()->GetMap("map")->Update();
     player->Update(dt);
 }
 
 void Engine::Render() {
     SDL_SetRenderDrawColor(m_Renderer, 124, 128, 255, 255);
     SDL_RenderClear(m_Renderer);
-    m_LevelMap->Render();
+    // TextureManager::GetInstance()->Draw("Assets", 0, 0, 400, 400);
+//    for(int i = 0; i < 25; i++){
+//        for(int j = 0; j < 25; j++){
+//            if (j % 2 == 0 && i % 2 == 1)
+//            TextureManager::GetInstance()->DrawTile("Assets", 16, i * 16, j * 16, j, i);
+//        }
+//    }
+
+    MapParser::GetInstance()->GetMap("map")->Render();
     player->Draw();
     SDL_RenderPresent(m_Renderer);
 }

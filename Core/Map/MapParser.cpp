@@ -65,7 +65,7 @@ bool MapParser::Parse(std::string id, std::string source) {
     }
 
     while(layerNode){
-        TileLayer* tileLayer = ParseTileLayer(&layerNode, tilesets, tilesize, colcount, rowcount);
+        TileLayer* tileLayer = ParseTileLayer(&layerNode, tilesets, tilesize, rowcount, colcount);
         gamemap->m_MapLayer.push_back(tileLayer);
         layerNode = layerNode.next_sibling("layer");
     }
@@ -101,16 +101,16 @@ TileLayer *MapParser::ParseTileLayer(pugi::xml_node *xmlTileLayer, TilesetList t
         std::string encoding = dataNode.attribute("encoding").value();
 
         std::string csvData = dataNode.text().get();
-        std::istringstream stream(csvData);
+        std::istringstream readStream(csvData);
         std::string cell;
 
         for (int row = 0; row < rowcount; row++) {
             for (int col = 0; col < colcount; col++) {
-                std::getline(stream, cell, ',');
-                std::stringstream convertor(cell);
-                convertor >> tilemap[row][col];
+                std::getline(readStream, cell, ',');
+                std::stringstream writeStream(cell);
+                writeStream >> tilemap[row][col];
 
-                if (!stream.good()) break;
+                if (!readStream.good()) break;
             }
         }
     }

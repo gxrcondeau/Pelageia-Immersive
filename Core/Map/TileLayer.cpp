@@ -2,6 +2,7 @@
 // Created by pylinskyi.k on 03.11.2023.
 //
 
+#include <iostream>
 #include "TileLayer.h"
 #include "../Graphics/TextureManager.h"
 
@@ -13,32 +14,29 @@ TileLayer::TileLayer(int tilesize, int rowcount, int colcount, TileMap tilemap, 
 }
 
 void TileLayer::Render() {
-    for(unsigned i = 0; i < m_RowCount; i++){
-        for(unsigned j = 0; j < m_ColCount; j++){
-            int tileID = m_TileMap[i][j];
-            if(tileID == 0) continue;
+    for (unsigned row = 0; row < m_RowCount; row++){
+        for (unsigned col = 0; col < m_ColCount; col++){
+            int tileID = m_TileMap[row][col];
 
-            int index;
-            if(m_TilesetList.size() > 1){
-                for(unsigned k = 1; k < m_TilesetList.size(); k++){
-                    if(tileID > m_TilesetList[k].FirstID && tileID < m_TilesetList[k].LastID){
-                        tileID = tileID + m_TilesetList[k].TileCount - m_TilesetList[k].LastID;
-                        index = k;
+            if (tileID > 0){
+                for(unsigned tilesetID = 0; tilesetID < m_TilesetList.size(); tilesetID++){
+                    Tileset tileset = m_TilesetList[tilesetID];
+
+                    if (tileID >= tileset.FirstID && tileID <= tileset.LastID){
+                        std::string tilesetName = tileset.Name;
+                        int tileSize = tileset.TileSize;
+                        int x = col * tileset.TileSize;
+                        int y = row * tileset.TileSize;
+                        int tileRow = (tileID - tileset.FirstID + 1)/tileset.ColCount;
+                        int tileCol = (tileID - tileset.FirstID + 1) - tileRow * tileset.ColCount - 1;
+
+                        std::cout << "tileset: " << tilesetID << "\ttileID: " << tileID << "\ttexture(" << tileRow << ", " << tileCol << ")\tpos(" << col << ", " << row << ")" << std::endl;
+
+                        TextureManager::GetInstance()->DrawTile(tilesetName, tileSize, x, y,tileRow, tileCol);
                         break;
                     }
                 }
             }
-
-            Tileset tileset = m_TilesetList[index];
-            int tileRow = tileID/tileset.ColCount;
-            int tileCol = tileID - tileRow * tileset.ColCount - 1;
-
-            if(tileID % tileset.ColCount == 0){
-                tileRow--;
-                tileCol = tileset.ColCount - 1;
-            }
-
-            TextureManager::GetInstance()->DrawTile(tileset.Name, tileset.TileSize, j * tileset.TileSize, i * tileset.TileSize, tileRow, tileCol);
         }
     }
 }
