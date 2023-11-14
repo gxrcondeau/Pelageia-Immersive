@@ -36,6 +36,8 @@ add_executable(${PROJECT_NAME} main.cpp
         Core/Map/TileLayer.h
         Core/Map/MapParser.cpp
         Core/Map/MapParser.h
+        Core/Camera/Camera.cpp
+        Core/Camera/Camera.h
 )
 
 include_directories(Core/Utils/ConfigLoader)

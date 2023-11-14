@@ -6,6 +6,8 @@
 #include "SDL_image.h"
 #include "../Engine.h"
 #include "TextureManager.h"
+#include "../Physics/Vector2D.h"
+#include "../Camera/Camera.h"
 
 
 bool TextureManager::Load(std::string id, std::string filename) {
@@ -55,7 +57,9 @@ void TextureManager::DrawFrame(std::string id, int x, int y, int width, int heig
 
 void TextureManager::DrawTile(std::string tilesetName, int tileSize, int x, int y, int row, int column,
                               SDL_RendererFlip flip) {
+    Vector2D cam = Camera::GetInstance()->GetPosition();
+
     SDL_Rect srcRect = {tileSize * column, tileSize * row, tileSize, tileSize};
-    SDL_Rect dstRect = {x, y, tileSize, tileSize};
+    SDL_Rect dstRect = {x - (int)cam.X, y - (int)cam.Y, tileSize, tileSize};
     SDL_RenderCopyEx(Engine::GetInstance()->GetRenderer(), m_TextureMap[tilesetName], &srcRect, &dstRect, 0, nullptr, flip);
 }

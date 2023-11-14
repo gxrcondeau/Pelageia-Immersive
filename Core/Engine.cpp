@@ -10,6 +10,7 @@
 #include "Characters/Player.h"
 #include "Inputs/Input.h"
 #include "Map/MapParser.h"
+#include "Camera/Camera.h"
 
 
 Engine* Engine::s_Instance = nullptr;
@@ -43,6 +44,7 @@ bool Engine::Init() {
     TextureManager::GetInstance()->Load("player_idle", "Resources/Animations/Player/player_idle.png");
     TextureManager::GetInstance()->Load("player_run", "Resources/Animations/Player/player_run.png");
     player = new Player(new Properties("player_idle", 20, 30, 48, 48, SDL_RendererFlip::SDL_FLIP_NONE));
+    Camera::GetInstance()->SetTarget(player->GetOrigin());
 
     return m_IsRunning = true;
 }
@@ -63,21 +65,14 @@ bool Engine::Quit() {
 
 void Engine::Update() {
     float dt = Timer::GetInstance()->GetDeltaTime();
-    //MapParser::GetInstance()->GetMap("map")->Update();
+    MapParser::GetInstance()->GetMap("map")->Update();
     player->Update(dt);
+    Camera::GetInstance()->Update(dt);
 }
 
 void Engine::Render() {
     SDL_SetRenderDrawColor(m_Renderer, 124, 128, 255, 255);
     SDL_RenderClear(m_Renderer);
-    // TextureManager::GetInstance()->Draw("Assets", 0, 0, 400, 400);
-//    for(int i = 0; i < 25; i++){
-//        for(int j = 0; j < 25; j++){
-//            if (j % 2 == 0 && i % 2 == 1)
-//            TextureManager::GetInstance()->DrawTile("Assets", 16, i * 16, j * 16, j, i);
-//        }
-//    }
-
     MapParser::GetInstance()->GetMap("map")->Render();
     player->Draw();
     SDL_RenderPresent(m_Renderer);
