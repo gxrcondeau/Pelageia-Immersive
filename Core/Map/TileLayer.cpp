@@ -8,9 +8,8 @@
 
 TileLayer::TileLayer(int tilesize, int rowcount, int colcount, TileMap tilemap, TilesetList tilesetList) :
         m_TileSize(tilesize), m_RowCount(rowcount), m_ColCount(colcount), m_TileMap(tilemap), m_TilesetList(tilesetList) {
-    for(unsigned i = 0; i < m_TilesetList.size(); i++){
-        TextureManager::GetInstance()->Load(m_TilesetList[i].Name, "Assets/Maps/" + m_TilesetList[i].Source);
-    }
+    for(auto tilesetList: m_TilesetList)
+        TextureManager::GetInstance()->Load(tilesetList.Name, "Assets/Maps/" + tilesetList.Source);
 }
 
 void TileLayer::Render() {
