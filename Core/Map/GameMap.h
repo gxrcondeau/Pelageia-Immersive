@@ -12,7 +12,7 @@
 class GameMap{
 public:
     void Render() { for(auto layer: m_MapLayer) layer->Render(); }
-    void Update() { for(auto layer: m_MapLayer) layer->Update(); }
+    void Update(int dt) { for(auto layer: m_MapLayer) layer->Update(dt); }
 
     std::vector<Layer*> GetMapLayers() { return m_MapLayer; }
 private:

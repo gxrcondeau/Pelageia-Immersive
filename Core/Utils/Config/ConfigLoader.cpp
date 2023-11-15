@@ -3,105 +3,74 @@
 //
 
 #include <sys/stat.h>
-#include <io.h> // Use io.h for directory existence on Windows
-#include <iostream>
+#include <io.h>
 #include <fstream>
 #include <vector>
-#include <cwchar>
-#include "../Parser/TryParse.h"
 #include "ConfigLoader.h"
 #include "../Logger/PeImLogger.h"
 
+ConfigLoader* ConfigLoader::s_Instance = nullptr;
+
 ConfigLoader::ConfigLoader() {
-    createDefault();
+    CreateConfig(WindowParamsFileName, WindowParamsDefaultXml);
 
-    WindowParams params = getWindowParams();
-    printf("Config: window name: %s, height: %i, width: %i, fullScreen: %i\n", params.name, params.height, params.width, params.fullScreen);
+    WindowParams* params = GetWindowParams();
+    SDL_Log("Config: window name: %s, height: %i, width: %i, fullScreen: %i\n", params->Name.c_str(), params->Height, params->Width, params->FullScreen);
 }
 
-ConfigLoader::~ConfigLoader() {
-}
+WindowParams* ConfigLoader::GetWindowParams() const {
+    pugi::xml_document windowXml = GetConfigXml(WindowParamsFileName);
 
-pugi::xml_document ConfigLoader::getXml() const{
-    if(!isConfigExist()) {
-        createDefault();
+    pugi::xml_node rootNode = windowXml.child("config");
+    pugi::xml_node metaNode = rootNode.child("meta");
+    pugi::xml_node windowNode = rootNode.child("window");
+
+    if(!rootNode || !metaNode || !windowNode){
+        SDL_Log("Invalid XML Config File");
+        return nullptr;
     }
 
-    pugi::xml_document doc;
+    std::string windowName = metaNode.attribute("name").as_string();
+    int windowWidth = windowNode.attribute("width").as_int();
+    int windowHeight = windowNode.attribute("height").as_int();
+    int windowFullScreen = windowNode.attribute("fullscreen").as_int();
 
-    const char* const configPath = getConfigFullPath();
-    pugi::xml_parse_result result = doc.load_file(configPath);
-
-    delete[] configPath;
-    std::cout << "Load result: " << result.description() << std::endl;
-    return doc;
+    return new WindowParams(windowName, windowWidth, windowHeight, windowFullScreen);
 }
 
-void ConfigLoader::createDefault() const{
-    if(!isDirectoryExist()){
-        int stat = mkdir(configDirectory);
-        if(!stat){
-            PeImLogger::Info("Folder Created: %s", configDirectory);
-        }
-        else{
-            PeImLogger::Info("Impossible create folder");
-        }
+pugi::xml_document ConfigLoader::GetConfigXml(std::string configName) const {
+    pugi::xml_document document;
+    std::string documentPath = ConfigDirectory + configName;
+    pugi::xml_parse_result result = document.load_file(documentPath.c_str());
+
+    SDL_Log("Document: %s Parse result: %s", documentPath.c_str(), result.description());
+
+    return document;
+}
+
+void ConfigLoader::CreateConfig(std::string configName, std::string configXml) const {
+    if(!IsDirectoryExist()){
+        int stat = mkdir(ConfigDirectory.c_str());
+        if(!stat) SDL_Log("Folder Created: %s", ConfigDirectory.c_str());
+        else SDL_Log("Impossible create folder");
     }
 
-    if(isConfigExist()) {
-        createFile();
+    if(!IsFileExist(configName)) {
+        std::string filePath = ConfigDirectory + configName;
+        std::ofstream outfile(filePath);
+        outfile << configXml;
+
+        outfile.close();
     }
 }
 
-char* ConfigLoader::getConfigFullPath() const {
-    size_t fullPathLength = strlen(configDirectory) + strlen("/") + strlen(configFileName) + 1;
-
-    char* fullPath = new char[fullPathLength];
-
-    strcpy(fullPath, configDirectory);
-
-    strcat(fullPath, "/");
-    strcat(fullPath, configFileName);
-
-    return fullPath;
-}
-
-bool ConfigLoader::isConfigExist() const {
+bool ConfigLoader::IsDirectoryExist() const {
     struct stat buffer{};
-    return stat(getConfigFullPath(), &buffer) == 1;
+    return stat(ConfigDirectory.c_str(), &buffer) == 0;
 }
 
-bool ConfigLoader::isDirectoryExist() const {
+bool ConfigLoader::IsFileExist(std::string configName) const {
     struct stat buffer{};
-    return stat(configDirectory, &buffer) == 1;
-}
-
-void ConfigLoader::createFile() const {
-    const char* const outFilePath = getConfigFullPath();
-
-    std::ofstream outfile(outFilePath);
-    outfile << configDefaultString;
-
-    outfile.close();
-
-    PeImLogger::Info("File created: %s", outFilePath);
-}
-
-void ConfigLoader::update() {
-}
-
-WindowParams ConfigLoader::getWindowParams() const{
-    const auto config = getXml();
-
-    const auto name = config.child("PeImConfig").child("meta").attribute("name").value();
-    const auto width = config.child("PeImConfig").child("window").attribute("width").value();
-    const auto height = config.child("PeImConfig").child("window").attribute("height").value();
-    const auto fullscreen = config.child("PeImConfig").child("window").attribute("fullscreen").value();
-
-    return WindowParams{
-            "Name",
-            TryParse::Int(width).first,
-            TryParse::Int(height).first,
-            TryParse::Bool(fullscreen)
-    };
+    std::string documentPath = ConfigDirectory + configName;
+    return stat(documentPath.c_str(), &buffer) == 0;
 }

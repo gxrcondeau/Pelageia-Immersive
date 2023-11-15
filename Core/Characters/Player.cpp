@@ -10,7 +10,7 @@
 
 Player::Player(Properties *props) : Character(props) {
     m_Animation = new Animation();
-    m_Animation->SetProps(m_TextureID, 1, 10, 80);
+    m_Animation->SetProps(m_TextureID, 1, 10, 50);
     m_RigidBody = new RigidBody();
 }
 
@@ -19,16 +19,16 @@ void Player::Draw() {
 }
 
 void Player::Update(float dt) {
-    m_Animation->SetProps("player_idle", 1, 10, 80);
+    m_Animation->SetProps("player_idle", 1, 10, 50);
     m_RigidBody->UnsetForce();
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_A)){
-        m_Animation->SetProps("player_run", 1, 8, 80, SDL_FLIP_HORIZONTAL);
+        m_Animation->SetProps("player_run", 1, 8, 50, SDL_FLIP_HORIZONTAL);
         m_RigidBody->ApplyForceX(5 * BACKWARD);
     }
 
     if(Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D)){
-        m_Animation->SetProps("player_run", 1, 8, 80, SDL_FLIP_NONE);
+        m_Animation->SetProps("player_run", 1, 8, 50, SDL_FLIP_NONE);
         m_RigidBody->ApplyForceX(5 * FORWARD);
     }
 

@@ -19,13 +19,22 @@ void TileLayer::Render() {
 
             if (tileID > 0){
                 for(auto tileset: m_TilesetList){
+                    std::string tilesetName = tileset.Name;
+                    int tileSize = tileset.TileSize;
+                    int x = col * tileset.TileSize;
+                    int y = row * tileset.TileSize;
 
-                    if (tileID >= tileset.FirstID && tileID <= tileset.LastID){
-                        std::string tilesetName = tileset.Name;
-                        int tileSize = tileset.TileSize;
-                        int x = col * tileset.TileSize;
-                        int y = row * tileset.TileSize;
+                    // Tile Animation for some reason render not working in update function
+                    if (tileset.Animation.size() > 0 && tileID == tileset.Animation[0].FrameID) {
+                        int frame = (SDL_GetTicks() / 100) % tileset.Animation.size();
 
+                        int tileRow = (tileset.Animation[frame].FrameID - tileset.FirstID + 1) / tileset.ColCount;
+                        int tileCol = (tileset.Animation[frame].FrameID - tileset.FirstID + 1) - tileRow * tileset.ColCount - 1;
+
+                        TextureManager::GetInstance()->DrawTile(tilesetName, tileSize, x, y, tileRow, tileCol);
+                    }
+                    // Static Tile render
+                    else if(tileID >= tileset.FirstID && tileID <= tileset.LastID && tileset.Animation.size() == 0){
                         int tileRow = (tileID - tileset.FirstID + 1)/tileset.ColCount;
                         int tileCol = (tileID - tileset.FirstID + 1) - tileRow * tileset.ColCount - 1;
 
@@ -38,6 +47,34 @@ void TileLayer::Render() {
     }
 }
 
-void TileLayer::Update() {
-    SDL_Log("Updating layer");
+// Animated tiles render
+void TileLayer::Update(int dt) {
+    for (unsigned row = 0; row < m_RowCount; row++){
+        for (unsigned col = 0; col < m_ColCount; col++){
+            int tileID = m_TileMap[row][col];
+
+            if (tileID > 0){
+                for(auto tileset: m_TilesetList){
+                    if (tileID >= tileset.FirstID && tileID <= tileset.LastID){
+                        if (tileset.Animation.size() > 0 && tileID == tileset.Animation[0].FrameID) {
+                            int frame = (SDL_GetTicks() / dt) % tileset.Animation.size();
+
+                            std::string tilesetName = tileset.Name;
+                            int tileSize = tileset.TileSize;
+                            int x = col * tileset.TileSize;
+                            int y = row * tileset.TileSize;
+
+                            int tileRow = (tileset.Animation[frame].FrameID - tileset.FirstID + 1) / tileset.ColCount;
+                            int tileCol = (tileset.Animation[frame].FrameID - tileset.FirstID + 1) -
+                                          tileRow * tileset.ColCount - 1;
+
+                            SDL_Log("tile: %i %i %i %i", tileset.Animation[frame].FrameID, frame, tileRow, tileCol);
+
+                            TextureManager::GetInstance()->DrawTile(tilesetName, tileSize, x, y, tileRow, tileCol);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

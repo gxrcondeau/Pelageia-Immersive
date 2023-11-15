@@ -7,10 +7,11 @@
 
 #include "SDL.h"
 #include "../Physics/Vector2D.h"
+#include "../Utils/Config/ConfigLoader.h"
 
 class Camera {
 public:
-    static Camera* GetInstance() { return s_Instance = (s_Instance != nullptr) ? s_Instance : new Camera(480, 320); }
+    static Camera* GetInstance() { return s_Instance = (s_Instance != nullptr) ? s_Instance : new Camera(); }
 
     void Update(float deltatime);
 
@@ -18,7 +19,7 @@ public:
     inline SDL_Rect GetViewBox() { return m_ViewBox; }
     inline void SetTarget(Vector2D* target) { m_Target = target; }
 private:
-    Camera(int width, int height) { m_ViewBox = {0, 0, width, height}; }
+    Camera();
     static Camera* s_Instance;
 
     Vector2D* m_Target;

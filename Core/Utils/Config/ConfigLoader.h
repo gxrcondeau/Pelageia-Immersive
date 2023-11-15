@@ -8,45 +8,40 @@
 #include "../../Include/Pugi/pugixml.hpp"
 
 struct WindowParams{
-    const char* const name;
-    int width;
-    int height;
-    bool fullScreen;
+    std::string Name;
+    int Width;
+    int Height;
+    bool FullScreen;
 };
 
 class ConfigLoader {
 public:
-    ConfigLoader();
-    ~ConfigLoader();
+    static ConfigLoader* GetInstance() { return s_Instance = ( s_Instance != nullptr ? s_Instance : new ConfigLoader() ); }
 
-    pugi::xml_document getXml() const;
+    WindowParams* GetWindowParams() const;
 
-    WindowParams getWindowParams() const;
-
-    // TODO: add config update method
-    void update();
-
-    void createDefault() const;
+    void CreateConfig(std::string configName, std::string configXml) const;
 
 protected:
-    const char* const configDirectory = "./Config";
-    const char* const configFileName = "Engine.xml";
+    const std::string ConfigDirectory = "./Config/";
+    const std::string WindowParamsFileName = "WindowParams.xml";
 
-    char* getConfigFullPath() const;
+    pugi::xml_document GetConfigXml(std::string configName) const;
 
-    void createFile() const;
-
-    bool isConfigExist() const;
-    bool isDirectoryExist() const;
-    bool isLoaded;
+    bool IsDirectoryExist() const;
+    bool IsFileExist(std::string configName) const;
+    bool IsLoaded;
 
 private:
-    const char* const configDefaultString = "<?xml version=\"1.0\"?>\n"
-                                            "<PeImConfig>\n"
+    ConfigLoader();
+    static ConfigLoader* s_Instance;
+
+    std::string WindowParamsDefaultXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                                            "<config>\n"
                                             "    <build version=\"0.1\" channel=\"dev\"/>\n"
                                             "    <meta name=\"Pelageia Immersive\"/>\n"
-                                            "    <window width=\"720\" height=\"420\" fullscreen=\"0\"/>\n"
-                                            "</PeImConfig>";
+                                            "    <window width=\"320\" height=\"320\" fullscreen=\"0\"/>\n"
+                                            "</config>";
 };
 
 

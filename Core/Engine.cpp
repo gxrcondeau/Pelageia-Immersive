@@ -20,12 +20,14 @@ Timer* Timer::s_Instance = nullptr;
 Player* player = nullptr;
 
 bool Engine::Init() {
+    m_WindowParams = GetWindowParams();
+
     if(SDL_Init(SDL_INIT_VIDEO) != 0 && IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG) != 0){
         SDL_Log("Failed initialize SDL: %s", SDL_GetError());
         return false;
     }
 
-    m_Window = SDL_CreateWindow("Pelageia Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 480, 320, 0);
+    m_Window = SDL_CreateWindow("Pelageia Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, m_WindowParams->Width, m_WindowParams->Height, 0);
     if(!m_Window){
         SDL_Log("Failed initialize Window: %s", SDL_GetError());
         return false;
@@ -43,7 +45,8 @@ bool Engine::Init() {
 
     TextureManager::GetInstance()->Load("player_idle", "Resources/Animations/Player/player_idle.png");
     TextureManager::GetInstance()->Load("player_run", "Resources/Animations/Player/player_run.png");
-    player = new Player(new Properties("player_idle", 20, 30, 48, 48, SDL_RendererFlip::SDL_FLIP_NONE));
+    TextureManager::GetInstance()->Load("background", "Resources/BackGround/NonParallax.png");
+    player = new Player(new Properties("player_idle", 240, 120, 48, 48, SDL_RendererFlip::SDL_FLIP_NONE));
     Camera::GetInstance()->SetTarget(player->GetOrigin());
 
     return m_IsRunning = true;
@@ -64,8 +67,9 @@ bool Engine::Quit() {
 }
 
 void Engine::Update() {
+    //Timer::GetInstance()->Tick();
     float dt = Timer::GetInstance()->GetDeltaTime();
-    MapParser::GetInstance()->GetMap("map")->Update();
+    MapParser::GetInstance()->GetMap("map")->Update(500);
     player->Update(dt);
     Camera::GetInstance()->Update(dt);
 }
@@ -73,6 +77,7 @@ void Engine::Update() {
 void Engine::Render() {
     SDL_SetRenderDrawColor(m_Renderer, 124, 128, 255, 255);
     SDL_RenderClear(m_Renderer);
+    TextureManager::GetInstance()->Draw("background", 0, 0, m_WindowParams->Width, m_WindowParams->Height);
     MapParser::GetInstance()->GetMap("map")->Render();
     player->Draw();
     SDL_RenderPresent(m_Renderer);

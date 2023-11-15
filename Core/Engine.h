@@ -8,6 +8,8 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "Map/GameMap.h"
+#include "Utils/Config/ConfigLoader.h"
+
 
 class Engine {
 public:
@@ -16,6 +18,7 @@ public:
     }
 
     inline SDL_Renderer* GetRenderer(){ return m_Renderer; }
+    inline WindowParams* GetWindowParams() { return ConfigLoader::GetInstance()->GetWindowParams(); }
 
     bool Init();
     bool Clean();
@@ -28,13 +31,14 @@ public:
     inline bool IsRunning(){ return m_IsRunning; }
 private:
     Engine() {}
+    static Engine* s_Instance;
+
+    WindowParams* m_WindowParams;
+
     SDL_Window* m_Window;
     SDL_Renderer* m_Renderer;
 
     bool m_IsRunning;
-    static Engine* s_Instance;
-
-    GameMap* m_LevelMap;
 };
 
 

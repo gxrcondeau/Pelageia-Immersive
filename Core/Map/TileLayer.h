@@ -32,7 +32,7 @@ public:
     TileLayer(int tilesize, int rowcount, int colcount, TileMap tilemap, TilesetList tilesetList);
 
     void Render() override;
-    void Update() override;
+    void Update(int dt) override;
 
     inline TileMap GetTilemap() { return m_TileMap; }
 private:

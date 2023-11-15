@@ -7,6 +7,11 @@
 
 Camera* Camera::s_Instance = nullptr;
 
+Camera::Camera() {
+    WindowParams* params = ConfigLoader::GetInstance()->GetWindowParams();
+    m_ViewBox = {0, 0, params->Width, params->Height};
+}
+
 void Camera::Update(float deltatime) {
     m_ViewBox.x = m_Target->X - m_ViewBox.w / 2;
     m_ViewBox.y = m_Target->Y - m_ViewBox.h / 2;
