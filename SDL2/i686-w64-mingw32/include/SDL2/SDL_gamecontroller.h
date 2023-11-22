@@ -22,7 +22,7 @@
 /**
  *  \file SDL_gamecontroller.h
  *
- *  Include file for SDL game controller event handling
+ *  Vendor file for SDL game controller event handling
  */
 
 #ifndef SDL_gamecontroller_h_

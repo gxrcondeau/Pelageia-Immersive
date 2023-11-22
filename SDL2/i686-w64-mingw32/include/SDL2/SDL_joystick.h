@@ -22,7 +22,7 @@
 /**
  *  \file SDL_joystick.h
  *
- *  Include file for SDL joystick event handling
+ *  Vendor file for SDL joystick event handling
  *
  * The term "device_index" identifies currently plugged in joystick devices between 0 and SDL_NumJoysticks(), with the exact joystick
  *   behind a device_index changing as joysticks are plugged and unplugged.

@@ -22,7 +22,7 @@
 /**
  *  \file SDL_mouse.h
  *
- *  Include file for SDL mouse event handling.
+ *  Vendor file for SDL mouse event handling.
  */
 
 #ifndef SDL_mouse_h_

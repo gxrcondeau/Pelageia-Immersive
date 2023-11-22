@@ -1,5 +1,5 @@
-#include "Core/Timer/Timer.h"
-#include "Core/Engine.h"
+#include "Timer/Timer.h"
+#include "Engine.h"
 
 int main(int argc, char *args[]) {
     Engine::GetInstance()->Init();

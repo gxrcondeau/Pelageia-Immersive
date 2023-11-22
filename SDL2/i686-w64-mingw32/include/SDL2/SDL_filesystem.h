@@ -22,7 +22,7 @@
 /**
  *  \file SDL_filesystem.h
  *
- *  \brief Include file for filesystem SDL API functions
+ *  \brief Vendor file for filesystem SDL API functions
  */
 
 #ifndef SDL_filesystem_h_

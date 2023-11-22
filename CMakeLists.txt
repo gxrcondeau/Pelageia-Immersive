@@ -3,61 +3,47 @@ project(pelageia-immersive)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(${PROJECT_NAME} main.cpp
-        Core/Utils/Config/ConfigLoader.cpp
-        Core/Utils/Config/ConfigLoader.h
-        Core/Utils/Parser/TryParse.cpp
-        Core/Utils/Parser/TryParse.h
-        Core/Utils/Logger/PeImLogger.cpp
-        Core/Engine.cpp
-        Core/Engine.h
-        Core/Graphics/TextureManager.cpp
-        Core/Graphics/TextureManager.h
-        Core/Graphics/TextureManager.h
-        Core/Physics/Vector2D.h
-        Core/Physics/Vector2D.h
-        Core/Physics/Transform.h
-        Core/Objects/IObject.h
-        Core/Objects/GameObject.h
-        Core/Characters/Character.h
-        Core/Characters/Player.cpp
-        Core/Characters/Player.h
-        Core/Objects/Utils.h
-        Core/Physics/RigidBody.h
-        Core/Animation/Animation.cpp
-        Core/Animation/Animation.h
-        Core/Inputs/Input.cpp
-        Core/Inputs/Input.h
-        Core/Timer/Timer.cpp
-        Core/Timer/Timer.h
-        Core/Map/Layer.h
-        Core/Map/GameMap.h
-        Core/Map/TileLayer.cpp
-        Core/Map/TileLayer.h
-        Core/Map/MapParser.cpp
-        Core/Map/MapParser.h
-        Core/Camera/Camera.cpp
-        Core/Camera/Camera.h
-        Core/Collisions/CollisionHandler.cpp
-        Core/Collisions/CollisionHandler.h
-        Core/Physics/Collider.cpp
-        Core/Physics/Collider.h
+# Set the source files
+set(SOURCES
+        Private/Utils/Config/ConfigLoader.cpp
+        Private/Engine.cpp
+        Private/Graphics/TextureManager.cpp
+        Private/Characters/Player.cpp
+        Private/Animation/Animation.cpp
+        Private/Inputs/Input.cpp
+        Private/Timer/Timer.cpp
+        Private/Map/TileLayer.cpp
+        Private/Map/MapParser.cpp
+        Private/Camera/Camera.cpp
+        Private/Collisions/CollisionHandler.cpp
+        Private/Physics/Collider.cpp
 )
 
-include_directories(Core/Utils/ConfigLoader)
-include_directories(Core/Include/Pugixml)
+# Create a library from the source files
+add_library(${PROJECT_NAME} STATIC ${SOURCES})
 
+# Set include directories for the library
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/Public)
+
+# Organize source files into directories
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCES})
+
+# Create an executable for the main.cpp file
+add_executable(pelageia_immersive_bin main.cpp)
+
+# Set the C++ standard for the executable
+set_target_properties(pelageia_immersive_bin PROPERTIES CXX_STANDARD 23)
+
+# Link the executable with the library
+target_link_libraries(pelageia_immersive_bin PRIVATE ${PROJECT_NAME})
+
+# Set the module path for external CMake modules
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
-set(SDL2_PATH "SDL2/x86_64-w64-mingw32")
-set(SDL2_IMAGE_PATH "SDL2/x86_64-w64-mingw32")
 
+# Find SDL2 and SDL2_image packages
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 
-include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR})
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES})
-
-
-
-
-
+# Set include directories and link libraries for SDL2 and SDL2_image
+target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES})

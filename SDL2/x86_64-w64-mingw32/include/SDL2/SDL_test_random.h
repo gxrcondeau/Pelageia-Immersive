@@ -22,7 +22,7 @@
 /**
  *  \file SDL_test_random.h
  *
- *  Include file for SDL test framework.
+ *  Vendor file for SDL test framework.
  *
  *  This code is a part of the SDL2_test library, not the main SDL library.
  */

@@ -22,7 +22,7 @@
 /**
  *  \file SDL_gesture.h
  *
- *  Include file for SDL gesture event handling.
+ *  Vendor file for SDL gesture event handling.
  */
 
 #ifndef SDL_gesture_h_

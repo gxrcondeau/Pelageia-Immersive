@@ -406,8 +406,8 @@ extern "C" {
  *
  *    "0"     - Don't log any events (default)
  *    "1"     - Log most events (other than the really spammy ones).
- *    "2"     - Include mouse and finger motion events.
- *    "3"     - Include SDL_SysWMEvent events.
+ *    "2"     - Vendor mouse and finger motion events.
+ *    "3"     - Vendor SDL_SysWMEvent events.
  *
  *  This is generally meant to be used to debug SDL itself, but can be useful
  *  for application developers that need better visibility into what is going

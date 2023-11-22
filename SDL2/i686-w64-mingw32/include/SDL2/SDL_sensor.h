@@ -22,7 +22,7 @@
 /**
  *  \file SDL_sensor.h
  *
- *  Include file for SDL sensor event handling
+ *  Vendor file for SDL sensor event handling
  *
  */
 

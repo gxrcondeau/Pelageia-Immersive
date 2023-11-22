@@ -22,7 +22,7 @@
 /**
  * \file SDL_clipboard.h
  *
- * Include file for SDL clipboard handling
+ * Vendor file for SDL clipboard handling
  */
 
 #ifndef SDL_clipboard_h_

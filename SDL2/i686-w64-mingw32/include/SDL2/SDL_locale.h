@@ -22,7 +22,7 @@
 /**
  *  \file SDL_locale.h
  *
- *  Include file for SDL locale services
+ *  Vendor file for SDL locale services
  */
 
 #ifndef _SDL_locale_h

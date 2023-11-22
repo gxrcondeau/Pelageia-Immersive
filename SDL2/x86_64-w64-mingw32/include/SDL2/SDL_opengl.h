@@ -110,7 +110,7 @@
 #endif /* WIN32 && !CYGWIN */
 
 /*
- * WINDOWS: Include windows.h here to define APIENTRY.
+ * WINDOWS: Vendor windows.h here to define APIENTRY.
  * It is also useful when applications include this file by
  * including only glut.h, since glut.h depends on windows.h.
  * Applications needing to include windows.h with parms other

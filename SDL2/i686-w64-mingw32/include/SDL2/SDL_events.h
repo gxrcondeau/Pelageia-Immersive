@@ -22,7 +22,7 @@
 /**
  *  \file SDL_events.h
  *
- *  Include file for SDL event handling.
+ *  Vendor file for SDL event handling.
  */
 
 #ifndef SDL_events_h_
