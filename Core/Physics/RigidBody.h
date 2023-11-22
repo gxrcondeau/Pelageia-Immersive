@@ -18,7 +18,7 @@ public:
     inline Vector2D GetPosition() { return m_Position; }
 
     // Gravity and Mass
-    inline void SetMAss(float mass) { m_Mass = mass; }
+    inline void SetMass(float mass) { m_Mass = mass; }
     inline void SetGravity(float gravity) { m_Gravity = gravity; }
 
     // Force

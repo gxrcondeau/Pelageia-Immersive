@@ -38,6 +38,10 @@ add_executable(${PROJECT_NAME} main.cpp
         Core/Map/MapParser.h
         Core/Camera/Camera.cpp
         Core/Camera/Camera.h
+        Core/Collisions/CollisionHandler.cpp
+        Core/Collisions/CollisionHandler.h
+        Core/Physics/Collider.cpp
+        Core/Physics/Collider.h
 )
 
 include_directories(Core/Utils/ConfigLoader)

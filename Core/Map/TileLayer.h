@@ -35,6 +35,9 @@ public:
     void Update(int dt) override;
 
     inline TileMap GetTilemap() { return m_TileMap; }
+    inline int GetTileSize() { return m_TileSize; }
+    inline int GetRowCount() { return m_RowCount; }
+    inline int GetColCount() { return m_ColCount; }
 private:
     int m_TileSize;
     int m_RowCount, m_ColCount;

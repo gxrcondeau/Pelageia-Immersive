@@ -45,10 +45,11 @@ bool Engine::Init() {
 
     TextureManager::GetInstance()->Load("player_idle", "Resources/Animations/Player/player_idle.png");
     TextureManager::GetInstance()->Load("player_run", "Resources/Animations/Player/player_run.png");
+    TextureManager::GetInstance()->Load("player_jump", "Resources/Animations/Player/player_jump.png");
     TextureManager::GetInstance()->Load("background", "Resources/BackGround/NonParallax.png");
     player = new Player(new Properties("player_idle", 240, 120, 48, 48, SDL_RendererFlip::SDL_FLIP_NONE));
     Camera::GetInstance()->SetTarget(player->GetOrigin());
-
+    m_GameMap = MapParser::GetInstance()->GetMap("map");
     return m_IsRunning = true;
 }
 
@@ -78,7 +79,7 @@ void Engine::Render() {
     SDL_SetRenderDrawColor(m_Renderer, 124, 128, 255, 255);
     SDL_RenderClear(m_Renderer);
     TextureManager::GetInstance()->Draw("background", 0, 0, m_WindowParams->Width, m_WindowParams->Height);
-    MapParser::GetInstance()->GetMap("map")->Render();
+    m_GameMap->Render();
     player->Draw();
     SDL_RenderPresent(m_Renderer);
 }

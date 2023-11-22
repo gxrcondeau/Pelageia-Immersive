@@ -19,6 +19,7 @@ public:
 
     inline SDL_Renderer* GetRenderer(){ return m_Renderer; }
     inline WindowParams* GetWindowParams() { return ConfigLoader::GetInstance()->GetWindowParams(); }
+    inline GameMap* GetGameMap() { return m_GameMap; }
 
     bool Init();
     bool Clean();
@@ -39,6 +40,8 @@ private:
     SDL_Renderer* m_Renderer;
 
     bool m_IsRunning;
+
+    GameMap* m_GameMap;
 };
 
 
