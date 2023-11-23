@@ -18,6 +18,7 @@
 #define JUMP_TIME = 10
 #define JUMP_FORCE = 10
 
+
 class Player : public Character
 {
 public:
@@ -26,6 +27,7 @@ public:
     virtual void Draw() override;
     virtual void Update(float dt) override;
     virtual void Clean() override;
+    virtual void AnimationState() override;
 
 private:
     bool m_IsJumping;
@@ -33,6 +35,8 @@ private:
 
     float m_JumpTime;
     float m_JumpForce;
+
+    float m_AttackTime;
 
     Collider* m_Collider;
     Animation* m_Animation;

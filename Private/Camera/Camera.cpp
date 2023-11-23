@@ -15,7 +15,7 @@ Camera::Camera()
 void Camera::Update(float dt)
 {
     m_ViewBox.x = m_Target->X - m_ViewBox.w / 2;
-    m_ViewBox.y = m_Target->Y - m_ViewBox.h / 2;
+    // m_ViewBox.y = m_Target->Y - m_ViewBox.h / 2;
 
     if (m_ViewBox.x < 0) m_ViewBox.x = 0;
     if (m_ViewBox.y < 0) m_ViewBox.y = 0;

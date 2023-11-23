@@ -43,11 +43,10 @@ bool Engine::Init()
         SDL_Log("Failed to load map");
     }
 
-    TextureManager::GetInstance()->Load("player_idle", "Resources/Animations/Player/player_idle.png");
-    TextureManager::GetInstance()->Load("player_run", "Resources/Animations/Player/player_run.png");
-    TextureManager::GetInstance()->Load("player_jump", "Resources/Animations/Player/player_jump.png");
-    TextureManager::GetInstance()->Load("background", "Resources/BackGround/NonParallax.png");
-    player = new Player(new Properties("player_idle", 240, 120, 48, 48, SDL_RendererFlip::SDL_FLIP_NONE));
+    TextureManager::GetInstance()->Load("background", "Resources/Background/NonParallax.png");
+    TextureManager::GetInstance()->Load("player_anim_sheet", "Resources/Animations/Player/AnimationSheet_Character.png");
+    player = new Player(new Properties("player_anim_sheet", 240, 120, 32, 32, SDL_RendererFlip::SDL_FLIP_NONE));
+    // Camera::GetInstance()->SetTarget(player->GetOrigin());
     Camera::GetInstance()->SetTarget(player->GetOrigin());
     m_GameMap = MapParser::GetInstance()->GetMap("map");
     return m_IsRunning = true;

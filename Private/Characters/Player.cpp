@@ -18,8 +18,8 @@ Player::Player(Properties* props) : Character(props)
     m_IsGrounded = true;
 
     m_Collider = new Collider();
-    m_Collider->SetBuffer(-8, -8, 0, 0);
-    m_Collider->Set(m_Transform->X, m_Transform->Y, 48, 48);
+    m_Collider->SetBuffer(0, 0, 0, 0);
+    m_Collider->Set(m_Transform->X, m_Transform->Y, 32, 32);
 
     m_RigidBody = new RigidBody();
     m_RigidBody->SetGravity(GRAVITY);
@@ -43,20 +43,21 @@ void Player::Draw()
 
 void Player::Update(float dt)
 {
-    m_Animation->SetProps("player_idle", 1, 10, 50, m_PlayerFlip);
     m_RigidBody->UnsetForce();
+    e_CharacterState = IDLE;
 
     if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_A))
     {
         m_PlayerFlip = SDL_FLIP_HORIZONTAL;
-        m_Animation->SetProps("player_run", 1, 8, 50, m_PlayerFlip);
+        e_CharacterState = RUNNING;
+        m_Animation->SetProps("player_anim_sheet", 4, 8, 100, m_PlayerFlip);
         m_RigidBody->ApplyForceX(5 * BACKWARD);
     }
 
     if (Input::GetInstance()->GetKeyDown(SDL_SCANCODE_D))
     {
         m_PlayerFlip = SDL_FLIP_NONE;
-        m_Animation->SetProps("player_run", 1, 8, 50, m_PlayerFlip);
+        e_CharacterState = RUNNING;
         m_RigidBody->ApplyForceX(5 * FORWARD);
     }
 
@@ -69,7 +70,6 @@ void Player::Update(float dt)
     {
         m_JumpTime -= dt;
         m_RigidBody->ApplyForceY(UPWARD * m_JumpForce);
-        m_Animation->SetProps("player_jump", 1, 3, 50, m_PlayerFlip);
     }
     else
     {
@@ -96,16 +96,43 @@ void Player::Update(float dt)
     }
     else
     {
+        e_CharacterState = FALLING;
         m_IsGrounded = false;
     }
 
     m_Origin->X = m_Transform->X + m_Width / 2;
     m_Origin->Y = m_Transform->Y + m_Height / 2;
 
+    AnimationState();
     m_Animation->Update();
 }
 
 void Player::Clean()
 {
     TextureManager::GetInstance()->Clean();
+}
+void Player::AnimationState()
+{
+    switch (e_CharacterState)
+    {
+        case IDLE:
+            m_Animation->SetProps("player_anim_sheet", 5, 6, 100, m_PlayerFlip);
+            break;
+        case WALKING:
+            break;
+        case RUNNING:
+            m_Animation->SetProps("player_anim_sheet", 4, 8, 100, m_PlayerFlip);
+            break;
+        case JUMPING:
+            m_Animation->SetProps("player_anim_sheet", 6, 8, 100, m_PlayerFlip);
+            break;
+        case FALLING:
+            break;
+        case LANDING:
+            break;
+        case CROUCHING:
+            break;
+        case ATTACKING:
+            break;
+    }
 }
