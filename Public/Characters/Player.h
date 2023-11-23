@@ -1,25 +1,25 @@
 //
-// Created by admin on 24/10/2023.
+// Created by pylinskyi.k on 24/10/2023.
 //
 
 #ifndef PELAGEIA_IMMERSIVE_PLAYER_H
 #define PELAGEIA_IMMERSIVE_PLAYER_H
 
 #include "Character.h"
-#include "../Physics/Vector2D.h"
-#include "../Physics/RigidBody.h"
-#include "../Animation/Animation.h"
-#include "../Physics/Collider.h"
+#include "Physics/Vector2D.h"
+#include "Physics/RigidBody.h"
+#include "Animation/Animation.h"
+#include "Physics/Collider.h"
 
 #define FORWARD 1
 #define BACKWARD -1
 #define UPWARD -1
 #define DOWNWARD 1
-#define JUMP_TIME = 15.0
-#define JUMP_FORCE = 10.0
+#define JUMP_TIME = 10
+#define JUMP_FORCE = 10
 
-
-class Player : public Character{
+class Player : public Character
+{
 public:
     Player(Properties* props);
 
@@ -41,4 +41,4 @@ private:
     SDL_RendererFlip m_PlayerFlip;
 };
 
-#endif //PELAGEIA_IMMERSIVE_PLAYER_H
+#endif  // PELAGEIA_IMMERSIVE_PLAYER_H

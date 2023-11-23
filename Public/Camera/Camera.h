@@ -6,18 +6,20 @@
 #define PELAGEIA_IMMERSIVE_CAMERA_H
 
 #include "SDL.h"
-#include "../Physics/Vector2D.h"
-#include "../Utils/Config/ConfigLoader.h"
+#include "Physics/Vector2D.h"
+#include "Utils/Config/ConfigLoader.h"
 
-class Camera {
+class Camera
+{
 public:
     static Camera* GetInstance() { return s_Instance = (s_Instance != nullptr) ? s_Instance : new Camera(); }
 
-    void Update(float deltatime);
+    void Update(float dt);
 
-    inline Vector2D GetPosition() { return m_Position; }
-    inline SDL_Rect GetViewBox() { return m_ViewBox; }
+    inline Vector2D GetPosition() const { return m_Position; }
+    inline SDL_Rect GetViewBox() const { return m_ViewBox; }
     inline void SetTarget(Vector2D* target) { m_Target = target; }
+
 private:
     Camera();
     static Camera* s_Instance;
@@ -27,5 +29,4 @@ private:
     SDL_Rect m_ViewBox;
 };
 
-
-#endif //PELAGEIA_IMMERSIVE_CAMERA_H
+#endif  // PELAGEIA_IMMERSIVE_CAMERA_H

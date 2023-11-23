@@ -19,6 +19,8 @@ set(SOURCES
         Private/Physics/Collider.cpp
 )
 
+include_directories(Vendor/Pugi)
+
 # Create a library from the source files
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
 
@@ -37,13 +39,12 @@ set_target_properties(pelageia_immersive_bin PROPERTIES CXX_STANDARD 23)
 # Link the executable with the library
 target_link_libraries(pelageia_immersive_bin PRIVATE ${PROJECT_NAME})
 
-# Set the module path for external CMake modules
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
+set(SDL2_PATH "SDL2/x86_64-w64-mingw32")
+set(SDL2_IMAGE_PATH "SDL2/x86_64-w64-mingw32")
 
-# Find SDL2 and SDL2_image packages
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 
-# Set include directories and link libraries for SDL2 and SDL2_image
-target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR})
-target_link_libraries(${PROJECT_NAME} PRIVATE ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES})
+include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES})

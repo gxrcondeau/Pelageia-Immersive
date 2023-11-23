@@ -11,21 +11,23 @@
 
 ConfigLoader* ConfigLoader::s_Instance = nullptr;
 
-ConfigLoader::ConfigLoader() {
+ConfigLoader::ConfigLoader()
+{
     CreateConfig(WindowParamsFileName, WindowParamsDefaultXml);
-
-    WindowParams* params = GetWindowParams();
-    SDL_Log("Config: window name: %s, height: %i, width: %i, fullScreen: %i\n", params->Name.c_str(), params->Height, params->Width, params->FullScreen);
 }
 
-WindowParams* ConfigLoader::GetWindowParams() const {
+WindowParams* ConfigLoader::GetWindowParams()
+{
+    if (m_WindowParams) return m_WindowParams;
+
     pugi::xml_document windowXml = GetConfigXml(WindowParamsFileName);
 
     pugi::xml_node rootNode = windowXml.child("config");
     pugi::xml_node metaNode = rootNode.child("meta");
     pugi::xml_node windowNode = rootNode.child("window");
 
-    if(!rootNode || !metaNode || !windowNode){
+    if (!rootNode || !metaNode || !windowNode)
+    {
         SDL_Log("Invalid XML Config File");
         return nullptr;
     }
@@ -35,10 +37,11 @@ WindowParams* ConfigLoader::GetWindowParams() const {
     int windowHeight = windowNode.attribute("height").as_int();
     int windowFullScreen = windowNode.attribute("fullscreen").as_int();
 
-    return new WindowParams(windowName, windowWidth, windowHeight, windowFullScreen);
+    return m_WindowParams = new WindowParams(windowName, windowWidth, windowHeight, windowFullScreen);
 }
 
-pugi::xml_document ConfigLoader::GetConfigXml(std::string configName) const {
+pugi::xml_document ConfigLoader::GetConfigXml(std::string configName) const
+{
     pugi::xml_document document;
     std::string documentPath = ConfigDirectory + configName;
     pugi::xml_parse_result result = document.load_file(documentPath.c_str());
@@ -48,14 +51,19 @@ pugi::xml_document ConfigLoader::GetConfigXml(std::string configName) const {
     return document;
 }
 
-void ConfigLoader::CreateConfig(std::string configName, std::string configXml) const {
-    if(!IsDirectoryExist()){
+void ConfigLoader::CreateConfig(std::string configName, std::string configXml) const
+{
+    if (!IsDirectoryExist())
+    {
         int stat = mkdir(ConfigDirectory.c_str());
-        if(!stat) SDL_Log("Folder Created: %s", ConfigDirectory.c_str());
-        else SDL_Log("Impossible create folder");
+        if (!stat)
+            SDL_Log("Folder Created: %s", ConfigDirectory.c_str());
+        else
+            SDL_Log("Impossible create folder");
     }
 
-    if(!IsFileExist(configName)) {
+    if (!IsFileExist(configName))
+    {
         std::string filePath = ConfigDirectory + configName;
         std::ofstream outfile(filePath);
         outfile << configXml;
@@ -64,13 +72,15 @@ void ConfigLoader::CreateConfig(std::string configName, std::string configXml) c
     }
 }
 
-bool ConfigLoader::IsDirectoryExist() const {
-    struct stat buffer{};
+bool ConfigLoader::IsDirectoryExist() const
+{
+    struct stat buffer {};
     return stat(ConfigDirectory.c_str(), &buffer) == 0;
 }
 
-bool ConfigLoader::IsFileExist(std::string configName) const {
-    struct stat buffer{};
+bool ConfigLoader::IsFileExist(std::string configName) const
+{
+    struct stat buffer {};
     std::string documentPath = ConfigDirectory + configName;
     return stat(documentPath.c_str(), &buffer) == 0;
 }

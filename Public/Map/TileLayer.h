@@ -9,35 +9,41 @@
 #include <string>
 #include <vector>
 
-struct TileAnimation{
-    int FrameID, Duration;
+struct TileAnimation
+{
+    int FrameID;
+    int Duration;
 };
 
-struct Tileset{
-    int FirstID, LastID;
-    int RowCount, ColCount;
-    int TileCount, TileSize;
-    std::string Name, Source;
+struct Tileset
+{
+    int FirstID;
+    int LastID;
+    int RowCount;
+    int ColCount;
+    int TileCount;
+    int TileSize;
+    std::string Name;
+    std::string Source;
     std::vector<TileAnimation> Animation;
 };
-
-
 
 using TilesetList = std::vector<Tileset>;
 using TileMap = std::vector<std::vector<int>>;
 
-
-class TileLayer : public Layer{
+class TileLayer : public Layer
+{
 public:
     TileLayer(int tilesize, int rowcount, int colcount, TileMap tilemap, TilesetList tilesetList);
 
     void Render() override;
     void Update(int dt) override;
 
-    inline TileMap GetTilemap() { return m_TileMap; }
-    inline int GetTileSize() { return m_TileSize; }
-    inline int GetRowCount() { return m_RowCount; }
-    inline int GetColCount() { return m_ColCount; }
+    inline TileMap GetTilemap() const { return m_TileMap; }
+    inline int GetTileSize() const { return m_TileSize; }
+    inline int GetRowCount() const { return m_RowCount; }
+    inline int GetColCount() const { return m_ColCount; }
+
 private:
     int m_TileSize;
     int m_RowCount, m_ColCount;
@@ -45,5 +51,4 @@ private:
     TilesetList m_TilesetList;
 };
 
-
-#endif //PELAGEIA_IMMERSIVE_TILELAYER_H
+#endif  // PELAGEIA_IMMERSIVE_TILELAYER_H

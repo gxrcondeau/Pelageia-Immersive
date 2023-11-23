@@ -5,20 +5,22 @@
 #ifndef PELAGEIA_IMMERSIVE_CONFIGLOADER_H
 #define PELAGEIA_IMMERSIVE_CONFIGLOADER_H
 
-#include "../../../Vendor/Pugi/pugixml.hpp"
+#include "pugixml.hpp"
 
-struct WindowParams{
+struct WindowParams
+{
     std::string Name;
     int Width;
     int Height;
     bool FullScreen;
 };
 
-class ConfigLoader {
+class ConfigLoader
+{
 public:
-    static ConfigLoader* GetInstance() { return s_Instance = ( s_Instance != nullptr ? s_Instance : new ConfigLoader() ); }
+    static ConfigLoader* GetInstance() { return s_Instance = (s_Instance != nullptr ? s_Instance : new ConfigLoader()); }
 
-    WindowParams* GetWindowParams() const;
+    WindowParams* GetWindowParams();
 
     void CreateConfig(std::string configName, std::string configXml) const;
 
@@ -36,13 +38,13 @@ private:
     ConfigLoader();
     static ConfigLoader* s_Instance;
 
+    WindowParams* m_WindowParams = nullptr;
     std::string WindowParamsDefaultXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                                            "<config>\n"
-                                            "    <build version=\"0.1\" channel=\"dev\"/>\n"
-                                            "    <meta name=\"Pelageia Immersive\"/>\n"
-                                            "    <window width=\"320\" height=\"320\" fullscreen=\"0\"/>\n"
-                                            "</config>";
+                                         "<config>\n"
+                                         "    <build version=\"0.1\" channel=\"dev\"/>\n"
+                                         "    <meta name=\"Pelageia Immersive\"/>\n"
+                                         "    <window width=\"320\" height=\"320\" fullscreen=\"0\"/>\n"
+                                         "</config>";
 };
 
-
-#endif //PELAGEIA_IMMERSIVE_CONFIGLOADER_H
+#endif  // PELAGEIA_IMMERSIVE_CONFIGLOADER_H

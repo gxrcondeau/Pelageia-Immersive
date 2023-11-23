@@ -5,11 +5,11 @@
 #include "SDL.h"
 #include "Timer/Timer.h"
 
-void Timer::Tick() {
-    m_DeltaTime = (SDL_GetTicks() - m_LastTime) * (TARGET_FPS/1000.0f);
+void Timer::Tick()
+{
+    m_DeltaTime = (SDL_GetTicks() - m_LastTime) * (TARGET_FPS / 1000.0f);
 
-    if(m_DeltaTime > TARGET_DELTA_TIME)
-        m_DeltaTime = TARGET_DELTA_TIME;
+    if (m_DeltaTime > TARGET_DELTA_TIME) m_DeltaTime = TARGET_DELTA_TIME;
 
     m_LastTime = SDL_GetTicks();
 }

@@ -1,5 +1,5 @@
 //
-// Created by admin on 02/11/2023.
+// Created by pylinskyi.k on 02/11/2023.
 //
 
 #ifndef PELAGEIA_IMMERSIVE_INPUT_H
@@ -7,12 +7,10 @@
 
 #include "SDL.h"
 
-
-class Input {
+class Input
+{
 public:
-    static Input* GetInstance(){
-        return s_Instance = (s_Instance != nullptr) ? s_Instance : new Input();
-    }
+    static Input* GetInstance() { return s_Instance = (s_Instance != nullptr) ? s_Instance : new Input(); }
 
     void Listen();
     bool GetKeyDown(SDL_Scancode key);
@@ -26,5 +24,4 @@ private:
     static Input* s_Instance;
 };
 
-
-#endif //PELAGEIA_IMMERSIVE_INPUT_H
+#endif  // PELAGEIA_IMMERSIVE_INPUT_H

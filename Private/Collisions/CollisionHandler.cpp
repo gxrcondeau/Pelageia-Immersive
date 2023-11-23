@@ -8,20 +8,22 @@
 
 CollisionHandler* CollisionHandler::s_Instance = nullptr;
 
-CollisionHandler::CollisionHandler() {
+CollisionHandler::CollisionHandler()
+{
     m_CollisionLayer = (TileLayer*)Engine::GetInstance()->GetGameMap()->GetMapLayers().front();
-    m_CollisionTilemap =m_CollisionLayer->GetTilemap();
+    m_CollisionTilemap = m_CollisionLayer->GetTilemap();
 }
 
-
-bool CollisionHandler::CheckCollision(SDL_Rect a, SDL_Rect b) {
+bool CollisionHandler::CheckCollision(SDL_Rect a, SDL_Rect b)
+{
     bool x_overlaps = (a.x < b.x + b.w) && (b.x < a.x + a.w);
     bool y_overlaps = (a.y < b.y + b.h) && (b.y < a.y + a.h);
 
     return x_overlaps && y_overlaps;
 }
 
-bool CollisionHandler::MapCollision(SDL_Rect a) {
+bool CollisionHandler::MapCollision(SDL_Rect a)
+{
     int tileSize = m_CollisionLayer->GetTileSize();
     int rowCount = m_CollisionLayer->GetRowCount();
     int colCount = m_CollisionLayer->GetColCount();
@@ -38,8 +40,10 @@ bool CollisionHandler::MapCollision(SDL_Rect a) {
     if (top_tile < 0) top_tile = 0;
     if (bottom_tile > rowCount) bottom_tile = rowCount;
 
-    for (int i = left_tile; i < right_tile; i++){
-        for (int j = top_tile; j < bottom_tile; j++){
+    for (int i = left_tile; i < right_tile; i++)
+    {
+        for (int j = top_tile; j < bottom_tile; j++)
+        {
             if (m_CollisionTilemap[j][i] > 0) return true;
         }
     }

@@ -1,5 +1,5 @@
 //
-// Created by admin on 24/10/2023.
+// Created by pylinskyi.k on 24/10/2023.
 //
 
 #ifndef PELAGEIA_IMMERSIVE_IOBJECT_H
