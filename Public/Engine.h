@@ -16,7 +16,7 @@ public:
     static Engine* GetInstance() { return s_Instance = (s_Instance != nullptr) ? s_Instance : new Engine(); }
 
     inline SDL_Renderer* GetRenderer() { return m_Renderer; }
-    inline WindowParams* GetWindowParams() { return ConfigLoader::GetInstance()->GetWindowParams(); }
+    inline WindowConfig* GetWindowParams() { return ConfigLoader::GetInstance()->GetWindowConfig(); }
     inline GameMap* GetGameMap() { return m_GameMap; }
 
     bool Init();

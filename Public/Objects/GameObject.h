@@ -20,16 +20,8 @@ public:
     int Width;
     int Height;
     SDL_RendererFlip Flip;
-
-    Properties(std::string textureID, int x, int y, int width, int height, SDL_RendererFlip flip)
-    {
-        TextureID = textureID;
-        X = x;
-        Y = y;
-        Width = width;
-        Height = height;
-        Flip = flip;
-    }
+    float JumpForce;
+    float JumpTime;
 };
 
 class GameObject : public IObject

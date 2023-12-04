@@ -323,7 +323,7 @@ extern DECLSPEC int SDLCALL SDL_LockSurface(SDL_Surface * surface);
 extern DECLSPEC void SDLCALL SDL_UnlockSurface(SDL_Surface * surface);
 
 /**
- * Load a BMP image from a seekable SDL data stream.
+ * LoadTexture a BMP image from a seekable SDL data stream.
  *
  * The new surface should be freed with SDL_FreeSurface(). Not doing so will
  * result in a memory leak.
@@ -348,7 +348,7 @@ extern DECLSPEC SDL_Surface *SDLCALL SDL_LoadBMP_RW(SDL_RWops * src,
                                                     int freesrc);
 
 /**
- * Load a surface from a file.
+ * LoadTexture a surface from a file.
  *
  * Convenience macro.
  */

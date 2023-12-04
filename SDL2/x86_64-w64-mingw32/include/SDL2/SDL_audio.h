@@ -787,7 +787,7 @@ extern DECLSPEC void SDLCALL SDL_PauseAudioDevice(SDL_AudioDeviceID dev,
 /* @} *//* Pause audio functions */
 
 /**
- * Load the audio data of a WAVE file into memory.
+ * LoadTexture the audio data of a WAVE file into memory.
  *
  * Loading a WAVE file requires `src`, `spec`, `audio_buf` and `audio_len` to
  * be valid pointers. The entire data portion of the file is then loaded into

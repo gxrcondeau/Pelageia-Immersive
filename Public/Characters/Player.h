@@ -30,19 +30,17 @@ public:
     virtual void AnimationState() override;
 
 private:
-    bool m_IsJumping;
-    bool m_IsGrounded;
+    bool m_IsJumping = false;
+    bool m_IsGrounded = true;
 
-    float m_JumpTime;
-    float m_JumpForce;
+    float m_JumpForce = m_Properties->JumpForce;
+    float m_JumpTime = m_Properties->JumpTime;
 
-    float m_AttackTime;
-
-    Collider* m_Collider;
-    Animation* m_Animation;
-    RigidBody* m_RigidBody;
-    Vector2D m_LastSafePosition;
-    SDL_RendererFlip m_PlayerFlip;
+    Vector2D* m_LastSafePosition = new Vector2D(m_Properties->X, m_Properties->Y);
+    Collider* m_Collider = new Collider();
+    RigidBody* m_RigidBody = new RigidBody();
+    Animation* m_Animation = new Animation();
+    SDL_RendererFlip m_PlayerFlip = SDL_FLIP_NONE;
 };
 
 #endif  // PELAGEIA_IMMERSIVE_PLAYER_H

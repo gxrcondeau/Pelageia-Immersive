@@ -17,6 +17,7 @@ set(SOURCES
         Private/Camera/Camera.cpp
         Private/Collisions/CollisionHandler.cpp
         Private/Physics/Collider.cpp
+        Private/Characters/Character.cpp
 )
 
 include_directories(Vendor/Pugi)

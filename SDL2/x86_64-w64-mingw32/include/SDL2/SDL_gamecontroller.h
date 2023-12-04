@@ -135,7 +135,7 @@ typedef struct SDL_GameControllerButtonBind
  */
 
 /**
- * Load a set of Game Controller mappings from a seekable SDL data stream.
+ * LoadTexture a set of Game Controller mappings from a seekable SDL data stream.
  *
  * You can call this function several times, if needed, to load different
  * database files.
@@ -165,7 +165,7 @@ typedef struct SDL_GameControllerButtonBind
 extern DECLSPEC int SDLCALL SDL_GameControllerAddMappingsFromRW(SDL_RWops * rw, int freerw);
 
 /**
- *  Load a set of mappings from a file, filtered by the current SDL_GetPlatform()
+ *  LoadTexture a set of mappings from a file, filtered by the current SDL_GetPlatform()
  *
  *  Convenience macro.
  */

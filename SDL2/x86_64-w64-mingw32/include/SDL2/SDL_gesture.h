@@ -92,7 +92,7 @@ extern DECLSPEC int SDLCALL SDL_SaveDollarTemplate(SDL_GestureID gestureId,SDL_R
 
 
 /**
- * Load Dollar Gesture templates from a file.
+ * LoadTexture Dollar Gesture templates from a file.
  *
  * \param touchId a touch id
  * \param src a SDL_RWops to load from

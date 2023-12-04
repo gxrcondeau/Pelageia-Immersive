@@ -191,7 +191,7 @@ extern DECLSPEC int SDLCALL IMG_Init(int flags);
 extern DECLSPEC void SDLCALL IMG_Quit(void);
 
 /**
- * Load an image from an SDL data source into a software surface.
+ * LoadTexture an image from an SDL data source into a software surface.
  *
  * An SDL_Surface is a buffer of pixels in memory accessible by the CPU. Use
  * this if you plan to hand the data to something else or manipulate it
@@ -252,7 +252,7 @@ extern DECLSPEC void SDLCALL IMG_Quit(void);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadTyped_RW(SDL_RWops *src, int freesrc, const char *type);
 
 /**
- * Load an image from a filesystem path into a software surface.
+ * LoadTexture an image from a filesystem path into a software surface.
  *
  * An SDL_Surface is a buffer of pixels in memory accessible by the CPU. Use
  * this if you plan to hand the data to something else or manipulate it
@@ -294,7 +294,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadTyped_RW(SDL_RWops *src, int frees
 extern DECLSPEC SDL_Surface * SDLCALL IMG_Load(const char *file);
 
 /**
- * Load an image from an SDL data source into a software surface.
+ * LoadTexture an image from an SDL data source into a software surface.
  *
  * An SDL_Surface is a buffer of pixels in memory accessible by the CPU. Use
  * this if you plan to hand the data to something else or manipulate it
@@ -349,7 +349,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_Load_RW(SDL_RWops *src, int freesrc);
 #if SDL_VERSION_ATLEAST(2,0,0)
 
 /**
- * Load an image from a filesystem path into a GPU texture.
+ * LoadTexture an image from a filesystem path into a GPU texture.
  *
  * An SDL_Texture represents an image in GPU memory, usable by SDL's 2D Render
  * API. This can be significantly more efficient than using a CPU-bound
@@ -385,7 +385,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_Load_RW(SDL_RWops *src, int freesrc);
 extern DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture(SDL_Renderer *renderer, const char *file);
 
 /**
- * Load an image from an SDL data source into a GPU texture.
+ * LoadTexture an image from an SDL data source into a GPU texture.
  *
  * An SDL_Texture represents an image in GPU memory, usable by SDL's 2D Render
  * API. This can be significantly more efficient than using a CPU-bound
@@ -432,7 +432,7 @@ extern DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture(SDL_Renderer *renderer, co
 extern DECLSPEC SDL_Texture * SDLCALL IMG_LoadTexture_RW(SDL_Renderer *renderer, SDL_RWops *src, int freesrc);
 
 /**
- * Load an image from an SDL data source into a GPU texture.
+ * LoadTexture an image from an SDL data source into a GPU texture.
  *
  * An SDL_Texture represents an image in GPU memory, usable by SDL's 2D Render
  * API. This can be significantly more efficient than using a CPU-bound
@@ -1263,7 +1263,7 @@ extern DECLSPEC int SDLCALL IMG_isXV(SDL_RWops *src);
 extern DECLSPEC int SDLCALL IMG_isWEBP(SDL_RWops *src);
 
 /**
- * Load a AVIF image directly.
+ * LoadTexture a AVIF image directly.
  *
  * If you know you definitely have a AVIF image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1297,7 +1297,7 @@ extern DECLSPEC int SDLCALL IMG_isWEBP(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadAVIF_RW(SDL_RWops *src);
 
 /**
- * Load a ICO image directly.
+ * LoadTexture a ICO image directly.
  *
  * If you know you definitely have a ICO image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1331,7 +1331,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadAVIF_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadICO_RW(SDL_RWops *src);
 
 /**
- * Load a CUR image directly.
+ * LoadTexture a CUR image directly.
  *
  * If you know you definitely have a CUR image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1365,7 +1365,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadICO_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadCUR_RW(SDL_RWops *src);
 
 /**
- * Load a BMP image directly.
+ * LoadTexture a BMP image directly.
  *
  * If you know you definitely have a BMP image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1399,7 +1399,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadCUR_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadBMP_RW(SDL_RWops *src);
 
 /**
- * Load a GIF image directly.
+ * LoadTexture a GIF image directly.
  *
  * If you know you definitely have a GIF image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1433,7 +1433,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadBMP_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadGIF_RW(SDL_RWops *src);
 
 /**
- * Load a JPG image directly.
+ * LoadTexture a JPG image directly.
  *
  * If you know you definitely have a JPG image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1467,7 +1467,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadGIF_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadJPG_RW(SDL_RWops *src);
 
 /**
- * Load a JXL image directly.
+ * LoadTexture a JXL image directly.
  *
  * If you know you definitely have a JXL image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1501,7 +1501,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadJPG_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadJXL_RW(SDL_RWops *src);
 
 /**
- * Load a LBM image directly.
+ * LoadTexture a LBM image directly.
  *
  * If you know you definitely have a LBM image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1535,7 +1535,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadJXL_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadLBM_RW(SDL_RWops *src);
 
 /**
- * Load a PCX image directly.
+ * LoadTexture a PCX image directly.
  *
  * If you know you definitely have a PCX image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1569,7 +1569,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadLBM_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadPCX_RW(SDL_RWops *src);
 
 /**
- * Load a PNG image directly.
+ * LoadTexture a PNG image directly.
  *
  * If you know you definitely have a PNG image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1603,7 +1603,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadPCX_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadPNG_RW(SDL_RWops *src);
 
 /**
- * Load a PNM image directly.
+ * LoadTexture a PNM image directly.
  *
  * If you know you definitely have a PNM image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1637,7 +1637,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadPNG_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadPNM_RW(SDL_RWops *src);
 
 /**
- * Load a SVG image directly.
+ * LoadTexture a SVG image directly.
  *
  * If you know you definitely have a SVG image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1671,7 +1671,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadPNM_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadSVG_RW(SDL_RWops *src);
 
 /**
- * Load a QOI image directly.
+ * LoadTexture a QOI image directly.
  *
  * If you know you definitely have a QOI image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1705,7 +1705,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadSVG_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadQOI_RW(SDL_RWops *src);
 
 /**
- * Load a TGA image directly.
+ * LoadTexture a TGA image directly.
  *
  * If you know you definitely have a TGA image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1739,7 +1739,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadQOI_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadTGA_RW(SDL_RWops *src);
 
 /**
- * Load a TIFF image directly.
+ * LoadTexture a TIFF image directly.
  *
  * If you know you definitely have a TIFF image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1773,7 +1773,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadTGA_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadTIF_RW(SDL_RWops *src);
 
 /**
- * Load a XCF image directly.
+ * LoadTexture a XCF image directly.
  *
  * If you know you definitely have a XCF image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1807,7 +1807,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadTIF_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadXCF_RW(SDL_RWops *src);
 
 /**
- * Load a XPM image directly.
+ * LoadTexture a XPM image directly.
  *
  * If you know you definitely have a XPM image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1841,7 +1841,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadXCF_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadXPM_RW(SDL_RWops *src);
 
 /**
- * Load a XV image directly.
+ * LoadTexture a XV image directly.
  *
  * If you know you definitely have a XV image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1875,7 +1875,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadXPM_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadXV_RW(SDL_RWops *src);
 
 /**
- * Load a WEBP image directly.
+ * LoadTexture a WEBP image directly.
  *
  * If you know you definitely have a WEBP image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's
@@ -1909,7 +1909,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadXV_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadWEBP_RW(SDL_RWops *src);
 
 /**
- * Load an SVG image, scaled to a specific size.
+ * LoadTexture an SVG image, scaled to a specific size.
  *
  * Since SVG files are resolution-independent, you specify the size you would
  * like the output image to be and it will be generated at those dimensions.
@@ -1930,7 +1930,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadWEBP_RW(SDL_RWops *src);
 extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadSizedSVG_RW(SDL_RWops *src, int width, int height);
 
 /**
- * Load an XPM image from a memory array.
+ * LoadTexture an XPM image from a memory array.
  *
  * The returned surface will be an 8bpp indexed surface, if possible,
  * otherwise it will be 32bpp. If you always want 32-bit data, use
@@ -1949,7 +1949,7 @@ extern DECLSPEC SDL_Surface * SDLCALL IMG_LoadSizedSVG_RW(SDL_RWops *src, int wi
 extern DECLSPEC SDL_Surface * SDLCALL IMG_ReadXPMFromArray(char **xpm);
 
 /**
- * Load an XPM image from a memory array.
+ * LoadTexture an XPM image from a memory array.
  *
  * The returned surface will always be a 32-bit RGB surface. If you want 8-bit
  * indexed colors (and the XPM data allows it), use IMG_ReadXPMFromArray()
@@ -2050,7 +2050,7 @@ typedef struct
 } IMG_Animation;
 
 /**
- * Load an animation from a file.
+ * LoadTexture an animation from a file.
  *
  * When done with the returned animation, the app should dispose of it with a
  * call to IMG_FreeAnimation().
@@ -2065,7 +2065,7 @@ typedef struct
 extern DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimation(const char *file);
 
 /**
- * Load an animation from an SDL_RWops.
+ * LoadTexture an animation from an SDL_RWops.
  *
  * If `freesrc` is non-zero, the RWops will be closed before returning,
  * whether this function succeeds or not. SDL_image reads everything it needs
@@ -2086,7 +2086,7 @@ extern DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimation(const char *file);
 extern DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimation_RW(SDL_RWops *src, int freesrc);
 
 /**
- * Load an animation from an SDL datasource
+ * LoadTexture an animation from an SDL datasource
  *
  * Even though this function accepts a file type, SDL_image may still try
  * other decoders that are capable of detecting file type from the contents of
@@ -2131,7 +2131,7 @@ extern DECLSPEC IMG_Animation * SDLCALL IMG_LoadAnimationTyped_RW(SDL_RWops *src
 extern DECLSPEC void SDLCALL IMG_FreeAnimation(IMG_Animation *anim);
 
 /**
- * Load a GIF animation directly.
+ * LoadTexture a GIF animation directly.
  *
  * If you know you definitely have a GIF image, you can call this function,
  * which will skip SDL_image's file format detection routines. Generally it's

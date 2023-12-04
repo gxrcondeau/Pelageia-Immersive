@@ -1071,29 +1071,29 @@ namespace pugi
         void reset(const xml_document& proto);
 
 #ifndef PUGIXML_NO_STL
-        // Load document from stream.
+        // LoadTexture document from stream.
         xml_parse_result load(std::basic_istream<char, std::char_traits<char> >& stream, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
         xml_parse_result load(std::basic_istream<wchar_t, std::char_traits<wchar_t> >& stream, unsigned int options = parse_default);
 #endif
 
-        // (deprecated: use load_string instead) Load document from zero-terminated string. No encoding conversions are applied.
+        // (deprecated: use load_string instead) LoadTexture document from zero-terminated string. No encoding conversions are applied.
         PUGIXML_DEPRECATED xml_parse_result load(const char_t* contents, unsigned int options = parse_default);
 
-        // Load document from zero-terminated string. No encoding conversions are applied.
+        // LoadTexture document from zero-terminated string. No encoding conversions are applied.
         xml_parse_result load_string(const char_t* contents, unsigned int options = parse_default);
 
-        // Load document from file
+        // LoadTexture document from file
         xml_parse_result load_file(const char* path, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
         xml_parse_result load_file(const wchar_t* path, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
 
-        // Load document from buffer. Copies/converts the buffer, so it may be deleted or changed after the function returns.
+        // LoadTexture document from buffer. Copies/converts the buffer, so it may be deleted or changed after the function returns.
         xml_parse_result load_buffer(const void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
 
-        // Load document from buffer, using the buffer for in-place parsing (the buffer is modified and used for storage of document data).
+        // LoadTexture document from buffer, using the buffer for in-place parsing (the buffer is modified and used for storage of document data).
         // You should ensure that buffer data will persist throughout the document's lifetime, and free the buffer memory manually once document is destroyed.
         xml_parse_result load_buffer_inplace(void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
 
-        // Load document from buffer, using the buffer for in-place parsing (the buffer is modified and used for storage of document data).
+        // LoadTexture document from buffer, using the buffer for in-place parsing (the buffer is modified and used for storage of document data).
         // You should allocate the buffer with pugixml allocation function; document will free the buffer when it is no longer needed (you can't use it anymore).
         xml_parse_result load_buffer_inplace_own(void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
 

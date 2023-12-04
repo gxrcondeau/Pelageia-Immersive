@@ -10,7 +10,7 @@ TileLayer::TileLayer(int tilesize, int rowcount, int colcount, TileMap tilemap, 
     : m_TileSize(tilesize), m_RowCount(rowcount), m_ColCount(colcount), m_TileMap(tilemap), m_TilesetList(tilesetList)
 {
     for (auto tilesetList : m_TilesetList)
-        TextureManager::GetInstance()->Load(tilesetList.Name, "Assets/Maps/" + tilesetList.Source);
+        TextureManager::GetInstance()->LoadTexture(tilesetList.Name, "Assets/Maps/" + tilesetList.Source);
 }
 
 void TileLayer::Render()
@@ -27,8 +27,14 @@ void TileLayer::Render()
                 {
                     std::string tilesetName = tileset.Name;
                     int tileSize = tileset.TileSize;
-                    int x = col * tileset.TileSize;
-                    int y = row * tileset.TileSize;
+
+                    // for platformer
+                    // int x = col * tileset.TileSize;
+                    // int y = row * tileset.TileSize;
+
+                    // for isometric
+                    int x = (col - row) * (tileSize / 2);
+                    int y = (col + row) * (tileSize / 4);
 
                     // Tile Animation for some reason not working in update function
                     if (tileset.Animation.size() > 0 && tileID == tileset.Animation[0].FrameID)

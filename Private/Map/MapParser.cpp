@@ -60,8 +60,8 @@ bool MapParser::Parse(std::string id, std::string source)
     int colcount, rowcount, tilesize = 0;
 
     tilesize = tilesets[0].TileSize;
-    colcount = 30;
-    rowcount = 20;
+    colcount = 100;
+    rowcount = 100;
 
     GameMap* gamemap = new GameMap();
     pugi::xml_node layerNode = root.child("layer");
