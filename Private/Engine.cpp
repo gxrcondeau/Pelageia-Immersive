@@ -45,7 +45,7 @@ bool Engine::Init()
 
     TextureManager::GetInstance()->LoadCharactersTextures();
 
-    Properties* PlayerProps = new Properties{"Player", 256, 256, 256, 256, SDL_RendererFlip::SDL_FLIP_NONE, 10.0f, 15.0f};
+    Properties* PlayerProps = new Properties{"Player", 256, 256, 256, 256};
     player = new Player(PlayerProps);
 
     Camera::GetInstance()->SetTarget(player->GetOrigin());
@@ -82,7 +82,6 @@ void Engine::Render()
 {
     SDL_SetRenderDrawColor(m_Renderer, 124, 128, 255, 255);
     SDL_RenderClear(m_Renderer);
-    TextureManager::GetInstance()->Draw("background", 0, 0, GetWindowParams()->Width, GetWindowParams()->Height);
     m_GameMap->Render();
     player->Draw();
     SDL_RenderPresent(m_Renderer);

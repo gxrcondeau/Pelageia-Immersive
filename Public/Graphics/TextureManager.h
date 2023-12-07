@@ -5,20 +5,50 @@
 #ifndef PELAGEIA_IMMERSIVE_TEXTUREMANAGER_H
 #define PELAGEIA_IMMERSIVE_TEXTUREMANAGER_H
 
-#include "SDL.h"
 #include "Characters/Character.h"
-#include <string>
+#include "Utils/Config/ConfigLoader.h"
+#include "SDL.h"
 #include <map>
+#include <string>
 
-struct CharacterTextureParams
+struct DrawParams
 {
-    std::uint8_t AnimSheetRows;
-    std::uint8_t AnimSheetCols;
-    std::uint8_t StartSpriteRow;
-    std::uint8_t FrameCount;
-    std::uint8_t AnimSpeed;
-    SDL_RendererFlip Flip;
-    std::map<CharacterState, std::map<CharacterDirection, SDL_Texture*>> TextureMap;
+    std::string ID;
+    int X;
+    int Y;
+    int Width;
+    int Height;
+    SDL_RendererFlip Flip = SDL_FLIP_NONE;
+};
+
+struct DrawTileParams
+{
+    std::string TilesetName;
+    int TileSize;
+    int X;
+    int Y;
+    int Row;
+    int Column;
+    SDL_RendererFlip Flip = SDL_FLIP_NONE;
+};
+
+struct DrawFrameParams
+{
+    std::string ID;
+    CharacterState State;
+    CharacterDirection Direction;
+    int X;
+    int Y;
+    int SpriteWidth;
+    int SpriteHeight;
+    int AnimSheetRows;
+    int AnimSheetCols;
+    int FirstSpriteRow;
+    int FirstSpriteCol;
+    int CurrentFrame;
+    float XScale = 1;
+    float YScale = 1;
+    SDL_RendererFlip Flip = SDL_FLIP_NONE;
 };
 
 class TextureManager
@@ -27,21 +57,20 @@ public:
     static TextureManager* GetInstance() { return s_Instance = (s_Instance != nullptr) ? s_Instance : new TextureManager(); }
 
     bool LoadTexture(std::string id, std::string filename);
-    bool LoadCharactersTextures();
+    void LoadCharactersTextures() { m_CharactersTexturesMap = ConfigLoader::GetInstance()->GetCharactersTexturesConfig(); };
     void Drop(std::string id);
     void Clean();
 
-    void Draw(std::string id, int x, int y, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
-    void DrawTile(std::string tilesetName, int tileSize, int x, int y, int row, int column, SDL_RendererFlip flip = SDL_FLIP_NONE);
-    void DrawFrame(std::string id, uint8_t state, uint8_t direction, int x, int y, int width, int height,
-        int animSheetRows, int animSheetCols, int row, int frame, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void Draw(DrawParams params);
+    void DrawTile(DrawTileParams params);
+    void DrawFrame(DrawFrameParams params);
 
-    CharacterTextureParams* GetCharacterTextureParams(std::string id) { return m_CharactersTextureParams[id]; }
+    CharacterTexturesConfig* GetCharacterTextureParams(std::string id) { return m_CharactersTexturesMap[id]; }
 
 private:
     TextureManager(){};
     std::map<std::string, SDL_Texture*> m_TextureMap;
-    std::map<std::string, CharacterTextureParams*> m_CharactersTextureParams;
+    std::map<std::string, CharacterTexturesConfig*> m_CharactersTexturesMap;
     static TextureManager* s_Instance;
 };
 

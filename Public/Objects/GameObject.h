@@ -19,15 +19,12 @@ public:
     int Y;
     int Width;
     int Height;
-    SDL_RendererFlip Flip;
-    float JumpForce;
-    float JumpTime;
 };
 
 class GameObject : public IObject
 {
 public:
-    GameObject(Properties* props) : m_Width(props->Height), m_Height(props->Width), m_TextureID(props->TextureID), m_Flip(props->Flip)
+    GameObject(Properties* props) : m_Width(props->Height), m_Height(props->Width), m_TextureID(props->TextureID)
     {
         m_Transform = new Transform(props->X, props->Y);
 
@@ -47,7 +44,6 @@ protected:
     Transform* m_Transform;
     int m_Width, m_Height;
     std::string m_TextureID;
-    SDL_RendererFlip m_Flip;
 };
 
 #endif  // PELAGEIA_IMMERSIVE_GAMEOBJECT_H

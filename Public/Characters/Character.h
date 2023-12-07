@@ -44,12 +44,12 @@ public:
     virtual void Draw() = 0;
     virtual void Update(float dt) = 0;
     virtual void Clean() = 0;
-    virtual void AnimationState() = 0;
+    virtual void HandleAnimation() = 0;
     virtual CharacterDirection GetDirection(int horizontal, int vertical);
 
 protected:
     Properties* m_Properties;
-    std::string m_Name;
+    std::string m_CharacterName;
 
     CharacterState m_CharacterState;
     CharacterDirection m_CharacterDirection;

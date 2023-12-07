@@ -5,6 +5,7 @@
 #ifndef PELAGEIA_IMMERSIVE_VECTOR2D_H
 #define PELAGEIA_IMMERSIVE_VECTOR2D_H
 
+#include <valarray>
 class Vector2D
 {
 public:
@@ -29,7 +30,17 @@ public:
     inline Vector2D operator/(const Vector2D& vector) const { return Vector2D(X / vector.X, Y / vector.Y); }
     inline Vector2D operator/(const float scalar) const { return Vector2D(X / scalar, Y / scalar); }
 
-private:
+    void Normalize()
+    {
+        float length = std::sqrt(X * X + Y * Y);
+
+        // Check for division by zero to avoid NaN
+        if (length != 0.0f)
+        {
+            X /= length;
+            Y /= length;
+        }
+    }
 };
 
 #endif  // PELAGEIA_IMMERSIVE_VECTOR2D_H

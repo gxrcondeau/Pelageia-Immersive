@@ -8,29 +8,26 @@
 #include "SDL.h"
 #include "Characters/Character.h"
 #include <string>
+#include <functional>
 
 class Animation
 {
 public:
-    Animation(){};
+    using AnimationEventCallback = std::function<void()>;
 
-    void Update();
-    void Draw(float x, float y, int spriteWidth, int spriteHeight);
-    void SetProps(std::string textureID, uint8_t state, uint8_t direction, int animSheetRows, int animSheetCols,
-        int spriteRow, int frameCount, int animSpeed, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    Animation(bool repeat = true) : m_Repeat(repeat) { m_IsEnded = false; };
 
-private:
-    int m_AnimSheetRows;
-    int m_AnimSheetCols;
-    int m_SpriteRow;
-    int m_SpriteFrame;
-    int m_AnimSpeed;
-    int m_FrameCount;
+    virtual void Update() = 0;
 
-    std::string m_TextureID;
-    uint8_t m_State;
-    uint8_t m_Direction;
-    SDL_RendererFlip m_Flip;
+    void SetAnimationEndCallback(const AnimationEventCallback& callback) { m_AnimationEndCallback = callback; }
+
+    inline bool IsEnded() { return m_IsEnded; }
+
+protected:
+    AnimationEventCallback m_AnimationEndCallback;
+
+    bool m_Repeat;
+    bool m_IsEnded;
 };
 
 #endif  // PELAGEIA_IMMERSIVE_ANIMATION_H

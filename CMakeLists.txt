@@ -9,7 +9,7 @@ set(SOURCES
         Private/Engine.cpp
         Private/Graphics/TextureManager.cpp
         Private/Characters/Player.cpp
-        Private/Animation/Animation.cpp
+        Private/Animation/SpriteAnimation.cpp
         Private/Inputs/Input.cpp
         Private/Timer/Timer.cpp
         Private/Map/TileLayer.cpp
@@ -18,6 +18,8 @@ set(SOURCES
         Private/Collisions/CollisionHandler.cpp
         Private/Physics/Collider.cpp
         Private/Characters/Character.cpp
+        Private/Graphics/ShadowManager.cpp
+        Private/Animation/SeqAnimation.cpp
 )
 
 include_directories(Vendor/Pugi)

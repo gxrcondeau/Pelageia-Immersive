@@ -10,6 +10,7 @@
 #include "Physics/RigidBody.h"
 #include "Animation/Animation.h"
 #include "Physics/Collider.h"
+#include "Animation/SpriteAnimation.h"
 
 #define FORWARD 1
 #define BACKWARD -1
@@ -27,19 +28,19 @@ public:
     virtual void Draw() override;
     virtual void Update(float dt) override;
     virtual void Clean() override;
-    virtual void AnimationState() override;
+    virtual void HandleAnimation() override;
 
 private:
     bool m_IsJumping = false;
-    bool m_IsGrounded = true;
-
-    float m_JumpForce = m_Properties->JumpForce;
-    float m_JumpTime = m_Properties->JumpTime;
+    bool m_IsRolling = false;
+    float m_Velocity = 0;
+    int m_HorizontalAxis = 0;
+    int m_VerticalAxis = 0;
 
     Vector2D* m_LastSafePosition = new Vector2D(m_Properties->X, m_Properties->Y);
     Collider* m_Collider = new Collider();
     RigidBody* m_RigidBody = new RigidBody();
-    Animation* m_Animation = new Animation();
+    SpriteAnimation* m_Animation = new SpriteAnimation();
     SDL_RendererFlip m_PlayerFlip = SDL_FLIP_NONE;
 };
 

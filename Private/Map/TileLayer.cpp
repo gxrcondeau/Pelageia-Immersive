@@ -44,7 +44,8 @@ void TileLayer::Render()
                         int tileRow = (tileset.Animation[frame].FrameID - tileset.FirstID + 1) / tileset.ColCount;
                         int tileCol = (tileset.Animation[frame].FrameID - tileset.FirstID + 1) - tileRow * tileset.ColCount - 1;
 
-                        TextureManager::GetInstance()->DrawTile(tilesetName, tileSize, x, y, tileRow, tileCol);
+                        DrawTileParams params {tilesetName, tileSize, x, y, tileRow, tileCol};
+                        TextureManager::GetInstance()->DrawTile(params);
                     }
                     // Static Tile render
                     else if (tileID >= tileset.FirstID && tileID <= tileset.LastID && tileset.Animation.size() == 0)
@@ -52,7 +53,8 @@ void TileLayer::Render()
                         int tileRow = (tileID - tileset.FirstID + 1) / tileset.ColCount;
                         int tileCol = (tileID - tileset.FirstID + 1) - tileRow * tileset.ColCount - 1;
 
-                        TextureManager::GetInstance()->DrawTile(tilesetName, tileSize, x, y, tileRow, tileCol);
+                        DrawTileParams params {tilesetName, tileSize, x, y, tileRow, tileCol};
+                        TextureManager::GetInstance()->DrawTile(params);
                         break;
                     }
                 }
