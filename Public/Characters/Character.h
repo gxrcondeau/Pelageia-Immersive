@@ -51,7 +51,7 @@ protected:
     Properties* m_Properties;
     std::string m_CharacterName;
 
-    CharacterState m_CharacterState;
+    CharacterState m_CurrentCharacterState;
     CharacterDirection m_CharacterDirection;
 };
 

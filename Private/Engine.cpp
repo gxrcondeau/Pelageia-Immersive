@@ -23,8 +23,7 @@ bool Engine::Init()
         return false;
     }
 
-    m_Window = SDL_CreateWindow(
-        "Pelageia Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, GetWindowParams()->Width, GetWindowParams()->Height, 0);
+    m_Window = SDL_CreateWindow("Pelageia Engine", 400, 1000, GetWindowParams()->Width, GetWindowParams()->Height, 0);
     if (!m_Window)
     {
         SDL_Log("Failed initialize Window: %s", SDL_GetError());

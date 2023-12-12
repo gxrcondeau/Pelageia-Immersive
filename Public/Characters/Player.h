@@ -29,13 +29,22 @@ public:
     virtual void Update(float dt) override;
     virtual void Clean() override;
     virtual void HandleAnimation() override;
+    virtual void HandleInput();
+    virtual void HandlePhisics(float dt);
+    inline bool IsInAction() { return m_IsJumping || m_IsRolling || m_IsAttacking; }
 
 private:
     bool m_IsJumping = false;
     bool m_IsRolling = false;
+    bool m_IsAttacking = false;
+
     float m_Velocity = 0;
-    int m_HorizontalAxis = 0;
-    int m_VerticalAxis = 0;
+
+    int m_HorizontalAxis;
+    int m_VerticalAxis;
+    float m_IsometricX;
+    float m_IsometricY;
+    Vector2D m_InputVector;
 
     Vector2D* m_LastSafePosition = new Vector2D(m_Properties->X, m_Properties->Y);
     Collider* m_Collider = new Collider();

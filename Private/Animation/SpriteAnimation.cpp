@@ -9,31 +9,24 @@ SpriteAnimation::SpriteAnimation(bool repeat) : Animation(repeat){};
 
 void SpriteAnimation::Update()
 {
-    Uint32 currentTime = SDL_GetTicks();
-    m_CurrentFrame = static_cast<int>((currentTime / m_AnimSpeed) % m_FrameCount);
+    int currentTime = SDL_GetTicks();
 
-    SDL_Log("Frame %i / %i", m_CurrentFrame, m_FrameCount);
-
-    if (m_Repeat) {
-        m_IsEnded = false;
-    } else if (m_CurrentFrame == m_FrameCount - 1) {
-        // Animation completed a full cycle
-        m_IsEnded = true;
-        SDL_Log("Animation is ended");
-        if (m_IsEnded && m_AnimationEndCallback) {
-            m_AnimationEndCallback();
-            SDL_Log("Animation end callback");
-        }
+    if (m_CurrentState != m_PreviousState)
+    {
+        m_PreviousState = m_CurrentState;
+        m_LastStateChangeTime = currentTime;
     }
+    Uint32 elapsedTime = currentTime - m_LastStateChangeTime;
+    m_CurrentFrame = static_cast<int>(elapsedTime / m_AnimSpeed) % m_FrameCount;
+
+    if (m_CurrentFrame == m_FrameCount - 1 && m_AnimationEndCallback) m_AnimationEndCallback();
 }
-
-
 
 void SpriteAnimation::DrawFrame(int x, int y, int spriteWidth, int spriteHeight, float xScale, float yScale, SDL_RendererFlip flip)
 {
     DrawFrameParams params;
     params.ID = m_TextureID;
-    params.State = m_State;
+    params.State = m_CurrentState;
     params.Direction = m_Direction;
     params.X = x;
     params.Y = y;
