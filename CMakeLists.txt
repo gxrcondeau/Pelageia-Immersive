@@ -13,13 +13,37 @@ set(SOURCES
         Private/Inputs/Input.cpp
         Private/Timer/Timer.cpp
         Private/Map/TileLayer.cpp
-        Private/Map/MapParser.cpp
+        Private/Map/TileMapParser.cpp
         Private/Camera/Camera.cpp
         Private/Collisions/CollisionHandler.cpp
         Private/Physics/Collider.cpp
         Private/Characters/Character.cpp
         Private/Graphics/ShadowManager.cpp
         Private/Animation/SeqAnimation.cpp
+        Public/Map/EntitiesLayer.h
+        Public/Utils/Calculations/Coordinates.h
+        include/systems/graphics/TextureManagerSystem.h
+        include/systems/configuration/ConfigurationSystem.h
+        include/systems/input/InputSystem.h
+        include/systems/scene/SceneParserSystem.h
+        include/components/scene/LayerComponent.h
+        include/components/sprite/SpriteComponent.h
+        include/components/physics/TransformComponent.h
+        include/components/physics/RigidBodyComponent.h
+        include/components/BaseComponent.h
+        include/entities/Entity.h
+        include/systems/BaseSystem.h
+        include/mathematics/Vector2D.h
+        include/components/physics/ColliderComponent.h
+        include/components/camera/CameraComponent.h
+        include/components/animation/AnimationComponent.h
+        include/components/animation/SpriteAnimationComponent.h
+        include/entities/characters/CharacterEntity.h
+        include/entities/characters/PlayerEntity.h
+        include/entities/scene/GameMapEntity.h
+        include/components/scene/TileLayerComponent.h
+        include/components/scene/EntitiesLayerComponent.h
+        include/mathematics/IsometricConverter.h
 )
 
 include_directories(Vendor/Pugi)

@@ -65,7 +65,7 @@ typedef unsigned int SDL_TLSID;
 /**
  *  The SDL thread priority.
  *
- *  SDL will make system changes as necessary in order to apply the thread priority.
+ *  SDL will make systems changes as necessary in order to apply the thread priority.
  *  Code which attempts to control thread state related to priority should be aware
  *  that calling SDL_SetThreadPriority may alter such state.
  *  SDL_HINT_THREAD_PRIORITY_POLICY can be used to control aspects of this behavior.
@@ -210,29 +210,29 @@ SDL_CreateThread(SDL_ThreadFunction fn, const char *name, void *data);
 /**
  * Create a new thread with a specific stack size.
  *
- * SDL makes an attempt to report `name` to the system, so that debuggers can
+ * SDL makes an attempt to report `name` to the systems, so that debuggers can
  * display it. Not all platforms support this.
  *
  * Thread naming is a little complicated: Most systems have very small limits
  * for the string length (Haiku has 32 bytes, Linux currently has 16, Visual
  * C++ 6.0 has _nine_!), and possibly other arbitrary rules. You'll have to
- * see what happens with your system's debugger. The name should be UTF-8 (but
+ * see what happens with your systems's debugger. The name should be UTF-8 (but
  * using the naming limits of C identifiers is a better bet). There are no
  * requirements for thread naming conventions, so long as the string is
  * null-terminated UTF-8, but these guidelines are helpful in choosing a name:
  *
  * https://stackoverflow.com/questions/149932/naming-conventions-for-threads
  *
- * If a system imposes requirements, SDL will try to munge the string for it
+ * If a systems imposes requirements, SDL will try to munge the string for it
  * (truncate, etc), but the original string contents will be available from
  * SDL_GetThreadName().
  *
  * The size (in bytes) of the new stack can be specified. Zero means "use the
- * system default" which might be wildly different between platforms. x86
+ * systems default" which might be wildly different between platforms. x86
  * Linux generally defaults to eight megabytes, an embedded device might be a
  * few kilobytes instead. You generally need to specify a stack that is a
- * multiple of the system's page size (in many cases, this is 4 kilobytes, but
- * check your system documentation).
+ * multiple of the systems's page size (in many cases, this is 4 kilobytes, but
+ * check your systems documentation).
  *
  * In SDL 2.1, stack size will be folded into the original SDL_CreateThread
  * function, but for backwards compatibility, this is currently a separate
@@ -274,7 +274,7 @@ extern DECLSPEC const char *SDLCALL SDL_GetThreadName(SDL_Thread *thread);
 /**
  * Get the thread identifier for the current thread.
  *
- * This thread identifier is as reported by the underlying operating system.
+ * This thread identifier is as reported by the underlying operating systems.
  * If SDL is running on a platform that does not support threads the return
  * value will always be zero.
  *
@@ -292,7 +292,7 @@ extern DECLSPEC SDL_threadID SDLCALL SDL_ThreadID(void);
 /**
  * Get the thread identifier for the specified thread.
  *
- * This thread identifier is as reported by the underlying operating system.
+ * This thread identifier is as reported by the underlying operating systems.
  * If SDL is running on a platform that does not support threads the return
  * value will always be zero.
  *

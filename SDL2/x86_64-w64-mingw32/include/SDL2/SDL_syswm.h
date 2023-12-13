@@ -22,7 +22,7 @@
 /**
  *  \file SDL_syswm.h
  *
- *  Vendor file for SDL custom system window manager hooks.
+ *  Vendor file for SDL custom systems window manager hooks.
  */
 
 #ifndef SDL_syswm_h_
@@ -221,7 +221,7 @@ struct SDL_SysWMmsg
  *  The custom window manager information structure.
  *
  *  When this structure is returned, it holds information about which
- *  low level system it is using, and will be one of SDL_SYSWM_TYPE.
+ *  low level systems it is using, and will be one of SDL_SYSWM_TYPE.
  */
 struct SDL_SysWMinfo
 {

@@ -7,7 +7,7 @@
 #include "Graphics/TextureManager.h"
 #include "Characters/Player.h"
 #include "Inputs/Input.h"
-#include "Map/MapParser.h"
+#include "Map/TileMapParser.h"
 #include "Camera/Camera.h"
 
 Engine* Engine::s_Instance = nullptr;
@@ -37,24 +37,24 @@ bool Engine::Init()
         return false;
     }
 
-    if (!MapParser::GetInstance()->Load())
+    if (!TileMapParser::GetInstance()->Load())
     {
         SDL_Log("Failed to load map");
     }
 
     TextureManager::GetInstance()->LoadCharactersTextures();
 
-    Properties* PlayerProps = new Properties{"Player", 256, 256, 256, 256};
+    Properties* PlayerProps = new Properties{"Player", 0, 0, 256, 256};
     player = new Player(PlayerProps);
 
     Camera::GetInstance()->SetTarget(player->GetOrigin());
-    m_GameMap = MapParser::GetInstance()->GetMap("map");
+    m_GameMap = TileMapParser::GetInstance()->GetMap("map");
     return m_IsRunning = true;
 }
 
 bool Engine::Clean()
 {
-    MapParser::GetInstance()->Clean();
+    TileMapParser::GetInstance()->Clean();
     TextureManager::GetInstance()->Clean();
     SDL_DestroyRenderer(m_Renderer);
     SDL_DestroyWindow(m_Window);
@@ -72,14 +72,14 @@ void Engine::Update()
 {
     // Timer::GetInstance()->Tick();
     float dt = Timer::GetInstance()->GetDeltaTime();
-    MapParser::GetInstance()->GetMap("map")->Update(500);
+    TileMapParser::GetInstance()->GetMap("map")->Update(500);
     player->Update(dt);
     Camera::GetInstance()->Update(dt);
 }
 
 void Engine::Render()
 {
-    SDL_SetRenderDrawColor(m_Renderer, 124, 128, 255, 255);
+    SDL_SetRenderDrawColor(m_Renderer, 255, 128, 124, 255);
     SDL_RenderClear(m_Renderer);
     m_GameMap->Render();
     player->Draw();

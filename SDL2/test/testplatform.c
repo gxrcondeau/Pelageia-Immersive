@@ -453,7 +453,7 @@ int main(int argc, char *argv[])
         verbose = SDL_FALSE;
     }
     if (verbose) {
-        SDL_Log("This system is running %s\n", SDL_GetPlatform());
+        SDL_Log("This systems is running %s\n", SDL_GetPlatform());
     }
 
     status += TestTypes(verbose);

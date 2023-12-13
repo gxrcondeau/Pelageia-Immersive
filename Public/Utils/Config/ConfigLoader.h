@@ -20,6 +20,13 @@ struct WindowConfig
     bool IsIsometric;
 };
 
+struct PlayerConfig
+{
+    std::string TextureID;
+    int PositionRow;
+    int PositionCol;
+};
+
 struct CharaterStateConfig
 {
     int AnimSheetRows;
@@ -46,6 +53,7 @@ public:
     static ConfigLoader* GetInstance() { return s_Instance = (s_Instance != nullptr ? s_Instance : new ConfigLoader()); }
 
     WindowConfig* GetWindowConfig();
+    PlayerConfig* GetPlayerConfig();
     std::map<std::string, CharacterTexturesConfig*> GetCharactersTexturesConfig();
 
     void CreateConfig(std::string configName, std::string configXml) const;
@@ -53,6 +61,7 @@ public:
 protected:
     const std::string ConfigDirectory = "./Config/";
     const std::string WindowParamsFileName = "WindowConfig.xml";
+    const std::string PlayerParamsFileName = "PlayerConfig.xml";
     const std::string CharacterTextureParamsFileName = "CharactersTexturesConfig.xml";
 
     pugi::xml_document GetConfigXml(std::string configName) const;
@@ -65,6 +74,7 @@ private:
     static ConfigLoader* s_Instance;
 
     WindowConfig* windowConfig = nullptr;
+    PlayerConfig* playerConfig = nullptr;
 
     std::string windowParamsDefaultXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                          "<config>\n"
@@ -73,10 +83,16 @@ private:
                                          "    <window width=\"512\" height=\"512\" fullscreen=\"false\"/>\n"
                                          "</config>";
 
+    std::string playerParamsDefaultXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                                         "<config>\n"
+                                         "    <position row=\"0\" col=\"0\"/>\n"
+                                         "    <texture id=\"Player\"/>\n"
+                                         "</config>";
+
     std::string charactersTexturesParamsXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                               "<config>\n"
-                                              "    <character id=\"Player\" xScale=\"1\" yScale=\"1\">\n"
-                                              "        <state id=\"0\" animSheetRows=\"4\" animSheetCols=\"4\" firstSpriteRow=\"1\" firstSpriteCol=\"1\" frameCount=\"14\" animSpeed=\"280\" repeat=\"true\" flip=\"0\">\n"
+                                              "    <character id=\"Player\" width=\"256\" height=\"256\" xScale=\"1\" yScale=\"1\">\n"
+                                              "        <state id=\"0\" animSheetRows=\"4\" animSheetCols=\"4\" firstSpriteRow=\"1\" firstSpriteCol=\"1\" frameCount=\"14\" animSpeed=\"140\" repeat=\"true\" flip=\"0\">\n"
                                               "            <direction id=\"0\" filePath=\"Resources/Animations/Player/Idle/Idle_Up.png\"/>\n"
                                               "            <direction id=\"1\" filePath=\"Resources/Animations/Player/Idle/Idle_UpRight.png\"/>\n"
                                               "            <direction id=\"2\" filePath=\"Resources/Animations/Player/Idle/Idle_Right.png\"/>\n"
@@ -86,7 +102,7 @@ private:
                                               "            <direction id=\"6\" filePath=\"Resources/Animations/Player/Idle/Idle_Left.png\"/>\n"
                                               "            <direction id=\"7\" filePath=\"Resources/Animations/Player/Idle/Idle_UpLeft.png\"/>\n"
                                               "        </state>\n"
-                                              "        <state id=\"1\" animSheetRows=\"3\" animSheetCols=\"4\" firstSpriteRow=\"1\" firstSpriteCol=\"1\" frameCount=\"9\" animSpeed=\"180\" repeat=\"true\" flip=\"0\">\n"
+                                              "        <state id=\"1\" animSheetRows=\"3\" animSheetCols=\"4\" firstSpriteRow=\"1\" firstSpriteCol=\"1\" frameCount=\"9\" animSpeed=\"90\" repeat=\"true\" flip=\"0\">\n"
                                               "            <direction id=\"0\" filePath=\"Resources/Animations/Player/Walk/Walk_Up.png\"/>\n"
                                               "            <direction id=\"1\" filePath=\"Resources/Animations/Player/Walk/Walk_UpRight.png\"/>\n"
                                               "            <direction id=\"2\" filePath=\"Resources/Animations/Player/Walk/Walk_Right.png\"/>\n"
@@ -96,7 +112,7 @@ private:
                                               "            <direction id=\"6\" filePath=\"Resources/Animations/Player/Walk/Walk_Left.png\"/>\n"
                                               "            <direction id=\"7\" filePath=\"Resources/Animations/Player/Walk/Walk_UpLeft.png\"/>\n"
                                               "        </state>\n"
-                                              "        <state id=\"2\" animSheetRows=\"2\" animSheetCols=\"4\" firstSpriteRow=\"1\" firstSpriteCol=\"1\" frameCount=\"5\" animSpeed=\"100\" repeat=\"true\" flip=\"0\">\n"
+                                              "        <state id=\"2\" animSheetRows=\"2\" animSheetCols=\"4\" firstSpriteRow=\"1\" firstSpriteCol=\"1\" frameCount=\"5\" animSpeed=\"50\" repeat=\"true\" flip=\"0\">\n"
                                               "            <direction id=\"0\" filePath=\"Resources/Animations/Player/Run/Run_Up.png\"/>\n"
                                               "            <direction id=\"1\" filePath=\"Resources/Animations/Player/Run/Run_UpRight.png\"/>\n"
                                               "            <direction id=\"2\" filePath=\"Resources/Animations/Player/Run/Run_Right.png\"/>\n"
@@ -106,7 +122,7 @@ private:
                                               "            <direction id=\"6\" filePath=\"Resources/Animations/Player/Run/Run_Left.png\"/>\n"
                                               "            <direction id=\"7\" filePath=\"Resources/Animations/Player/Run/Run_UpLeft.png\"/>\n"
                                               "        </state>\n"
-                                              "        <state id=\"3\" animSheetRows=\"3\" animSheetCols=\"4\" firstSpriteRow=\"1\" firstSpriteCol=\"1\" frameCount=\"11\" animSpeed=\"220\" repeat=\"false\" flip=\"0\">\n"
+                                              "        <state id=\"3\" animSheetRows=\"3\" animSheetCols=\"4\" firstSpriteRow=\"1\" firstSpriteCol=\"1\" frameCount=\"11\" animSpeed=\"110\" repeat=\"false\" flip=\"0\">\n"
                                               "            <direction id=\"0\" filePath=\"Resources/Animations/Player/Jump/Jump_Up.png\"/>\n"
                                               "            <direction id=\"1\" filePath=\"Resources/Animations/Player/Jump/Jump_UpRight.png\"/>\n"
                                               "            <direction id=\"2\" filePath=\"Resources/Animations/Player/Jump/Jump_Right.png\"/>\n"
@@ -116,7 +132,7 @@ private:
                                               "            <direction id=\"6\" filePath=\"Resources/Animations/Player/Jump/Jump_Left.png\"/>\n"
                                               "            <direction id=\"7\" filePath=\"Resources/Animations/Player/Jump/Jump_UpLeft.png\"/>\n"
                                               "        </state>\n"
-                                              "        <state id=\"4\" animSheetRows=\"2\" animSheetCols=\"4\" firstSpriteRow=\"1\" firstSpriteCol=\"1\" frameCount=\"8\" animSpeed=\"160\" repeat=\"false\" flip=\"0\">\n"
+                                              "        <state id=\"4\" animSheetRows=\"2\" animSheetCols=\"4\" firstSpriteRow=\"1\" firstSpriteCol=\"1\" frameCount=\"8\" animSpeed=\"80\" repeat=\"false\" flip=\"0\">\n"
                                               "            <direction id=\"0\" filePath=\"Resources/Animations/Player/RunningJump/RunningJump_Up.png\"/>\n"
                                               "            <direction id=\"1\" filePath=\"Resources/Animations/Player/RunningJump/RunningJump_UpRight.png\"/>\n"
                                               "            <direction id=\"2\" filePath=\"Resources/Animations/Player/RunningJump/RunningJump_Right.png\"/>\n"
@@ -126,7 +142,7 @@ private:
                                               "            <direction id=\"6\" filePath=\"Resources/Animations/Player/RunningJump/RunningJump_Left.png\"/>\n"
                                               "            <direction id=\"7\" filePath=\"Resources/Animations/Player/RunningJump/RunningJump_UpLeft.png\"/>\n"
                                               "        </state>\n"
-                                              "        <state id=\"5\" animSheetRows=\"3\" animSheetCols=\"4\" firstSpriteRow=\"1\" firstSpriteCol=\"1\" frameCount=\"10\" animSpeed=\"200\" repeat=\"false\" flip=\"0\">\n"
+                                              "        <state id=\"5\" animSheetRows=\"3\" animSheetCols=\"4\" firstSpriteRow=\"1\" firstSpriteCol=\"1\" frameCount=\"10\" animSpeed=\"100\" repeat=\"false\" flip=\"0\">\n"
                                               "            <direction id=\"0\" filePath=\"Resources/Animations/Player/Roll/Roll_Up.png\"/>\n"
                                               "            <direction id=\"1\" filePath=\"Resources/Animations/Player/Roll/Roll_UpRight.png\"/>\n"
                                               "            <direction id=\"2\" filePath=\"Resources/Animations/Player/Roll/Roll_Right.png\"/>\n"
@@ -135,6 +151,16 @@ private:
                                               "            <direction id=\"5\" filePath=\"Resources/Animations/Player/Roll/Roll_DownLeft.png\"/>\n"
                                               "            <direction id=\"6\" filePath=\"Resources/Animations/Player/Roll/Roll_Left.png\"/>\n"
                                               "            <direction id=\"7\" filePath=\"Resources/Animations/Player/Roll/Roll_UpLeft.png\"/>\n"
+                                              "        </state>\n"
+                                              "        <state id=\"6\" animSheetRows=\"3\" animSheetCols=\"4\" firstSpriteRow=\"1\" firstSpriteCol=\"1\" frameCount=\"10\" animSpeed=\"100\" repeat=\"false\" flip=\"0\">\n"
+                                              "            <direction id=\"0\" filePath=\"Resources/Animations/Player/Melee/Melee_Up.png\"/>\n"
+                                              "            <direction id=\"1\" filePath=\"Resources/Animations/Player/Melee/Melee_UpRight.png\"/>\n"
+                                              "            <direction id=\"2\" filePath=\"Resources/Animations/Player/Melee/Melee_Right.png\"/>\n"
+                                              "            <direction id=\"3\" filePath=\"Resources/Animations/Player/Melee/Melee_DownRight.png\"/>\n"
+                                              "            <direction id=\"4\" filePath=\"Resources/Animations/Player/Melee/Melee_Down.png\"/>\n"
+                                              "            <direction id=\"5\" filePath=\"Resources/Animations/Player/Melee/Melee_DownLeft.png\"/>\n"
+                                              "            <direction id=\"6\" filePath=\"Resources/Animations/Player/Melee/Melee_Left.png\"/>\n"
+                                              "            <direction id=\"7\" filePath=\"Resources/Animations/Player/Melee/Melee_UpLeft.png\"/>\n"
                                               "        </state>\n"
                                               "    </character>\n"
                                               "</config>";

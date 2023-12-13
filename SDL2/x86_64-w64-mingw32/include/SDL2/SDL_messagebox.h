@@ -101,7 +101,7 @@ typedef struct
     int numbuttons;
     const SDL_MessageBoxButtonData *buttons;
 
-    const SDL_MessageBoxColorScheme *colorScheme;   /**< ::SDL_MessageBoxColorScheme, can be NULL to use system settings */
+    const SDL_MessageBoxColorScheme *colorScheme;   /**< ::SDL_MessageBoxColorScheme, can be NULL to use systems settings */
 } SDL_MessageBoxData;
 
 /**

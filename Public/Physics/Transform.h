@@ -10,19 +10,22 @@
 class Transform
 {
 public:
-    float X;
-    float Y;
-
-public:
-    Transform(float x, float y) : X(x), Y(y) {}
-
-    inline void TranslateX(float x) { X += x; };
-    inline void TranslateY(float y) { Y += y; };
-    inline void Translate(Vector2D vector)
+    Transform(float x, float y)
     {
-        X += vector.X;
-        Y += vector.Y;
+        Origin.X = x;
+        Origin.Y = y;
+    }
+
+    inline void TranslateX(float x) { Origin.X += x; };
+    inline void TranslateY(float y) { Origin.Y += y; };
+    inline void Translate(float x, float y)
+    {
+        Origin.X += x;
+        Origin.Y += y;
     };
+    inline void Translate(Vector2D vector) { Origin += vector; };
+
+    Vector2D Origin;
 };
 
 #endif  // PELAGEIA_IMMERSIVE_TRANSFORM_H

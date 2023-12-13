@@ -15,19 +15,16 @@ class Animation
 public:
     using AnimationEventCallback = std::function<void()>;
 
-    Animation(bool repeat = true) : m_Repeat(repeat) { m_IsEnded = false; };
+    Animation() {};
 
     virtual void Update() = 0;
 
     void SetAnimationEndCallback(const AnimationEventCallback& callback) { m_AnimationEndCallback = callback; }
 
-    inline bool IsEnded() { return m_IsEnded; }
-
 protected:
     AnimationEventCallback m_AnimationEndCallback;
 
     bool m_Repeat;
-    bool m_IsEnded;
 };
 
 #endif  // PELAGEIA_IMMERSIVE_ANIMATION_H

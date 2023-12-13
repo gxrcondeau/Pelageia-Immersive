@@ -28,7 +28,7 @@ struct Sequence
 class SeqAnimation : public Animation
 {
 public:
-    SeqAnimation(bool repeat = true);
+    SeqAnimation() {};
 
     virtual void Update() override;
     void DrawFrame(

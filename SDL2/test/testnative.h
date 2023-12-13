@@ -16,7 +16,7 @@
 
 #include "SDL.h"
 
-/* This header includes all the necessary system headers for native windows */
+/* This header includes all the necessary systems headers for native windows */
 #include "SDL_syswm.h"
 
 typedef struct
@@ -38,7 +38,7 @@ extern NativeWindowFactory X11WindowFactory;
 
 #ifdef SDL_VIDEO_DRIVER_COCOA
 /* Actually, we don't really do this, since it involves adding Objective C
-   support to the build system, which is a little tricky.  You can uncomment
+   support to the build systems, which is a little tricky.  You can uncomment
    it manually though and link testnativecocoa.m into the test application.
 */
 #define TEST_NATIVE_COCOA

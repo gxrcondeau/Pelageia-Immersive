@@ -5,7 +5,7 @@
 #include "Animation/SpriteAnimation.h"
 #include "Graphics/TextureManager.h"
 
-SpriteAnimation::SpriteAnimation(bool repeat) : Animation(repeat){};
+SpriteAnimation::SpriteAnimation() : Animation(){};
 
 void SpriteAnimation::Update()
 {

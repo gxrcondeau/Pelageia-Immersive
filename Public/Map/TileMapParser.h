@@ -2,8 +2,8 @@
 // Created by pylinskyi.k on 07.11.2023.
 //
 
-#ifndef PELAGEIA_IMMERSIVE_MAPPARSER_H
-#define PELAGEIA_IMMERSIVE_MAPPARSER_H
+#ifndef PELAGEIA_IMMERSIVE_TILEMAPPARSER_H
+#define PELAGEIA_IMMERSIVE_TILEMAPPARSER_H
 
 #include <string>
 #include <map>
@@ -11,18 +11,18 @@
 #include "GameMap.h"
 #include "pugixml.hpp"
 
-class MapParser
+class TileMapParser
 {
 public:
     bool Load();
     bool Clean();
 
     inline GameMap* GetMap(std::string id) { return m_MapDict[id]; };
-    inline static MapParser* GetInstance() { return s_Instance = (s_Instance != nullptr ? s_Instance : new MapParser()); }
+    inline static TileMapParser* GetInstance() { return s_Instance = (s_Instance != nullptr ? s_Instance : new TileMapParser()); }
 
 private:
-    MapParser(){};
-    static MapParser* s_Instance;
+    TileMapParser(){};
+    static TileMapParser* s_Instance;
     std::map<std::string, GameMap*> m_MapDict;
 
     bool Parse(std::string id, std::string source);
@@ -30,4 +30,4 @@ private:
     TileLayer* ParseTileLayer(pugi::xml_node* xmlTileLayer, TilesetList tilesets, int tilesize, int rowcount, int colcount);
 };
 
-#endif  // PELAGEIA_IMMERSIVE_MAPPARSER_H
+#endif  // PELAGEIA_IMMERSIVE_TILEMAPPARSER_H

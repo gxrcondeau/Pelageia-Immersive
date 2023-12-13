@@ -617,7 +617,7 @@ int audio_buildAudioCVTNegative()
         SDL_ClearError();
         SDLTest_AssertPass("Call to SDL_ClearError()");
 
-        /* Set various invalid format inputs */
+        /* Set various invalid format input */
         SDL_strlcpy(message, "Invalid: ", 256);
         if (i & 1) {
             SDL_strlcat(message, " spec1.format", 256);

@@ -375,7 +375,7 @@ extern DECLSPEC const char *SDLCALL SDL_GetCurrentAudioDriver(void);
  * - If `obtained` is NULL, we use `desired` (and allow no changes), which
  *   means desired will be modified to have the correct values for silence,
  *   etc, and SDL will convert any differences between your app's specific
- *   request and the hardware behind the scenes.
+ *   request and the hardware behind the scene.
  * - The return value is always success or failure, and not a device ID, which
  *   means you can only have one device open at a time with this function.
  *
@@ -533,7 +533,7 @@ extern DECLSPEC int SDLCALL SDL_GetAudioDeviceSpec(int index,
  * should call this function sparingly!
  *
  * `spec` will be filled with the sample rate, sample format, and channel
- * count, if a default device exists on the system. If `name` is provided,
+ * count, if a default device exists on the systems. If `name` is provided,
  * will be filled with either a dynamically-allocated UTF-8 string or NULL.
  *
  * \param name A pointer to be filled with the name of the default device (can
@@ -1056,7 +1056,7 @@ extern DECLSPEC int SDLCALL SDL_AudioStreamGet(SDL_AudioStream *stream, void *bu
 /**
  * Get the number of converted/resampled bytes available.
  *
- * The stream may be buffering data behind the scenes until it has enough to
+ * The stream may be buffering data behind the scene until it has enough to
  * resample correctly, so this number might be lower than what you expect, or
  * even be zero. Add more data or flush the stream if you need the data now.
  *

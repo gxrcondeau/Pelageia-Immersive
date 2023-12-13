@@ -5,16 +5,16 @@
 #include <sstream>
 #include <iostream>
 #include <SDL_log.h>
-#include "Map/MapParser.h"
+#include "Map/TileMapParser.h"
 
-MapParser* MapParser::s_Instance = nullptr;
+TileMapParser* TileMapParser::s_Instance = nullptr;
 
-bool MapParser::Load()
+bool TileMapParser::Load()
 {
     return Parse("map", "Assets/Maps/map.tmx");
 }
 
-bool MapParser::Clean()
+bool TileMapParser::Clean()
 {
     std::map<std::string, GameMap*>::iterator iterator;
     for (iterator = m_MapDict.begin(); iterator != m_MapDict.end(); iterator++)
@@ -25,7 +25,7 @@ bool MapParser::Clean()
     return true;
 }
 
-bool MapParser::Parse(std::string id, std::string source)
+bool TileMapParser::Parse(std::string id, std::string source)
 {
     pugi::xml_document xml;
     pugi::xml_parse_result parse_result = xml.load_file(source.c_str());
@@ -84,7 +84,7 @@ bool MapParser::Parse(std::string id, std::string source)
     return true;
 }
 
-Tileset MapParser::ParseTileset(pugi::xml_node* xmlTileset)
+Tileset TileMapParser::ParseTileset(pugi::xml_node* xmlTileset)
 {
     Tileset tileset;
     tileset.Name = xmlTileset->attribute("name").as_string();
@@ -116,7 +116,7 @@ Tileset MapParser::ParseTileset(pugi::xml_node* xmlTileset)
     return tileset;
 }
 
-TileLayer* MapParser::ParseTileLayer(pugi::xml_node* xmlTileLayer, TilesetList tilesets, int tilesize, int rowcount, int colcount)
+TileLayer* TileMapParser::ParseTileLayer(pugi::xml_node* xmlTileLayer, TilesetList tilesets, int tilesize, int rowcount, int colcount)
 {
     TileMap tilemap(rowcount, std::vector<int>(colcount, 0));
     pugi::xml_node dataNode = xmlTileLayer->child("data");

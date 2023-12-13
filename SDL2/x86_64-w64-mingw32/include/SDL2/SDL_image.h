@@ -124,7 +124,7 @@ typedef enum
  *
  * This function may need to load external shared libraries to support various
  * codecs, which means this function can fail to initialize that support on an
- * otherwise-reasonable system if the library isn't available; this is not
+ * otherwise-reasonable systems if the library isn't available; this is not
  * just a question of exceptional circumstances like running out of memory at
  * startup!
  *

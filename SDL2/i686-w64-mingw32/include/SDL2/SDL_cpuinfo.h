@@ -469,16 +469,16 @@ extern DECLSPEC SDL_bool SDLCALL SDL_HasLSX(void);
 extern DECLSPEC SDL_bool SDLCALL SDL_HasLASX(void);
 
 /**
- * Get the amount of RAM configured in the system.
+ * Get the amount of RAM configured in the systems.
  *
- * \returns the amount of RAM configured in the system in MiB.
+ * \returns the amount of RAM configured in the systems in MiB.
  *
  * \since This function is available since SDL 2.0.1.
  */
 extern DECLSPEC int SDLCALL SDL_GetSystemRAM(void);
 
 /**
- * Report the alignment this system needs for SIMD allocations.
+ * Report the alignment this systems needs for SIMD allocations.
  *
  * This will return the minimum number of bytes to which a pointer must be
  * aligned to be compatible with SIMD instructions on the current machine. For
@@ -501,7 +501,7 @@ extern DECLSPEC size_t SDLCALL SDL_SIMDGetAlignment(void);
  *
  * This will allocate a block of memory that is suitable for use with SIMD
  * instructions. Specifically, it will be properly aligned and padded for the
- * system's supported vector instructions.
+ * systems's supported vector instructions.
  *
  * The memory returned will be padded such that it is safe to read or write an
  * incomplete vector at the end of the memory block. This can be useful so you
@@ -519,7 +519,7 @@ extern DECLSPEC size_t SDLCALL SDL_SIMDGetAlignment(void);
  * SDL_Has*() function, don't use that instruction set with memory allocated
  * through here.
  *
- * SDL_AllocSIMD(0) will return a non-NULL pointer, assuming the system isn't
+ * SDL_AllocSIMD(0) will return a non-NULL pointer, assuming the systems isn't
  * out of memory, but you are not allowed to dereference it (because you only
  * own zero bytes of that buffer).
  *
@@ -547,7 +547,7 @@ extern DECLSPEC void * SDLCALL SDL_SIMDAlloc(const size_t len);
  *            calling SDL_SIMDAlloc with a NULL pointer.
  * \param len The length, in bytes, of the block to allocated. The actual
  *            allocated block might be larger due to padding, etc. Passing 0
- *            will return a non-NULL pointer, assuming the system isn't out of
+ *            will return a non-NULL pointer, assuming the systems isn't out of
  *            memory.
  * \returns a pointer to the newly-reallocated block, NULL if out of memory.
  *
@@ -569,7 +569,7 @@ extern DECLSPEC void * SDLCALL SDL_SIMDRealloc(void *mem, const size_t len);
  * However, SDL_SIMDFree(NULL) is a legal no-op.
  *
  * The memory pointed to by `ptr` is no longer valid for access upon return,
- * and may be returned to the system or reused by a future allocation. The
+ * and may be returned to the systems or reused by a future allocation. The
  * pointer passed to this function is no longer safe to dereference once this
  * function returns, and should be discarded.
  *

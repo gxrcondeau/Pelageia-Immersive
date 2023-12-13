@@ -822,9 +822,9 @@ typedef union SDL_HapticEffect
 /* Function prototypes */
 
 /**
- * Count the number of haptic devices attached to the system.
+ * Count the number of haptic devices attached to the systems.
  *
- * \returns the number of haptic devices detected on the system or a negative
+ * \returns the number of haptic devices detected on the systems or a negative
  *          error code on failure; call SDL_GetError() for more information.
  *
  * \since This function is available since SDL 2.0.0.
@@ -853,7 +853,7 @@ extern DECLSPEC const char *SDLCALL SDL_HapticName(int device_index);
  * Open a haptic device for use.
  *
  * The index passed as an argument refers to the N'th haptic device on this
- * system.
+ * systems.
  *
  * When opening a haptic device, its gain will be set to maximum and
  * autocenter will be disabled. To modify these values use SDL_HapticSetGain()

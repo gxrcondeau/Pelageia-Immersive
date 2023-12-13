@@ -962,7 +962,7 @@ extern DECLSPEC SDL_bool SDLCALL SDL_RenderIsClipEnabled(SDL_Renderer * renderer
  *
  * The drawing coordinates are scaled by the x/y scaling factors before they
  * are used by the renderer. This allows resolution independent drawing with a
- * single coordinate system.
+ * single coordinate systems.
  *
  * If this results in scaling or subpixel drawing by the rendering backend, it
  * will be handled using the appropriate quality hints. For best results use

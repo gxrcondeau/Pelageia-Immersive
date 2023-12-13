@@ -10,7 +10,7 @@
 class SpriteAnimation : public Animation
 {
 public:
-    SpriteAnimation(bool repeat = true);
+    SpriteAnimation();
 
     void Update() override;
 
@@ -34,9 +34,6 @@ public:
     void SetAnimSpeed(int speed) { m_AnimSpeed = speed; }
     void SetFlip(SDL_RendererFlip flip) { m_Flip = flip; }
     void SetRepeat(bool repeat) { m_Repeat = repeat; }
-
-    inline int SetCurrentFrame(int frame) { m_CurrentFrame = frame; }
-    inline int GetCurrentFrame() const { return m_CurrentFrame; }
 
 private:
     int m_CurrentFrame;

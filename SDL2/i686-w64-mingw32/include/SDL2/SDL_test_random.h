@@ -82,7 +82,7 @@ extern "C" {
                   unsigned int ci);
 
 /**
- *  \brief Initialize random number generator based on current system time.
+ *  \brief Initialize random number generator based on current systems time.
  *
  *  \param rndContext     pointer to context structure
  *
@@ -91,7 +91,7 @@ extern "C" {
 
 
 /**
- *  \brief Initialize random number generator based on current system time.
+ *  \brief Initialize random number generator based on current systems time.
  *
  *  Note: ...RandomInit() or ...RandomInitTime() must have been called
  *  before using this function.

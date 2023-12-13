@@ -782,7 +782,7 @@ int main(int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
-    SDL_Log("No OpenGL ES support on this system\n");
+    SDL_Log("No OpenGL ES support on this systems\n");
     return 1;
 }
 

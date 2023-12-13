@@ -430,7 +430,7 @@ int main(int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
-    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No OpenGL support on this system\n");
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "No OpenGL support on this systems\n");
     return 1;
 }
 

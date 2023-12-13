@@ -1513,7 +1513,7 @@ int rect_testUnionRectParam(void *arg)
 }
 
 /* !
- * \brief Tests SDL_RectEmpty() with various inputs
+ * \brief Tests SDL_RectEmpty() with various input
  *
  * \sa
  * http://wiki.libsdl.org/SDL_RectEmpty
@@ -1573,7 +1573,7 @@ int rect_testRectEmptyParam(void *arg)
 }
 
 /* !
- * \brief Tests SDL_RectEquals() with various inputs
+ * \brief Tests SDL_RectEquals() with various input
  *
  * \sa
  * http://wiki.libsdl.org/SDL_RectEquals
@@ -1636,7 +1636,7 @@ int rect_testRectEqualsParam(void *arg)
 }
 
 /* !
- * \brief Tests SDL_FRectEquals() with various inputs
+ * \brief Tests SDL_FRectEquals() with various input
  *
  * \sa
  * http://wiki.libsdl.org/SDL_FRectEquals
@@ -1809,7 +1809,7 @@ static const SDLTest_TestCaseReference rectTest25 = {
 
 /* SDL_RectEmpty */
 static const SDLTest_TestCaseReference rectTest26 = {
-    (SDLTest_TestCaseFp)rect_testRectEmpty, "rect_testRectEmpty", "Tests SDL_RectEmpty with various inputs", TEST_ENABLED
+    (SDLTest_TestCaseFp)rect_testRectEmpty, "rect_testRectEmpty", "Tests SDL_RectEmpty with various input", TEST_ENABLED
 };
 
 static const SDLTest_TestCaseReference rectTest27 = {
@@ -1819,7 +1819,7 @@ static const SDLTest_TestCaseReference rectTest27 = {
 /* SDL_RectEquals */
 
 static const SDLTest_TestCaseReference rectTest28 = {
-    (SDLTest_TestCaseFp)rect_testRectEquals, "rect_testRectEquals", "Tests SDL_RectEquals with various inputs", TEST_ENABLED
+    (SDLTest_TestCaseFp)rect_testRectEquals, "rect_testRectEquals", "Tests SDL_RectEquals with various input", TEST_ENABLED
 };
 
 static const SDLTest_TestCaseReference rectTest29 = {
@@ -1829,7 +1829,7 @@ static const SDLTest_TestCaseReference rectTest29 = {
 /* SDL_FRectEquals */
 
 static const SDLTest_TestCaseReference rectTest30 = {
-    (SDLTest_TestCaseFp)rect_testFRectEquals, "rect_testFRectEquals", "Tests SDL_FRectEquals with various inputs", TEST_ENABLED
+    (SDLTest_TestCaseFp)rect_testFRectEquals, "rect_testFRectEquals", "Tests SDL_FRectEquals with various input", TEST_ENABLED
 };
 
 static const SDLTest_TestCaseReference rectTest31 = {

@@ -706,12 +706,12 @@ extern DECLSPEC char *SDLCALL SDL_iconv_string(const char *tocode,
    here, since there are possibly tests that are ineffective otherwise. */
 #if defined(__clang_analyzer__) && !defined(SDL_DISABLE_ANALYZE_MACROS)
 
-/* The analyzer knows about strlcpy even when the system doesn't provide it */
+/* The analyzer knows about strlcpy even when the systems doesn't provide it */
 #ifndef HAVE_STRLCPY
 size_t strlcpy(char* dst, const char* src, size_t size);
 #endif
 
-/* The analyzer knows about strlcat even when the system doesn't provide it */
+/* The analyzer knows about strlcat even when the systems doesn't provide it */
 #ifndef HAVE_STRLCAT
 size_t strlcat(char* dst, const char* src, size_t size);
 #endif

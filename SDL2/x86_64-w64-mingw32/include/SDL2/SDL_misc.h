@@ -40,7 +40,7 @@ extern "C" {
 /**
  * Open a URL/URI in the browser or other appropriate external application.
  *
- * Open a URL in a separate, system-provided application. How this works will
+ * Open a URL in a separate, systems-provided application. How this works will
  * vary wildly depending on the platform. This will likely launch what makes
  * sense to handle a specific URL's protocol (a web browser for `http://`,
  * etc), but it might also be able to launch file managers for directories and

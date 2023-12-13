@@ -99,7 +99,7 @@ typedef enum
     SDL_KEYUP,                  /**< Key released */
     SDL_TEXTEDITING,            /**< Keyboard text editing (composition) */
     SDL_TEXTINPUT,              /**< Keyboard text input */
-    SDL_KEYMAPCHANGED,          /**< Keymap changed due to a system event such as an
+    SDL_KEYMAPCHANGED,          /**< Keymap changed due to a systems event such as an
                                      input language or keyboard layout change.
                                 */
     SDL_TEXTEDITING_EXT,       /**< Extended keyboard text editing (composition) */
@@ -116,7 +116,7 @@ typedef enum
     SDL_JOYHATMOTION,           /**< Joystick hat position change */
     SDL_JOYBUTTONDOWN,          /**< Joystick button pressed */
     SDL_JOYBUTTONUP,            /**< Joystick button released */
-    SDL_JOYDEVICEADDED,         /**< A new joystick has been inserted into the system */
+    SDL_JOYDEVICEADDED,         /**< A new joystick has been inserted into the systems */
     SDL_JOYDEVICEREMOVED,       /**< An opened joystick has been removed */
     SDL_JOYBATTERYUPDATED,      /**< Joystick battery level change */
 
@@ -124,7 +124,7 @@ typedef enum
     SDL_CONTROLLERAXISMOTION  = 0x650, /**< Game controller axis motion */
     SDL_CONTROLLERBUTTONDOWN,          /**< Game controller button pressed */
     SDL_CONTROLLERBUTTONUP,            /**< Game controller button released */
-    SDL_CONTROLLERDEVICEADDED,         /**< A new Game controller has been inserted into the system */
+    SDL_CONTROLLERDEVICEADDED,         /**< A new Game controller has been inserted into the systems */
     SDL_CONTROLLERDEVICEREMOVED,       /**< An opened Game controller has been removed */
     SDL_CONTROLLERDEVICEREMAPPED,      /**< The controller mapping was updated */
     SDL_CONTROLLERTOUCHPADDOWN,        /**< Game controller touchpad was touched */
@@ -146,7 +146,7 @@ typedef enum
     SDL_CLIPBOARDUPDATE = 0x900, /**< The clipboard or primary selection changed */
 
     /* Drag and drop events */
-    SDL_DROPFILE        = 0x1000, /**< The system requests a file open */
+    SDL_DROPFILE        = 0x1000, /**< The systems requests a file open */
     SDL_DROPTEXT,                 /**< text/plain drag-and-drop event */
     SDL_DROPBEGIN,                /**< A new set of drops is beginning (NULL filename) */
     SDL_DROPCOMPLETE,             /**< Current set of drops is now complete (NULL filename) */
@@ -546,7 +546,7 @@ typedef struct SDL_DollarGestureEvent
 
 
 /**
- *  \brief An event used to request a file open by the system (event.drop.*)
+ *  \brief An event used to request a file open by the systems (event.drop.*)
  *         This event is enabled by default, you can disable it with SDL_EventState().
  *  \note If this event is enabled, you must free the filename in the event.
  */
@@ -607,7 +607,7 @@ struct SDL_SysWMmsg;
 typedef struct SDL_SysWMmsg SDL_SysWMmsg;
 
 /**
- *  \brief A video driver dependent system event (event.syswm.*)
+ *  \brief A video driver dependent systems event (event.syswm.*)
  *         This event is disabled by default, you can enable it with SDL_EventState()
  *
  *  \note If you want to use this event, you should include SDL_syswm.h.
@@ -849,7 +849,7 @@ extern DECLSPEC void SDLCALL SDL_FlushEvents(Uint32 minType, Uint32 maxType);
  * As this function may implicitly call SDL_PumpEvents(), you can only call
  * this function in the thread that set the video mode.
  *
- * SDL_PollEvent() is the favored way of receiving system events since it can
+ * SDL_PollEvent() is the favored way of receiving systems events since it can
  * be done from the main loop and does not suspend the main loop while waiting
  * on an event to be posted.
  *

@@ -53,7 +53,7 @@ extern "C" {
 /**
  * Dynamically load a shared object.
  *
- * \param sofile a system-dependent name of the object file
+ * \param sofile a systems-dependent name of the object file
  * \returns an opaque pointer to the object handle or NULL if there was an
  *          error; call SDL_GetError() for more information.
  *

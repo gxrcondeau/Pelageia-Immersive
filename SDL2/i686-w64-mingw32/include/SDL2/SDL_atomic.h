@@ -76,7 +76,7 @@ extern "C" {
  * but are vulnerable to starvation and can spin forever if a thread
  * holding a lock has been terminated.  For this reason you should
  * minimize the code executed inside an atomic lock and never do
- * expensive things like API or system calls while holding them.
+ * expensive things like API or systems calls while holding them.
  *
  * The atomic locks are not safe to lock recursively.
  *

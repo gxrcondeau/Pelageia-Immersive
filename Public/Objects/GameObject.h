@@ -10,40 +10,31 @@
 #include "IObject.h"
 #include "Physics/Vector2D.h"
 #include "Physics/Transform.h"
+#include "Utils/Calculations/Coordinates.h"
 
-struct Properties
-{
-public:
-    std::string TextureID;
-    int X;
-    int Y;
-    int Width;
-    int Height;
-};
 
 class GameObject : public IObject
 {
 public:
-    GameObject(Properties* props) : m_Width(props->Height), m_Height(props->Width), m_TextureID(props->TextureID)
+    GameObject(std::string name, int positionRow, int positionCol)
     {
-        m_Transform = new Transform(props->X, props->Y);
+        m_Name = name;
+        int px = Coordinates::GetIsoX(positionRow, positionCol);
+        int py = Coordinates::GetIsoY(positionRow, positionCol);
 
-        float px = props->X + props->Width / 2;
-        float py = props->Y + props->Height / 2;
-
-        m_Origin = new Vector2D(px, py);
+        m_Transform = new Transform(px, py);
     }
 
-    inline Vector2D* GetOrigin() { return m_Origin; }
+    inline Vector2D GetOrigin() { return m_Transform->Origin; }
+    int GetWorldPositionRow() { return Coordinates::GetIsoRow(m_Transform->Origin.X, m_Transform->Origin.Y); };
+    int GetWorldPositionCol() { return Coordinates::GetIsoCol(m_Transform->Origin.X, m_Transform->Origin.Y); };
     virtual void Draw() = 0;
     virtual void Update(float dt) = 0;
     virtual void Clean() = 0;
 
 protected:
-    Vector2D* m_Origin;
+    std::string m_Name;
     Transform* m_Transform;
-    int m_Width, m_Height;
-    std::string m_TextureID;
 };
 
 #endif  // PELAGEIA_IMMERSIVE_GAMEOBJECT_H

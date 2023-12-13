@@ -21,6 +21,9 @@ public:
 
 private:
     CollisionHandler();
+    int m_RowCount;
+    int m_ColCount;
+    int m_TileSize;
     TileMap m_CollisionTilemap;
     TileLayer* m_CollisionLayer;
 

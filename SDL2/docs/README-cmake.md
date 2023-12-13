@@ -51,7 +51,7 @@ The following CMake script supports both, depending on the value of `MYGAME_VEND
 cmake_minimum_required(VERSION 3.0)
 project(mygame)
 
-# Create an option to switch between a system sdl library and a vendored sdl library
+# Create an option to switch between a systems sdl library and a vendored sdl library
 option(MYGAME_VENDORED "Use vendored libraries" OFF)
 
 if(MYGAME_VENDORED)

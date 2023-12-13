@@ -74,7 +74,7 @@
 
 
 /**********************************************************************
- * Begin system-specific stuff.
+ * Begin systems-specific stuff.
  */
 
 #if defined(_WIN32) && !defined(__WIN32__) && !defined(__CYGWIN__)
@@ -153,7 +153,7 @@
 #endif
 
 /*
- * End system-specific stuff.
+ * End systems-specific stuff.
  **********************************************************************/
 
 
@@ -2108,14 +2108,14 @@ typedef void (APIENTRYP PFNGLMULTITEXCOORD4SVARBPROC) (GLenum target, const GLsh
 
 
 /**********************************************************************
- * Begin system-specific stuff
+ * Begin systems-specific stuff
  */
 #if defined(PRAGMA_EXPORT_SUPPORTED)
 #pragma export off
 #endif
 
 /*
- * End system-specific stuff
+ * End systems-specific stuff
  **********************************************************************/
 
 

@@ -39,18 +39,17 @@ enum CharacterDirection : std::uint8_t
 class Character : public GameObject
 {
 public:
-    Character(Properties* props) : GameObject(props) { m_Properties = props; }
+    Character(std::string name, int positionRow, int positionCol, int tileSize);
 
     virtual void Draw() = 0;
     virtual void Update(float dt) = 0;
     virtual void Clean() = 0;
     virtual void HandleAnimation() = 0;
+    virtual void SetState(CharacterState state) { m_CurrentCharacterState = state; }
+    virtual void SetDirection(int horizontal, int vertical) { m_CharacterDirection = GetDirection(horizontal, vertical); }
     virtual CharacterDirection GetDirection(int horizontal, int vertical);
 
 protected:
-    Properties* m_Properties;
-    std::string m_CharacterName;
-
     CharacterState m_CurrentCharacterState;
     CharacterDirection m_CharacterDirection;
 };

@@ -10,17 +10,13 @@
 #include "Camera/Camera.h"
 #include "Collisions/CollisionHandler.h"
 
-Player::Player(Properties* props) : Character(props)
+Player::Player(std::string name, int positionRow, int positionCol, int tileSize) : Character(name, positionRow, positionCol, tileSize)
 {
-    m_CharacterName = "Player";
     m_CurrentCharacterState = IDLE;
     m_CharacterDirection = DOWN;
     m_IsJumping = false;
 
     m_Collider->SetBuffer(0, 0, 0, 0);
-    m_Collider->Set(m_Transform->X, m_Transform->Y, 32, 32);
-
-    m_RigidBody->SetGravity(0);
 
     m_Animation->SetAnimationEndCallback(
         [this]()
@@ -33,7 +29,7 @@ Player::Player(Properties* props) : Character(props)
 
 void Player::Draw()
 {
-    const auto textureProps = TextureManager::GetInstance()->GetCharacterTextureParams(m_CharacterName);
+    const auto textureProps = TextureManager::GetInstance()->GetCharacterTextureParams(m_Name);
 
     if (!textureProps) return;
     m_Animation->DrawFrame(m_Transform->X, m_Transform->Y, m_Width, m_Height, textureProps->XScale, textureProps->YScale,
@@ -43,6 +39,15 @@ void Player::Draw()
     SDL_Rect Box = m_Collider->Get();
     Box.x -= Cam.X;
     Box.y -= Cam.Y;
+
+    // Convert isometric coordinates to screen coordinates
+    int screenX = (Box.x - Box.y) / 2;
+    int screenY = (Box.x + Box.y) / 2;
+
+    // Draw a rotated rectangle
+    SDL_Rect rotatedRect = {(screenX + Box.w) / 2, (screenY + Box.h) / 2, Box.w, Box.h};
+
+    SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &rotatedRect);
 }
 
 void Player::Update(float dt)
@@ -91,8 +96,10 @@ void Player::HandleInput()
     m_IsometricX = 32 / 4 * inputVector.X;
     m_IsometricY = 32 / 8 * inputVector.Y;
 
-    if ((m_HorizontalAxis != 0 || m_VerticalAxis != 0))
+    if ((m_HorizontalAxis != 0 || m_VerticalAxis != 0) && !m_IsAttacking)
     {
+        SDL_Log("Player Loc X: %f Y: %f", m_RigidBody->GetPosition().X, m_RigidBody->GetPosition().X);
+
         m_CharacterDirection = GetDirection(m_HorizontalAxis, m_VerticalAxis);
 
         m_Velocity = 0.5f;
@@ -127,6 +134,7 @@ void Player::HandleInput()
     {
         m_CurrentCharacterState = MELEE_ATTACK;
         m_IsAttacking = true;
+        m_Velocity = 0.0f;
     }
 }
 
@@ -140,17 +148,19 @@ void Player::HandlePhisics(float dt)
     m_RigidBody->Update(dt);
     m_LastSafePosition->X = m_Transform->X;
     m_Transform->TranslateX(m_RigidBody->GetPosition().X);
-    m_Collider->Set(m_Transform->X, m_Transform->Y, 256, 256);
+    m_Collider->Set(m_Transform->X, m_Transform->Y, 32, 32);
 
     if (CollisionHandler::GetInstance()->MapCollision(m_Collider->Get())) m_Transform->X = m_LastSafePosition->X;
 
     m_RigidBody->Update(dt);
     m_LastSafePosition->Y = m_Transform->Y;
     m_Transform->TranslateY(m_RigidBody->GetPosition().Y);
-    m_Collider->Set(m_Transform->X, m_Transform->Y, 256, 256);
+    m_Collider->Set(m_Transform->X, m_Transform->Y, 32, 32);
 
     if (CollisionHandler::GetInstance()->MapCollision(m_Collider->Get())) m_Transform->Y = m_LastSafePosition->Y;
 
+    CollisionHandler::GetInstance()->MapCollision(m_Collider->Get());
     m_Origin->X = m_Transform->X + m_Width / 2;
     m_Origin->Y = m_Transform->Y + m_Height / 2;
+
 }

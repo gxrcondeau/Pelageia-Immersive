@@ -163,7 +163,7 @@ extern DECLSPEC SDL_mutex *SDLCALL SDL_CreateMutex(void);
  *
  * It is legal for the owning thread to lock an already-locked mutex. It must
  * unlock it the same number of times before it is actually made available for
- * other threads in the system (this is known as a "recursive mutex").
+ * other threads in the systems (this is known as a "recursive mutex").
  *
  * \param mutex the mutex to lock
  * \return 0, or -1 on error.
@@ -200,7 +200,7 @@ extern DECLSPEC int SDLCALL SDL_TryLockMutex(SDL_mutex * mutex) SDL_TRY_ACQUIRE(
  *
  * It is legal for the owning thread to lock an already-locked mutex. It must
  * unlock it the same number of times before it is actually made available for
- * other threads in the system (this is known as a "recursive mutex").
+ * other threads in the systems (this is known as a "recursive mutex").
  *
  * It is an error to unlock a mutex that has not been locked by the current
  * thread, and doing so results in undefined behavior.
@@ -219,7 +219,7 @@ extern DECLSPEC int SDLCALL SDL_UnlockMutex(SDL_mutex * mutex) SDL_RELEASE(mutex
  * Destroy a mutex created with SDL_CreateMutex().
  *
  * This function must be called on any mutex that is no longer needed. Failure
- * to destroy a mutex will result in a system memory or resource leak. While
+ * to destroy a mutex will result in a systems memory or resource leak. While
  * it is safe to destroy a mutex that is _unlocked_, it is not safe to attempt
  * to destroy a locked mutex, and may result in undefined behavior depending
  * on the platform.

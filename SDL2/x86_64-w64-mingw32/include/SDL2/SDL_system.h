@@ -349,7 +349,7 @@ extern DECLSPEC SDL_bool SDLCALL SDL_IsChromebook(void);
 extern DECLSPEC SDL_bool SDLCALL SDL_IsDeXMode(void);
 
 /**
- * Trigger the Android system back button behavior.
+ * Trigger the Android systems back button behavior.
  *
  * \since This function is available since SDL 2.0.9.
  */
@@ -513,7 +513,7 @@ typedef enum
 
 
 /**
- * Retrieve a WinRT defined path on the local file system.
+ * Retrieve a WinRT defined path on the local file systems.
  *
  * Not all paths are available on all versions of Windows. This is especially
  * true on Windows Phone. Check the documentation for the given SDL_WinRT_Path
@@ -536,7 +536,7 @@ typedef enum
 extern DECLSPEC const wchar_t * SDLCALL SDL_WinRTGetFSPathUNICODE(SDL_WinRT_Path pathType);
 
 /**
- * Retrieve a WinRT defined path on the local file system.
+ * Retrieve a WinRT defined path on the local file systems.
  *
  * Not all paths are available on all versions of Windows. This is especially
  * true on Windows Phone. Check the documentation for the given SDL_WinRT_Path

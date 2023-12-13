@@ -226,7 +226,7 @@ extern DECLSPEC int SDLCALL SDL_SetRelativeMouseMode(SDL_bool enabled);
  * restrained to your window.
  *
  * This function may also deny mouse input to other windows--both those in
- * your application and others on the system--so you should use this function
+ * your application and others on the systems--so you should use this function
  * sparingly, and in small bursts. For example, you might want to track the
  * mouse while the user is dragging something, until the user releases a mouse
  * button. It is not recommended that you capture the mouse for long periods
@@ -295,7 +295,7 @@ extern DECLSPEC SDL_bool SDLCALL SDL_GetRelativeMouseMode(void);
  * will be bound to the framerate.
  *
  * Also, since SDL 2.0.0, SDL_CreateSystemCursor() is available, which
- * provides twelve readily available system cursors to pick from.
+ * provides twelve readily available systems cursors to pick from.
  *
  * \param data the color value for each pixel of the cursor
  * \param mask the mask value for each pixel of the cursor
@@ -338,7 +338,7 @@ extern DECLSPEC SDL_Cursor *SDLCALL SDL_CreateColorCursor(SDL_Surface *surface,
                                                           int hot_y);
 
 /**
- * Create a system cursor.
+ * Create a systems cursor.
  *
  * \param id an SDL_SystemCursor enum value
  * \returns a cursor on success or NULL on failure; call SDL_GetError() for

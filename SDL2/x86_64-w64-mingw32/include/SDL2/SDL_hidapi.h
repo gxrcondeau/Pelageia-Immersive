@@ -159,12 +159,12 @@ extern DECLSPEC int SDLCALL SDL_hid_exit(void);
  * Check to see if devices may have been added or removed.
  *
  * Enumerating the HID devices is an expensive operation, so you can call this
- * to see if there have been any system device changes since the last call to
+ * to see if there have been any systems device changes since the last call to
  * this function. A change in the counter returned doesn't necessarily mean
  * that anything has changed, but you can call SDL_hid_enumerate() to get an
  * updated device list.
  *
- * Calling this function for the first time may cause a thread or other system
+ * Calling this function for the first time may cause a thread or other systems
  * resource to be allocated to track device change notifications.
  *
  * \returns a change counter that is incremented with each potential device
@@ -180,7 +180,7 @@ extern DECLSPEC Uint32 SDLCALL SDL_hid_device_change_count(void);
  * Enumerate the HID Devices.
  *
  * This function returns a linked list of all the HID devices attached to the
- * system which match vendor_id and product_id. If `vendor_id` is set to 0
+ * systems which match vendor_id and product_id. If `vendor_id` is set to 0
  * then any vendor matches. If `product_id` is set to 0 then any product
  * matches. If `vendor_id` and `product_id` are both set to 0, then all HID
  * devices will be returned.
@@ -188,7 +188,7 @@ extern DECLSPEC Uint32 SDLCALL SDL_hid_device_change_count(void);
  * \param vendor_id The Vendor ID (VID) of the types of device to open.
  * \param product_id The Product ID (PID) of the types of device to open.
  * \returns a pointer to a linked list of type SDL_hid_device_info, containing
- *          information about the HID devices attached to the system, or NULL
+ *          information about the HID devices attached to the systems, or NULL
  *          in the case of failure. Free this linked list by calling
  *          SDL_hid_free_enumeration().
  *

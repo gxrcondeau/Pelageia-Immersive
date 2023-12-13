@@ -16,19 +16,27 @@ public:
 
     // Addition
     inline Vector2D operator+(const Vector2D& vector) const { return Vector2D(X + vector.X, Y + vector.Y); }
+    inline Vector2D operator+=(const Vector2D& vector) const { return Vector2D(X + vector.X, Y + vector.Y); }
     inline Vector2D operator+(const float scalar) const { return Vector2D(X + scalar, Y + scalar); }
+    inline Vector2D operator+=(const float scalar) const { return Vector2D(X + scalar, Y + scalar); }
 
     // Difference
     inline Vector2D operator-(const Vector2D& vector) const { return Vector2D(X - vector.X, Y - vector.Y); }
+    inline Vector2D operator-=(const Vector2D& vector) const { return Vector2D(X - vector.X, Y - vector.Y); }
     inline Vector2D operator-(const float scalar) const { return Vector2D(X - scalar, Y - scalar); }
+    inline Vector2D operator-=(const float scalar) const { return Vector2D(X - scalar, Y - scalar); }
 
     // Multiplication
     inline Vector2D operator*(const Vector2D& vector) const { return Vector2D(X * vector.X, Y * vector.Y); }
+    inline Vector2D operator*=(const Vector2D& vector) const { return Vector2D(X * vector.X, Y * vector.Y); }
     inline Vector2D operator*(const float scalar) const { return Vector2D(X * scalar, Y * scalar); }
+    inline Vector2D operator*=(const float scalar) const { return Vector2D(X * scalar, Y * scalar); }
 
     // Division
     inline Vector2D operator/(const Vector2D& vector) const { return Vector2D(X / vector.X, Y / vector.Y); }
+    inline Vector2D operator/=(const Vector2D& vector) const { return Vector2D(X / vector.X, Y / vector.Y); }
     inline Vector2D operator/(const float scalar) const { return Vector2D(X / scalar, Y / scalar); }
+    inline Vector2D operator/=(const float scalar) const { return Vector2D(X / scalar, Y / scalar); }
 
     inline bool IsZeroVector() { return X == 0 && Y == 0; }
 

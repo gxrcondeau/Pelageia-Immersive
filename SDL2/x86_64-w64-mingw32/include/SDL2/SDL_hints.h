@@ -136,7 +136,7 @@ extern "C" {
  *        SDL_SCANCODE_AC_BACK.
  *
  * The variable can be set to the following values:
- *   "0"       - Back button will be handled as usual for system. (default)
+ *   "0"       - Back button will be handled as usual for systems. (default)
  *   "1"       - Back button will be trapped, allowing you to handle the key press
  *               manually.  (This will also let right mouse click work on systems
  *               where the right mouse button functions as back.)
@@ -210,7 +210,7 @@ extern "C" {
  *  \brief Specify an application name for an audio device.
  *
  * Some audio backends (such as PulseAudio) allow you to describe your audio
- * stream. Among other things, this description might show up in a system
+ * stream. Among other things, this description might show up in a systems
  * control panel that lets the user adjust the volume on specific audio
  * streams instead of using one giant master volume slider.
  *
@@ -231,7 +231,7 @@ extern "C" {
  *  \brief Specify an application name for an audio device.
  *
  * Some audio backends (such as PulseAudio) allow you to describe your audio
- * stream. Among other things, this description might show up in a system
+ * stream. Among other things, this description might show up in a systems
  * control panel that lets the user adjust the volume on specific audio
  * streams instead of using one giant master volume slider.
  *
@@ -253,7 +253,7 @@ extern "C" {
  *
  * Some audio backends (such as Pipewire) allow you to describe the role of
  * your audio stream. Among other things, this description might show up in
- * a system control panel or software for displaying and manipulating media
+ * a systems control panel or software for displaying and manipulating media
  * playback/capture graphs.
  *
  * This hints lets you transmit that information to the OS. The contents of
@@ -339,7 +339,7 @@ extern "C" {
  *
  *  If set, this hint will override the expected results for
  *  SDL_GetDisplayUsableBounds() for display index 0. Generally you don't want
- *  to do this, but this allows an embedded system to request that some of the
+ *  to do this, but this allows an embedded systems to request that some of the
  *  screen be reserved for other uses when paired with a well-behaved
  *  application.
  *
@@ -364,7 +364,7 @@ extern "C" {
 #define SDL_HINT_EMSCRIPTEN_ASYNCIFY   "SDL_EMSCRIPTEN_ASYNCIFY"
 
 /**
- *  \brief override the binding element for keyboard inputs for Emscripten builds
+ *  \brief override the binding element for keyboard input for Emscripten builds
  *
  * This hint only applies to the emscripten platform
  *
@@ -457,7 +457,7 @@ extern "C" {
  *  The variable should be newline delimited rows of gamecontroller config data, see SDL_gamecontroller.h
  *
  *  This hint must be set before calling SDL_Init(SDL_INIT_GAMECONTROLLER)
- *  You can update mappings after the system is initialized with SDL_GameControllerMappingForGUID() and SDL_GameControllerAddMapping()
+ *  You can update mappings after the systems is initialized with SDL_GameControllerMappingForGUID() and SDL_GameControllerAddMapping()
  */
 #define SDL_HINT_GAMECONTROLLERCONFIG "SDL_GAMECONTROLLERCONFIG"
 
@@ -467,7 +467,7 @@ extern "C" {
  *  The file should contain lines of gamecontroller config data, see SDL_gamecontroller.h
  *
  *  This hint must be set before calling SDL_Init(SDL_INIT_GAMECONTROLLER)
- *  You can update mappings after the system is initialized with SDL_GameControllerMappingForGUID() and SDL_GameControllerAddMapping()
+ *  You can update mappings after the systems is initialized with SDL_GameControllerMappingForGUID() and SDL_GameControllerAddMapping()
  */
 #define SDL_HINT_GAMECONTROLLERCONFIG_FILE "SDL_GAMECONTROLLERCONFIG_FILE"
 
@@ -546,7 +546,7 @@ extern "C" {
  *    "0"       - Grab will affect only the mouse
  *    "1"       - Grab will affect mouse and keyboard
  *
- *  By default SDL will not grab the keyboard so system shortcuts still work.
+ *  By default SDL will not grab the keyboard so systems shortcuts still work.
  */
 #define SDL_HINT_GRAB_KEYBOARD              "SDL_GRAB_KEYBOARD"
 
@@ -1038,10 +1038,10 @@ extern "C" {
 #define SDL_HINT_JOYSTICK_DEVICE "SDL_JOYSTICK_DEVICE"
 
 /**
-  *  \brief  A variable controlling whether joysticks on Linux will always treat 'hat' axis inputs (ABS_HAT0X - ABS_HAT3Y) as 8-way digital hats without checking whether they may be analog.
+  *  \brief  A variable controlling whether joysticks on Linux will always treat 'hat' axis input (ABS_HAT0X - ABS_HAT3Y) as 8-way digital hats without checking whether they may be analog.
   *
   *  This variable can be set to the following values:
-  *    "0"       - Only map hat axis inputs to digital hat outputs if the input axes appear to actually be digital (the default)
+  *    "0"       - Only map hat axis input to digital hat outputs if the input axes appear to actually be digital (the default)
   *    "1"       - Always handle the input axes numbered ABS_HAT0X to ABS_HAT3Y as digital hats
   */
 #define SDL_HINT_LINUX_DIGITAL_HATS "SDL_LINUX_DIGITAL_HATS"
@@ -1179,13 +1179,13 @@ extern "C" {
 #define SDL_HINT_MOUSE_RELATIVE_SPEED_SCALE    "SDL_MOUSE_RELATIVE_SPEED_SCALE"
 
 /**
- *  \brief  A variable controlling whether the system mouse acceleration curve is used for relative mouse motion.
+ *  \brief  A variable controlling whether the systems mouse acceleration curve is used for relative mouse motion.
  *
  *  This variable can be set to the following values:
  *    "0"       - Relative mouse motion will be unscaled (the default)
- *    "1"       - Relative mouse motion will be scaled using the system mouse acceleration curve.
+ *    "1"       - Relative mouse motion will be scaled using the systems mouse acceleration curve.
  *
- *    If SDL_HINT_MOUSE_RELATIVE_SPEED_SCALE is set, that will override the system speed scale.
+ *    If SDL_HINT_MOUSE_RELATIVE_SPEED_SCALE is set, that will override the systems speed scale.
  */
 #define SDL_HINT_MOUSE_RELATIVE_SYSTEM_SCALE    "SDL_MOUSE_RELATIVE_SYSTEM_SCALE"
 
@@ -1312,7 +1312,7 @@ extern "C" {
  *
  *  On QtWayland platforms, windows are rotated client-side to allow for custom
  *  transitions. In order to correctly position overlays (e.g. volume bar) and
- *  gestures (e.g. events view, close/minimize gestures), the system needs to
+ *  gestures (e.g. events view, close/minimize gestures), the systems needs to
  *  know in which orientation the application is currently drawing its contents.
  *
  *  This does not cause the window to be rotated or resized, the application
@@ -1538,7 +1538,7 @@ extern "C" {
 /**
 *  \brief  A string specifying additional information to use with SDL_SetThreadPriority.
 *
-*  By default SDL_SetThreadPriority will make appropriate system changes in order to
+*  By default SDL_SetThreadPriority will make appropriate systems changes in order to
 *  apply a thread priority.  For example on systems using pthreads the scheduler policy
 *  is changed automatically to a policy that works well with a given priority.
 *  Code which has specific requirements can override SDL's default behavior with this hint.
@@ -1569,14 +1569,14 @@ extern "C" {
 /**
  *  \brief A variable that controls the timer resolution, in milliseconds.
  *
- *  The higher resolution the timer, the more frequently the CPU services
+ *  The higher resolution the timer, the more frequently the CPU systems
  *  timer interrupts, and the more precise delays are, but this takes up
  *  power and CPU time.  This hint is only used on Windows.
  *
  *  See this blog post for more information:
  *  http://randomascii.wordpress.com/2013/07/08/windows-timer-resolution-megawatts-wasted/
  *
- *  If this variable is set to "0", the system timer resolution is not set.
+ *  If this variable is set to "0", the systems timer resolution is not set.
  *
  *  The default value is "1". This hint may be set at any time.
  */
@@ -2074,7 +2074,7 @@ extern "C" {
  *  a DPI scale factor.
  *
  *  This hint is equivalent to requesting DPI awareness via external means (e.g. calling SetProcessDpiAwarenessContext)
- *  and does not cause SDL to use a virtualized coordinate system, so it will generally give you 1 SDL coordinate = 1 pixel
+ *  and does not cause SDL to use a virtualized coordinate systems, so it will generally give you 1 SDL coordinate = 1 pixel
  *  even on high-DPI displays.
  *
  *  For more information, see:
@@ -2083,7 +2083,7 @@ extern "C" {
  *  This variable can be set to the following values:
  *    ""             - Do not change the DPI awareness (default).
  *    "unaware"      - Declare the process as DPI unaware. (Windows 8.1 and later).
- *    "system"       - Request system DPI awareness. (Vista and later).
+ *    "systems"       - Request systems DPI awareness. (Vista and later).
  *    "permonitor"   - Request per-monitor DPI awareness. (Windows 8.1 and later).
  *    "permonitorv2" - Request per-monitor V2 DPI awareness. (Windows 10, version 1607 and later).
  *                     The most visible difference from "permonitor" is that window title bar will be scaled
@@ -2096,9 +2096,9 @@ extern "C" {
 #define SDL_HINT_WINDOWS_DPI_AWARENESS "SDL_WINDOWS_DPI_AWARENESS"
 
 /**
- * \brief Uses DPI-scaled points as the SDL coordinate system on Windows.
+ * \brief Uses DPI-scaled points as the SDL coordinate systems on Windows.
  *
- *  This changes the SDL coordinate system units to be DPI-scaled points, rather than pixels everywhere.
+ *  This changes the SDL coordinate systems units to be DPI-scaled points, rather than pixels everywhere.
  *  This means windows will be appropriately sized, even when created on high-DPI displays with scaling.
  *
  *  e.g. requesting a 640x480 window from SDL, on a display with 125% scaling in Windows display settings,

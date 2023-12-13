@@ -5,13 +5,17 @@
 #include "Collisions/CollisionHandler.h"
 #include "Physics/Vector2D.h"
 #include "Camera/Camera.h"
+#include "Graphics/TextureManager.h"
 
 CollisionHandler* CollisionHandler::s_Instance = nullptr;
 
 CollisionHandler::CollisionHandler()
 {
-    m_CollisionLayer = (TileLayer*)Engine::GetInstance()->GetGameMap()->GetMapLayers().back();
+    m_CollisionLayer = (TileLayer*)Engine::GetInstance()->GetGameMap()->GetMapLayers()["collision"];
     m_CollisionTilemap = m_CollisionLayer->GetTilemap();
+    m_TileSize = m_CollisionLayer->GetTileSize();
+    m_RowCount = m_CollisionLayer->GetRowCount();
+    m_ColCount = m_CollisionLayer->GetColCount();
 }
 
 bool CollisionHandler::CheckCollision(SDL_Rect a, SDL_Rect b)
@@ -24,27 +28,20 @@ bool CollisionHandler::CheckCollision(SDL_Rect a, SDL_Rect b)
 
 bool CollisionHandler::MapCollision(SDL_Rect a)
 {
-    int tileSize = m_CollisionLayer->GetTileSize();
-    int rowCount = m_CollisionLayer->GetRowCount();
-    int colCount = m_CollisionLayer->GetColCount();
-
-    int left_tile = a.x / tileSize;
-    int right_tile = (a.x + a.w) / tileSize;
-
-    int top_tile = a.y / tileSize;
-    int bottom_tile = (a.y + a.h) / tileSize;
-
-    if (left_tile < 0) left_tile = 0;
-    if (right_tile > colCount) right_tile = colCount;
-
-    if (top_tile < 0) top_tile = 0;
-    if (bottom_tile > rowCount) bottom_tile = rowCount;
-
-    for (int i = left_tile; i < right_tile; i++)
+    for (unsigned row = 0; row < m_RowCount; row++)
     {
-        for (int j = top_tile; j < bottom_tile; j++)
+        for (unsigned col = 0; col < m_ColCount; col++)
         {
-            if (m_CollisionTilemap[j][i] > 0) return true;
+            int tileID = m_CollisionTilemap[row][col];
+
+            if (tileID > 0)
+            {
+
+                int x = (col - row) * (m_TileSize / 2);
+                int y = (col + row) * (m_TileSize / 4);
+
+                TextureManager::GetInstance()->DrawCollision(x, y);
+            }
         }
     }
 

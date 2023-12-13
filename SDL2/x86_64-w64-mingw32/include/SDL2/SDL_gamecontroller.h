@@ -44,7 +44,7 @@ extern "C" {
  *  \file SDL_gamecontroller.h
  *
  *  In order to use these functions, SDL_Init() must have been called
- *  with the ::SDL_INIT_GAMECONTROLLER flag.  This causes SDL to scan the system
+ *  with the ::SDL_INIT_GAMECONTROLLER flag.  This causes SDL to scan the systems
  *  for game controllers, and load appropriate drivers.
  *
  *  If you would like to receive controller updates while the application
@@ -104,7 +104,7 @@ typedef struct SDL_GameControllerButtonBind
 
 
 /**
- *  To count the number of game controllers in the system for the following:
+ *  To count the number of game controllers in the systems for the following:
  *
  *  ```c
  *  int nJoysticks = SDL_NumJoysticks();
@@ -346,7 +346,7 @@ extern DECLSPEC char *SDLCALL SDL_GameControllerMappingForDeviceIndex(int joysti
  * SDL_JoystickOpen().
  *
  * The index passed as an argument refers to the N'th game controller on the
- * system. This index is not the value which will identify this controller in
+ * systems. This index is not the value which will identify this controller in
  * future controller events. The joystick's instance id (SDL_JoystickID) will
  * be used there instead.
  *

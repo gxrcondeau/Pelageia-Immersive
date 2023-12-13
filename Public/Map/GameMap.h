@@ -6,6 +6,7 @@
 #define PELAGEIA_IMMERSIVE_GAMEMAP_H
 
 #include <vector>
+#include <map>
 #include "Layer.h"
 #include "TileLayer.h"
 
@@ -15,19 +16,21 @@ public:
     void Render()
     {
         for (auto layer : m_MapLayer)
-            layer->Render();
+            layer.second->Render();
+        // m_MapLayer["collision"]->RenderCollision();
     }
     void Update(int dt)
     {
         for (auto layer : m_MapLayer)
-            layer->Update(dt);
+            layer.second->Update(dt);
     }
 
-    std::vector<Layer*> GetMapLayers() { return m_MapLayer; }
+    std::map<std::string, Layer*> GetMapLayers() { return m_MapLayer; }
+    Layer* GetMapLayer(std::string name) { return m_MapLayer[name]; }
 
 private:
-    friend class MapParser;
-    std::vector<Layer*> m_MapLayer;
+    friend class TileMapParser;
+    std::map<std::string, Layer*> m_MapLayer;
 };
 
 #endif  // PELAGEIA_IMMERSIVE_GAMEMAP_H

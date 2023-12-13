@@ -148,7 +148,7 @@ typedef struct SDL_RWops
  *
  * The `mode` string is treated roughly the same as in a call to the C
  * library's fopen(), even if SDL doesn't happen to use fopen() behind the
- * scenes.
+ * scene.
  *
  * Available `mode` strings:
  *
@@ -179,7 +179,7 @@ typedef struct SDL_RWops
  * a text file.
  *
  * This function supports Unicode filenames, but they must be encoded in UTF-8
- * format, regardless of the underlying operating system.
+ * format, regardless of the underlying operating systems.
  *
  * As a fallback, SDL_RWFromFile() will transparently open a matching filename
  * in an Android app's `assets`.
@@ -221,7 +221,7 @@ extern DECLSPEC SDL_RWops *SDLCALL SDL_RWFromFP(FILE * fp, SDL_bool autoclose);
  * library.
  *
  * On some platforms, the first parameter is a `void*`, on others, it's a
- * `FILE*`, depending on what system headers are available to SDL. It is
+ * `FILE*`, depending on what systems headers are available to SDL. It is
  * always intended to be the `FILE*` type from the C runtime's stdio.h.
  *
  * \param fp the `FILE*` that feeds the SDL_RWops stream
@@ -326,7 +326,7 @@ extern DECLSPEC SDL_RWops *SDLCALL SDL_RWFromConstMem(const void *mem,
  * implementations in SDL, like SDL_RWFromFile() or SDL_RWFromMem(), etc.
  *
  * You must free the returned pointer with SDL_FreeRW(). Depending on your
- * operating system and compiler, there may be a difference between the
+ * operating systems and compiler, there may be a difference between the
  * malloc() and free() your program uses and the versions SDL calls
  * internally. Trying to mix the two can cause crashing such as segmentation
  * faults. Since all SDL_RWops must free themselves when their **close**

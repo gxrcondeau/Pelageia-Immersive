@@ -41,7 +41,7 @@
  *  complete, but have no effect.
  *
  *  SDL_Init() installs signal handlers for SIGINT (keyboard interrupt)
- *  and SIGTERM (system termination request), if handlers do not already
+ *  and SIGTERM (systems termination request), if handlers do not already
  *  exist, that generate ::SDL_QUIT events as well.  There is no way
  *  to determine the cause of an ::SDL_QUIT event, but setting a signal
  *  handler in your application will override the default generation of

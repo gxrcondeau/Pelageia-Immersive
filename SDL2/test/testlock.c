@@ -11,7 +11,7 @@
 */
 
 /* Test the thread and mutex locking functions
-   Also exercises the system's signal/thread interaction
+   Also exercises the systems's signal/thread interaction
 */
 
 #include <signal.h>

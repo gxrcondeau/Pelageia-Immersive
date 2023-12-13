@@ -163,7 +163,7 @@ typedef enum
     SDL_WINDOWEVENT_RESIZED,        /**< Window has been resized to data1xdata2 */
     SDL_WINDOWEVENT_SIZE_CHANGED,   /**< The window size has changed, either as
                                          a result of an API call or through the
-                                         system or user changing the window size. */
+                                         systems or user changing the window size. */
     SDL_WINDOWEVENT_MINIMIZED,      /**< Window has been minimized */
     SDL_WINDOWEVENT_MAXIMIZED,      /**< Window has been maximized */
     SDL_WINDOWEVENT_RESTORED,       /**< Window has been restored to normal size
@@ -186,8 +186,8 @@ typedef enum
 {
     SDL_DISPLAYEVENT_NONE,          /**< Never used */
     SDL_DISPLAYEVENT_ORIENTATION,   /**< Display orientation has changed to data1 */
-    SDL_DISPLAYEVENT_CONNECTED,     /**< Display has been added to the system */
-    SDL_DISPLAYEVENT_DISCONNECTED,  /**< Display has been removed from the system */
+    SDL_DISPLAYEVENT_CONNECTED,     /**< Display has been added to the systems */
+    SDL_DISPLAYEVENT_DISCONNECTED,  /**< Display has been removed from the systems */
     SDL_DISPLAYEVENT_MOVED          /**< Display has changed position */
 } SDL_DisplayEventID;
 
@@ -412,7 +412,7 @@ extern DECLSPEC int SDLCALL SDL_GetDisplayBounds(int displayIndex, SDL_Rect * re
  * The primary display (`displayIndex` zero) is always located at 0,0.
  *
  * This is the same area as SDL_GetDisplayBounds() reports, but with portions
- * reserved by the system removed. For example, on Apple's macOS, this
+ * reserved by the systems removed. For example, on Apple's macOS, this
  * subtracts the area occupied by the menu bar and dock.
  *
  * Setting a window to be fullscreen generally bypasses these unusable areas,
@@ -1021,7 +1021,7 @@ extern DECLSPEC void SDLCALL SDL_GetWindowSize(SDL_Window * window, int *w,
  * Note: This function may fail on systems where the window has not yet been
  * decorated by the display server (for example, immediately after calling
  * SDL_CreateWindow). It is recommended that you wait at least until the
- * window has been presented and composited, so that the window system has a
+ * window has been presented and composited, so that the window systems has a
  * chance to decorate the window and provide the border dimensions to SDL.
  *
  * This function also returns -1 if getting the information is not supported.
@@ -1394,8 +1394,8 @@ extern DECLSPEC void SDLCALL SDL_SetWindowGrab(SDL_Window * window,
 /**
  * Set a window's keyboard grab mode.
  *
- * Keyboard grab enables capture of system keyboard shortcuts like Alt+Tab or
- * the Meta/Super key. Note that not all system keyboard shortcuts can be
+ * Keyboard grab enables capture of systems keyboard shortcuts like Alt+Tab or
+ * the Meta/Super key. Note that not all systems keyboard shortcuts can be
  * captured by applications (one example is Ctrl+Alt+Del on Windows).
  *
  * This is primarily intended for specialized applications such as VNC clients
@@ -1737,7 +1737,7 @@ typedef SDL_HitTestResult (SDLCALL *SDL_HitTest)(SDL_Window *win,
  * Provide a callback that decides if a window region has special properties.
  *
  * Normally windows are dragged and resized by decorations provided by the
- * system window manager (a title bar, borders, etc), but for some apps, it
+ * systems window manager (a title bar, borders, etc), but for some apps, it
  * makes sense to drag them from somewhere else inside the window itself; for
  * example, one might have a borderless window that wants to be draggable from
  * any part, or simulate its own title bar, etc.
@@ -2098,7 +2098,7 @@ extern DECLSPEC void SDLCALL SDL_GL_GetDrawableSize(SDL_Window * window, int *w,
  * vsync. Adaptive vsync works the same as vsync, but if you've already missed
  * the vertical retrace for a given frame, it swaps buffers immediately, which
  * might be less jarring for the user during occasional framerate drops. If an
- * application requests adaptive vsync and the system does not support it,
+ * application requests adaptive vsync and the systems does not support it,
  * this function will fail and return -1. In such a case, you should probably
  * retry the call with 1 for the interval.
  *
@@ -2123,7 +2123,7 @@ extern DECLSPEC int SDLCALL SDL_GL_SetSwapInterval(int interval);
 /**
  * Get the swap interval for the current OpenGL context.
  *
- * If the system can't determine the swap interval, or there isn't a valid
+ * If the systems can't determine the swap interval, or there isn't a valid
  * current context, this function will return 0 as a safe default.
  *
  * \returns 0 if there is no vertical retrace synchronization, 1 if the buffer

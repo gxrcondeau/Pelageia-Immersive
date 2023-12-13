@@ -44,6 +44,29 @@ WindowConfig* ConfigLoader::GetWindowConfig()
     return windowConfig = new WindowConfig(windowName, windowWidth, windowHeight, windowFullScreen, windowIsometric);
 }
 
+PlayerConfig* ConfigLoader::GetPlayerConfig()
+{
+    if (playerConfig) return playerConfig;
+
+    pugi::xml_document playerXml = GetConfigXml(PlayerParamsFileName);
+
+    pugi::xml_node rootNode = playerXml.child("config");
+    pugi::xml_node textureNode = rootNode.child("texture");
+    pugi::xml_node positionNode = rootNode.child("position");
+
+    if (!rootNode || !textureNode || !positionNode)
+    {
+        SDL_Log("Invalid XML Config File");
+        return nullptr;
+    }
+
+    std::string textureID = textureNode.attribute("id").as_string();
+    int row = positionNode.attribute("row").as_int();
+    int col = positionNode.attribute("col").as_int();
+
+    return playerConfig = new PlayerConfig(textureID, row, col);
+}
+
 std::map<std::string, CharacterTexturesConfig*> ConfigLoader::GetCharactersTexturesConfig()
 {
     std::map<std::string, CharacterTexturesConfig*> config;

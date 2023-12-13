@@ -64,6 +64,7 @@ public:
     void Draw(DrawParams params);
     void DrawTile(DrawTileParams params);
     void DrawFrame(DrawFrameParams params);
+    void DrawCollision(int x, int y);
 
     CharacterTexturesConfig* GetCharacterTextureParams(std::string id) { return m_CharactersTexturesMap[id]; }
 

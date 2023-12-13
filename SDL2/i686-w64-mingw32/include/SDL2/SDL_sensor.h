@@ -44,7 +44,7 @@ extern "C" {
  *  \brief SDL_sensor.h
  *
  *  In order to use these functions, SDL_Init() must have been called
- *  with the ::SDL_INIT_SENSOR flag.  This causes SDL to scan the system
+ *  with the ::SDL_INIT_SENSOR flag.  This causes SDL to scan the systems
  *  for sensors, and load appropriate drivers.
  */
 
@@ -52,7 +52,7 @@ struct _SDL_Sensor;
 typedef struct _SDL_Sensor SDL_Sensor;
 
 /**
- * This is a unique ID for a sensor for the time it is connected to the system,
+ * This is a unique ID for a sensor for the time it is connected to the systems,
  * and is never reused for the lifetime of the application.
  *
  * The ID value starts at 0 and increments from there. The value -1 is an invalid ID.
@@ -144,7 +144,7 @@ extern DECLSPEC void SDLCALL SDL_LockSensors(void);
 extern DECLSPEC void SDLCALL SDL_UnlockSensors(void);
 
 /**
- * Count the number of sensors attached to the system right now.
+ * Count the number of sensors attached to the systems right now.
  *
  * \returns the number of sensors detected.
  *

@@ -135,7 +135,7 @@ using std::malloc;
 using std::free;
 #endif
 
-// Some MinGW/GCC versions have headers that erroneously omit LLONG_MIN/LLONG_MAX/ULLONG_MAX definitions from limits.h in some configurations
+// Some MinGW/GCC versions have headers that erroneously omit LLONG_MIN/LLONG_MAX/ULLONG_MAX definitions from limits.h in some configuration
 #if defined(PUGIXML_HAS_LONG_LONG) && defined(__GNUC__) && !defined(LLONG_MAX) && !defined(LLONG_MIN) && !defined(ULLONG_MAX)
 #	define LLONG_MIN (-LLONG_MAX - 1LL)
 #	define LLONG_MAX __LONG_LONG_MAX__
@@ -4813,7 +4813,7 @@ PUGI_IMPL_NS_BEGIN
             length_type length = ftello64(file);
             fseeko64(file, 0, SEEK_SET);
 #else
-            // if this is a 32-bit OS, long is enough; if this is a unix system, long is 64-bit, which is enough; otherwise we can't do anything anyway.
+            // if this is a 32-bit OS, long is enough; if this is a unix systems, long is 64-bit, which is enough; otherwise we can't do anything anyway.
 		typedef long length_type;
 
 		fseek(file, 0, SEEK_END);

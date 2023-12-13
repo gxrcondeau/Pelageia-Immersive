@@ -100,3 +100,14 @@ void TextureManager::DrawFrame(DrawFrameParams params)
     }
     SDL_RenderCopyEx(Engine::GetInstance()->GetRenderer(), texture, &srcRect, &dstRect, 0, nullptr, params.Flip);
 }
+
+void TextureManager::DrawCollision(int x, int y)
+{
+    Vector2D cam = Camera::GetInstance()->GetPosition();
+
+    SDL_Rect rect = {x - static_cast<int>(cam.X), y - static_cast<int>(cam.Y), 32, 32};
+
+    SDL_SetRenderDrawColor(Engine::GetInstance()->GetRenderer(), 124, 255, 124, 255);
+
+    SDL_RenderFillRect(Engine::GetInstance()->GetRenderer(), &rect);
+}

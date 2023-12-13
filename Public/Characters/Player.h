@@ -23,7 +23,7 @@
 class Player : public Character
 {
 public:
-    Player(Properties* props);
+    Player(std::string name, int positionRow, int positionCol, int tileSize);
 
     virtual void Draw() override;
     virtual void Update(float dt) override;
@@ -44,13 +44,11 @@ private:
     int m_VerticalAxis;
     float m_IsometricX;
     float m_IsometricY;
-    Vector2D m_InputVector;
 
-    Vector2D* m_LastSafePosition = new Vector2D(m_Properties->X, m_Properties->Y);
-    Collider* m_Collider = new Collider();
-    RigidBody* m_RigidBody = new RigidBody();
+    Vector2D* m_LastSafePosition;
+    Collider* m_Collider;
+    RigidBody* m_RigidBody;
     SpriteAnimation* m_Animation = new SpriteAnimation();
-    SDL_RendererFlip m_PlayerFlip = SDL_FLIP_NONE;
 };
 
 #endif  // PELAGEIA_IMMERSIVE_PLAYER_H

@@ -8,16 +8,12 @@
 
 CharacterDirection Character::GetDirection(int horizontal, int vertical)
 {
-    // Avoid division by zero
     if (horizontal == 0 && vertical == 0) return DOWN;
 
-    // Calculate angle in degrees using atan2
     double degrees = atan2(static_cast<double>(vertical), static_cast<double>(horizontal)) * 180.0 / M_PI;
 
-    // Ensure degrees is positive
     if (degrees < 0) degrees += 360.0;
 
-    // Use if-else statements to determine direction
     if (degrees >= 22.5 && degrees < 67.5) return UP_RIGHT;
     else if (degrees >= 67.5 && degrees < 112.5) return UP;
     else if (degrees >= 112.5 && degrees < 157.5) return UP_LEFT;

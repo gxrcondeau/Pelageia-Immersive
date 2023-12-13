@@ -41,7 +41,7 @@ typedef struct
 } d_to_d;
 
 /**
- * Stores a pair of inputs and the expected result
+ * Stores a pair of input and the expected result
  */
 typedef struct
 {
