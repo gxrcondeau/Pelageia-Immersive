@@ -1,0 +1,8 @@
+//
+// Created by pylinskyi.k on 13.12.2023.
+//
+
+#ifndef PELAGEIA_IMMERSIVE_ISOCOORDS_H
+#define PELAGEIA_IMMERSIVE_ISOCOORDS_H
+
+#endif  // PELAGEIA_IMMERSIVE_ISOCOORDS_H

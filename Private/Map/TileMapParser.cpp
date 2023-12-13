@@ -73,8 +73,9 @@ bool MapParser::Parse(std::string id, std::string source)
 
     while (layerNode)
     {
+        std::string layerName = layerNode.attribute("name").as_string();
         TileLayer* tileLayer = ParseTileLayer(&layerNode, tilesets, tilesize, rowcount, colcount);
-        gamemap->m_MapLayer.push_back(tileLayer);
+        gamemap->m_MapLayer[layerName] = tileLayer;
         layerNode = layerNode.next_sibling("layer");
     }
 
