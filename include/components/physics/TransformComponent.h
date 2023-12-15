@@ -5,4 +5,10 @@
 #ifndef PELAGEIA_IMMERSIVE_TRANSFORMCOMPONENT_H
 #define PELAGEIA_IMMERSIVE_TRANSFORMCOMPONENT_H
 
+#include "components/BaseComponent.h"
+
+class TransformComponent : BaseComponent {
+
+};
+
 #endif  // PELAGEIA_IMMERSIVE_TRANSFORMCOMPONENT_H

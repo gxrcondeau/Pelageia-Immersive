@@ -5,4 +5,10 @@
 #ifndef PELAGEIA_IMMERSIVE_LAYERCOMPONENT_H
 #define PELAGEIA_IMMERSIVE_LAYERCOMPONENT_H
 
+#include "entities/Entity.h"
+
+class LayerComponent : Entity {
+    virtual void Render();
+};
+
 #endif  // PELAGEIA_IMMERSIVE_LAYERCOMPONENT_H

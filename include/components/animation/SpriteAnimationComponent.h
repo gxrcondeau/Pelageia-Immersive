@@ -5,4 +5,10 @@
 #ifndef PELAGEIA_IMMERSIVE_SPRITEANIMATIONCOMPONENT_H
 #define PELAGEIA_IMMERSIVE_SPRITEANIMATIONCOMPONENT_H
 
+#include "components/animation/AnimationComponent.h"
+
+class SpriteAnimationComponent : AnimationComponent {
+
+};
+
 #endif  // PELAGEIA_IMMERSIVE_SPRITEANIMATIONCOMPONENT_H

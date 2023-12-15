@@ -5,4 +5,9 @@
 #ifndef PELAGEIA_IMMERSIVE_BASECOMPONENT_H
 #define PELAGEIA_IMMERSIVE_BASECOMPONENT_H
 
+class BaseComponent {
+public:
+    virtual void Update();
+};
+
 #endif  // PELAGEIA_IMMERSIVE_BASECOMPONENT_H

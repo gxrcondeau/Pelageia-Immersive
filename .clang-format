@@ -1,9 +1,9 @@
 Language: Cpp
-BasedOnStyle: Microsoft
+BasedOnStyle: LLVM
 IndentWidth: '4'
 UseTab: Never
 TabWidth: '4'
-BreakBeforeBraces: Allman
+BreakBeforeBraces: Attach
 ColumnLimit: '140'
 AccessModifierOffset: '-4'
 SortIncludes: false

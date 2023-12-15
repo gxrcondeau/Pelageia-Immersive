@@ -5,45 +5,20 @@ set(CMAKE_CXX_STANDARD 23)
 
 # Set the source files
 set(SOURCES
-        Private/Utils/Config/ConfigLoader.cpp
-        Private/Engine.cpp
-        Private/Graphics/TextureManager.cpp
-        Private/Characters/Player.cpp
-        Private/Animation/SpriteAnimation.cpp
-        Private/Inputs/Input.cpp
-        Private/Timer/Timer.cpp
-        Private/Map/TileLayer.cpp
-        Private/Map/TileMapParser.cpp
-        Private/Camera/Camera.cpp
-        Private/Collisions/CollisionHandler.cpp
-        Private/Physics/Collider.cpp
-        Private/Characters/Character.cpp
-        Private/Graphics/ShadowManager.cpp
-        Private/Animation/SeqAnimation.cpp
-        Public/Map/EntitiesLayer.h
-        Public/Utils/Calculations/Coordinates.h
-        include/systems/graphics/TextureManagerSystem.h
+        src/systems/graphics/TextureManagerSystem.cpp
+        src/systems/input/InputSystem.cpp
+        src/systems/scene/SceneParserSystem.cpp
+        src/systems/configuration/ConfigurationSystem.cpp
+        src/components/scene/TileMapLayerComponent.cpp
+        include/components/animation/SpriteAnimationComponent.h
+        include/components/camera/CameraComponent.h
+        include/components/physics/ColliderComponent.h
+        include/components/physics/RigidBodyComponent.h
+        include/components/physics/TransformComponent.h
         include/systems/configuration/ConfigurationSystem.h
+        include/Engine.h
         include/systems/input/InputSystem.h
         include/systems/scene/SceneParserSystem.h
-        include/components/scene/LayerComponent.h
-        include/components/sprite/SpriteComponent.h
-        include/components/physics/TransformComponent.h
-        include/components/physics/RigidBodyComponent.h
-        include/components/BaseComponent.h
-        include/entities/Entity.h
-        include/systems/BaseSystem.h
-        include/mathematics/Vector2D.h
-        include/components/physics/ColliderComponent.h
-        include/components/camera/CameraComponent.h
-        include/components/animation/AnimationComponent.h
-        include/components/animation/SpriteAnimationComponent.h
-        include/entities/characters/CharacterEntity.h
-        include/entities/characters/PlayerEntity.h
-        include/entities/scene/GameMapEntity.h
-        include/components/scene/TileLayerComponent.h
-        include/components/scene/EntitiesLayerComponent.h
-        include/mathematics/IsometricConverter.h
 )
 
 include_directories(Vendor/Pugi)
@@ -52,7 +27,7 @@ include_directories(Vendor/Pugi)
 add_library(${PROJECT_NAME} STATIC ${SOURCES})
 
 # Set include directories for the library
-target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/Public)
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 # Organize source files into directories
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCES})
