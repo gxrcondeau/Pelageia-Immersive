@@ -7,7 +7,7 @@
 
 class BaseComponent {
 public:
-    virtual void Update();
+    virtual void Update() = 0;
 };
 
 #endif  // PELAGEIA_IMMERSIVE_BASECOMPONENT_H

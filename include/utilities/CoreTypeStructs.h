@@ -7,8 +7,10 @@
 
 #include <map>
 #include <vector>
+#include <string>
 #include "SDL_render.h"
 #include "utilities/CoreTypeEnums.h"
+#include "../../Vendor/SDL/include/SDL2/SDL_render.h"
 
 struct WindowData
 {
@@ -56,6 +58,13 @@ struct TilesetData {
     int TileSize;
     std::string Source;
     std::vector<int> AnimationFrames;
+};
+
+struct LayerData {
+    std::string Name;
+    int Width;
+    int Height;
+    std::vector<std::vector<int>> Map;
 };
 
 #endif  // PELAGEIA_IMMERSIVE_CORETYPESTRUCTS_H

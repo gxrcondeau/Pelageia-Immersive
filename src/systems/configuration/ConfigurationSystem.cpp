@@ -6,7 +6,9 @@
 #include "Engine.h"
 #include "SDL_image.h"
 
-std::unique_ptr<WindowData> ConfigurationSystem::GetWindowData() {
+ConfigurationSystem* ConfigurationSystem::_instance = nullptr;
+
+WindowData* ConfigurationSystem::GetWindowData() {
     pugi::xml_document windowXml = GetConfigurationXml(_windowDataFileName);
 
     pugi::xml_node rootNode = windowXml.child("config");
@@ -15,7 +17,6 @@ std::unique_ptr<WindowData> ConfigurationSystem::GetWindowData() {
 
     if (!rootNode || !metaNode || !windowNode) {
         SDL_Log("Invalid XML Config File");
-        return nullptr;
     }
 
     std::string windowName = metaNode.attribute("name").as_string();
@@ -24,14 +25,16 @@ std::unique_ptr<WindowData> ConfigurationSystem::GetWindowData() {
     bool windowFullScreen = windowNode.attribute("fullscreen").as_bool();
     bool windowIsometric = metaNode.attribute("isometric").as_bool();
 
-    return std::make_unique<WindowData>(windowName, windowWidth, windowHeight, windowFullScreen, windowIsometric);
+    return new WindowData(windowName, windowWidth, windowHeight, windowFullScreen, windowIsometric);
 }
 
 std::map<std::string, std::unique_ptr<StaticTextureData>> ConfigurationSystem::GetStaticTextureData() {
     return std::map<std::string, std::unique_ptr<StaticTextureData>>();
 }
 
-bool ConfigurationSystem::GetCharacterSpriteData(std::map<std::string, std::unique_ptr<CharacterSpriteData>>& sprites) {
+std::map<std::string, std::unique_ptr<CharacterSpriteData>> ConfigurationSystem::GetCharacterSpriteData() {
+    std::map<std::string, std::unique_ptr<CharacterSpriteData>> sprites;
+
     pugi::xml_document characterTextureXml = GetConfigurationXml(_characterSpriteDataFileName);
 
     pugi::xml_node rootNode = characterTextureXml.child("config");
@@ -48,7 +51,7 @@ bool ConfigurationSystem::GetCharacterSpriteData(std::map<std::string, std::uniq
         while (stateNode) {
             State stateId = static_cast<State>(stateNode.attribute("id").as_int());
 
-            sprites[characterId]->States[stateId] = std::make_unique<StateTextureData>();
+            sprites[characterId]->States[stateId] = new StateTextureData();
             sprites[characterId]->States[stateId]->AnimSheetRows = stateNode.attribute("animSheetRows").as_int();
             sprites[characterId]->States[stateId]->AnimSheetCols = stateNode.attribute("animSheetCols").as_int();
             sprites[characterId]->States[stateId]->FirstSpriteRow = stateNode.attribute("firstSpriteRow").as_int();
@@ -68,13 +71,11 @@ bool ConfigurationSystem::GetCharacterSpriteData(std::map<std::string, std::uniq
                 SDL_Surface* surface = IMG_Load(filePath.c_str());
                 if (!surface) {
                     SDL_Log("Failed to load texture: %s %s", filePath.c_str(), SDL_GetError());
-                    return false;
                 }
 
                 SDL_Texture* texture = SDL_CreateTextureFromSurface(Engine::GetInstance().GetRenderer(), surface);
                 if (!texture) {
                     SDL_Log("Failed to create texture from surface: %s", SDL_GetError());
-                    return false;
                 }
 
                 sprites[characterId]->States[stateId]->Directions[directionId] = texture;
@@ -88,7 +89,7 @@ bool ConfigurationSystem::GetCharacterSpriteData(std::map<std::string, std::uniq
         characterNode = characterNode.next_sibling("character");
     }
 
-    return true;
+    return sprites;
 }
 
 void ConfigurationSystem::CreateConfiguration(const std::string& configName, const std::string& configXml) const {

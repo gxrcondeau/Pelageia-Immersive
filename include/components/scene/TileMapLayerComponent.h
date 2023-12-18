@@ -11,7 +11,7 @@
 
 class TileMapLayerComponent : LayerComponent{
 public:
-    TileMapLayerComponent(std::vector<TilesetData> tilesets, std::vector<std::vector<int>> tilemap);
+    TileMapLayerComponent(std::vector<TilesetData> tilesets, std::vector<LayerData> layers);
 
     void Render() override;
     void Update() override;
@@ -21,7 +21,7 @@ protected:
     size_t _rowCount;
     size_t _colCount;
     std::vector<TilesetData> _tilesets;
-    std::vector<std::vector<int>> _tilemap;
+    std::vector<LayerData> _layers;
 };
 
 #endif  // PELAGEIA_IMMERSIVE_TILEMAPLAYERCOMPONENT_H

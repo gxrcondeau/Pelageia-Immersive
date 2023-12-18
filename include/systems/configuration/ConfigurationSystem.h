@@ -14,21 +14,21 @@ class ConfigurationSystem {
 public:
     static ConfigurationSystem& GetInstance() {
         if (!_instance) {
-            _instance = std::make_unique<ConfigurationSystem>();
+            _instance = new ConfigurationSystem();
         }
         return *_instance;
     }
 
-    bool GetWindowData(std::unique_ptr<WindowData>& window);
-    bool GetStaticTextureData(std::map<std::string, std::unique_ptr<StaticTextureData>>& textures);
-    bool GetCharacterSpriteData(std::map<std::string, std::unique_ptr<CharacterSpriteData>>& sprites);
+    WindowData* GetWindowData();
+    std::map<std::string, std::unique_ptr<StaticTextureData>> GetStaticTextureData();
+    std::map<std::string, std::unique_ptr<CharacterSpriteData>> GetCharacterSpriteData();
 
+protected:
     ConfigurationSystem() {
         if (_instance) throw std::logic_error("ConfigurationSystem Instance already exists");
     }
 
-protected:
-    static std::unique_ptr<ConfigurationSystem> _instance;
+    static ConfigurationSystem* _instance;
 
     const std::string _directory = "./Config";
     const std::string _windowDataFileName = "window.xml";

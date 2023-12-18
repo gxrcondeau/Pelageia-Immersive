@@ -17,9 +17,9 @@ public:
         return *_instance;
     };
 
-    bool LoadTexture(std::string id, std::string source, SDL_RendererFlip flip);
-    bool LoadTextures() { return ConfigurationSystem::GetInstance().GetStaticTextureData(_textureMap); }
-    bool LoadCharacterTextures() { return ConfigurationSystem::GetInstance().GetCharacterSpriteData(_spriteMap); }
+    bool LoadTexture(std::string id, std::string source, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void LoadTextures() { _textureMap = ConfigurationSystem::GetInstance().GetStaticTextureData(); }
+    void LoadCharacterTextures() { _spriteMap = ConfigurationSystem::GetInstance().GetCharacterSpriteData(); }
 
     void Draw(std::string id, int x, int y);
     void DrawTile(std::string id, int tileSize, int row, int col, int x, int y);
@@ -29,8 +29,7 @@ public:
     void ClearTextureMap();
 
 protected:
-    TextureManagerSystem() { if (_instance) throw std::logic_error("TextureManagerSystem Instance already exists"); };
-    virtual ~TextureManagerSystem() { };
+    TextureManagerSystem() { if (_instance) throw std::logic_error("TextureManagerSystem Instance already exists"); }
 
     static TextureManagerSystem* _instance;
 

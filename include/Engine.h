@@ -7,6 +7,7 @@
 
 #include "SDL.h"
 #include "utilities/CoreTypeStructs.h"
+#include "entities/scene/GameMapEntity.h"
 #include <stdexcept>
 
 class Engine {
@@ -29,15 +30,15 @@ public:
     inline bool IsRunning() { return _isRunning; }
 
 private:
-    Engine() {
-        if (_instance) throw std::logic_error("Engine Instance already exists");
-    }
+    Engine();
     static Engine* _instance;
 
     SDL_Window* _window;
     SDL_Renderer* _renderer;
 
     bool _isRunning;
+
+    GameMapEntity* _gameMap;
 
     WindowData* _windowSettings;
     std::map<std::string, StaticTextureData*> _staticTextureMap;

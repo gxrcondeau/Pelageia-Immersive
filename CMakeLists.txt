@@ -5,20 +5,12 @@ set(CMAKE_CXX_STANDARD 23)
 
 # Set the source files
 set(SOURCES
+        src/Engine.cpp
+        src/systems/configuration/ConfigurationSystem.cpp
         src/systems/graphics/TextureManagerSystem.cpp
         src/systems/input/InputSystem.cpp
         src/systems/scene/SceneParserSystem.cpp
-        src/systems/configuration/ConfigurationSystem.cpp
         src/components/scene/TileMapLayerComponent.cpp
-        include/components/animation/SpriteAnimationComponent.h
-        include/components/camera/CameraComponent.h
-        include/components/physics/ColliderComponent.h
-        include/components/physics/RigidBodyComponent.h
-        include/components/physics/TransformComponent.h
-        include/systems/configuration/ConfigurationSystem.h
-        include/Engine.h
-        include/systems/input/InputSystem.h
-        include/systems/scene/SceneParserSystem.h
 )
 
 include_directories(Vendor/Pugi)

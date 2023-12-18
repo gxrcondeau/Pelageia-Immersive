@@ -19,19 +19,17 @@ public:
         return *_instance;
     };
 
-    inline GameMapEntity GetGameMap(std::string id) { return _gameMaps[id]; }
-    bool LoadMaps();
+    std::shared_ptr<TileMapLayerComponent> GetTileMapLayer(std::string gameMapFile);
 
 protected:
     SceneParserSystem() { if (_instance) throw std::logic_error("SceneParserSystem Instance already exists"); };
 
     static SceneParserSystem* _instance;
 
-    std::string _gameMapsDirectory = "./GameMaps";
+    std::string _gameMapsDirectory = "GameMaps/";
 
-    std::map<std::string, GameMapEntity> _gameMaps;
-    TilesetData LoadTilest(pugi::xml_node tilesetNode);
-    TileMapLayerComponent LoadTileMap();
+    TilesetData GetTilest(pugi::xml_node tilesetNode);
+    LayerData GetLayer(pugi::xml_node layerNode);
 };
 
 #endif  // PELAGEIA_IMMERSIVE_SCENEPARSERSYSTEM_H
