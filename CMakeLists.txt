@@ -6,11 +6,31 @@ set(CMAKE_CXX_STANDARD 23)
 # Set the source files
 set(SOURCES
         src/Engine.cpp
-        include/systems/configuration/ConfigurationSystem.h
         src/systems/configuration/ConfigurationSystem.cpp
         src/systems/input/InputSystem.cpp
-        include/systems/input/InputSystem.h
+        src/systems/scene/LayerFactory.cpp
+        src/components/scene/BaseLayer.cpp
+        src/components/scene/TileLayer.cpp
+        src/components/scene/ObjectLayer.cpp
+        src/components/scene/CollisionLayer.cpp
+        src/components/scene/EventLayer.cpp
+        src/components/scene/DecorationLayer.cpp
+        src/components/scene/EffectLayer.cpp
+        src/components/scene/OverlayLayer.cpp
+        include/components/scene/CharacterLayer.h
+        src/components/scene/CharacterLayer.cpp
+        include/components/scene/CollisionLayer.h
+        include/components/scene/EffectLayer.h
+        include/components/scene/EventLayer.h
+        include/components/scene/EventLayer.h
+        include/components/scene/ObjectLayer.h
+        include/components/scene/ObjectLayer.h
+        include/components/scene/OverlayLayer.h
+        include/components/scene/TileLayer.h
         include/systems/scene/SceneSystem.h
+        src/systems/scene/SceneSystem.cpp
+        include/entities/scene/Scene.h
+        src/entities/scene/Scene.cpp
 )
 
 include_directories(Vendor/Pugi)

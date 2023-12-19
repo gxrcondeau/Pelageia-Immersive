@@ -60,7 +60,7 @@ struct TilesetData {
 };
 
 struct LayerData {
-    std::string Name;
+    LayerType Type;
     int Width;
     int Height;
     std::vector<std::vector<int>> Map;

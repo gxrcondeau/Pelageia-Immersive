@@ -44,7 +44,6 @@ public:
     {
         float length = std::sqrt(X * X + Y * Y);
 
-        // Check for division by zero to avoid NaN
         if (length != 0.0f)
         {
             X /= length;

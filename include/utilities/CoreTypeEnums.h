@@ -40,4 +40,15 @@ enum Axis
     VERTICAL
 };
 
+enum class LayerType : std::uint8_t {
+    TILE = 0,
+    OBJECT = 1,
+    CHARACTER = 2,
+    COLLISION = 3,
+    DECORATION = 4,
+    EVENT = 5,
+    EFFECT = 6,
+    OVERLAY = 7
+};
+
 #endif  // PELAGEIA_IMMERSIVE_CORETYPEENUMS_H
