@@ -1,11 +1,17 @@
 //
-// Created by pylinskyi.k on 14.12.2023.
+// Created by pylinskyi.k on 19.12.2023.
 //
-
 #include "systems/input/InputSystem.h"
 #include "Engine.h"
 
 InputSystem* InputSystem::_instance = nullptr;
+
+InputSystem::InputSystem() { }
+
+InputSystem& InputSystem::GetInstance() {
+    if (!_instance) _instance = new InputSystem();
+    return *_instance;
+}
 
 void InputSystem::Listen() {
     SDL_Event event;
@@ -22,8 +28,20 @@ void InputSystem::Listen() {
 }
 
 bool InputSystem::GetKeyDown(SDL_Scancode key) {
-    if (_keyStates[key] == 1) return true;
-    return false;
+    return _keyStates[key] == 1;
+}
+
+int InputSystem::GetAxisKey(Axis axis) {
+    switch (axis)
+    {
+        case HORIZONTAL:
+            return (GetKeyDown(SDL_SCANCODE_D) || GetKeyDown(SDL_SCANCODE_RIGHT)) ? 1 :
+                   (GetKeyDown(SDL_SCANCODE_A) || GetKeyDown(SDL_SCANCODE_LEFT)) ? -1 : 0;
+
+        case VERTICAL:
+            return (GetKeyDown(SDL_SCANCODE_W) || GetKeyDown(SDL_SCANCODE_UP)) ? 1 :
+                   (GetKeyDown(SDL_SCANCODE_S) || GetKeyDown(SDL_SCANCODE_DOWN)) ? -1 : 0;
+    }
 }
 
 void InputSystem::KeyUp() {
@@ -32,19 +50,4 @@ void InputSystem::KeyUp() {
 
 void InputSystem::KeyDown() {
     _keyStates = SDL_GetKeyboardState(nullptr);
-}
-
-int InputSystem::GetAxisKey(Axis axis) {
-    switch (axis)
-    {
-        case HORIZONTAL:
-            if (GetKeyDown(SDL_SCANCODE_D) || GetKeyDown(SDL_SCANCODE_RIGHT)) return 1;
-            if (GetKeyDown(SDL_SCANCODE_A) || GetKeyDown(SDL_SCANCODE_LEFT)) return -1;
-            return 0;
-
-        case VERTICAL:
-            if (GetKeyDown(SDL_SCANCODE_W) || GetKeyDown(SDL_SCANCODE_UP)) return 1;
-            if (GetKeyDown(SDL_SCANCODE_S) || GetKeyDown(SDL_SCANCODE_DOWN)) return -1;
-            return 0;
-    }
 }

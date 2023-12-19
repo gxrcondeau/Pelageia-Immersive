@@ -18,7 +18,6 @@ struct WindowData
     int Width;
     int Height;
     bool IsFullScreen;
-    bool IsIsometric;
 };
 
 struct StaticTextureData {

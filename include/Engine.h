@@ -1,33 +1,30 @@
-//
-// Created by pylinskyi.k on 15.12.2023.
-//
+// Engine.h
 
 #ifndef PELAGEIA_IMMERSIVE_ENGINE_H
 #define PELAGEIA_IMMERSIVE_ENGINE_H
 
 #include "SDL.h"
 #include "utilities/CoreTypeStructs.h"
-#include "entities/scene/GameMapEntity.h"
+#include "systems/configuration/ConfigurationSystem.h"
+#include "systems/input/InputSystem.h"
+#include "SDL_image.h"
 #include <stdexcept>
 
 class Engine {
 public:
-    static Engine& GetInstance() {
-        if (!_instance) _instance = new Engine();
-        return *_instance;
-    }
+    static Engine& GetInstance();
 
-    inline SDL_Renderer* GetRenderer() { return _renderer; }
+    SDL_Renderer* GetRenderer() const;
 
     bool Init();
-    bool Clean();
-    bool Quit();
+    void Clean();
+    void Quit();
 
     void Update();
     void Render();
-    void Events();
+    void HandleEvents();
 
-    inline bool IsRunning() { return _isRunning; }
+    bool IsRunning() const;
 
 private:
     Engine();
@@ -38,11 +35,7 @@ private:
 
     bool _isRunning;
 
-    GameMapEntity* _gameMap;
-
-    WindowData* _windowSettings;
-    std::map<std::string, StaticTextureData*> _staticTextureMap;
-    std::map<std::string, CharacterSpriteData*> _characterSpriteMap;
+    WindowData* _windowData;
 };
 
 #endif  // PELAGEIA_IMMERSIVE_ENGINE_H

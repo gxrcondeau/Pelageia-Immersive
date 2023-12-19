@@ -6,11 +6,11 @@ set(CMAKE_CXX_STANDARD 23)
 # Set the source files
 set(SOURCES
         src/Engine.cpp
+        include/systems/configuration/ConfigurationSystem.h
         src/systems/configuration/ConfigurationSystem.cpp
-        src/systems/graphics/TextureManagerSystem.cpp
         src/systems/input/InputSystem.cpp
-        src/systems/scene/SceneParserSystem.cpp
-        src/components/scene/TileMapLayerComponent.cpp
+        include/systems/input/InputSystem.h
+        include/systems/scene/SceneSystem.h
 )
 
 include_directories(Vendor/Pugi)
